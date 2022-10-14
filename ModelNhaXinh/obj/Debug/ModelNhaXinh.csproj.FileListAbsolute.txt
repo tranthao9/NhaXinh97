@@ -1,0 +1,12 @@
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\ModelNhaXinh.dll.config
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\ModelNhaXinh.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\ModelNhaXinh.pdb
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\EntityFramework.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\EntityFramework.SqlServer.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\EntityFramework.xml
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\EntityFramework.SqlServer.xml
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.CoreCompileInputs.cache
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.CopyComplete
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.pdb
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.AssemblyReference.cache

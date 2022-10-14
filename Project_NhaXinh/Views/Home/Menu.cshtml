@@ -1,0 +1,280 @@
+﻿@model  List<ModelNhaXinh.EF.Menu>
+
+<nav class="navbar navbar-expand-sm navbar-light bg-white sticky-top border-bottom ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-flex">
+                <a class="navbar-brand navbar-toggler-icon d-lg-none down menu_children" aria-labelledby="menusi" data-bs-toggle="offcanvas" data-bs-target="#menusi">
+                </a>
+                <div class="submenu_h " data-bs-spy="scroll" data-bs-target=".offcancas">
+                    <div class="offcanvas offcanvas-start " id="menusi">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div class="offcanvas-body ">
+                            <ul id="accordion" class="accordion ">
+                                <li>
+                                    <div class="link">Sofa và Armchair<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Sofa</a></li>
+                                        <li><a href="#">Sofa góc</a></li>
+                                        <li><a href="#">Armchair</a></li>
+                                        <li><a href="#">Ghế dài & đôn</a></li>
+                                        <li><a href="#">Ghế thư dãn</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Bàn<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Bàn nước</a></li>
+                                        <li><a href="#">Bàn ăn</a></li>
+                                        <li><a href="#">Bàn bên</a></li>
+                                        <li><a href="#">Bàn làm việc</a></li>
+                                        <li><a href="#">Bàn trang điểm</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Ghế<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Ghế ăn</a></li>
+                                        <li><a href="#">Ghế bar</a></li>
+                                        <li><a href="#">Ghế làm việc</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Giường ngủ<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Giường</a></li>
+                                        <li><a href="#">Bàn đầu giường</a></li>
+                                        <li><a href="#">Nệm</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Tủ và kệ<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Tủ tivi</a></li>
+                                        <li><a href="#">Tủ trưng bày</a></li>
+                                        <li><a href="#">Tủ ly</a></li>
+                                        <li><a href="#">Tủ rượu</a></li>
+                                        <li><a href="#">Xe đẩy</a></li>
+                                        <li><a href="#">Tủ hộc kéo</a></li>
+                                        <li><a href="#">Tủ áo</a></li>
+                                        <li><a href="#">Tủ âm tường</a></li>
+                                        <li><a href="#">Tủ giầy</a></li>
+                                        <li><a href="#">Kệ phòng khách</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Bếp<i class="fa fa-chevron-down"></i></div>
+                                    <ul class="submenu">
+                                        <li><a href="#">Tủ bếp</a></li>
+                                        <li><a href="#">Phụ kiện bếp</a></li>
+                                        <li><a href="#">Đảo bếp</a></li>
+                                        <li><a href="#">Quầy bar</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="link">Hàng trang trí</div>
+                                </li>
+                                <li>
+                                    <div class="link">Ngoại thất</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link d-lg-none" href="/Home/Index" style="margin: auto">
+                    <img src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" alt="Nội thất Nhà Xinh" data-lazy-src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" data-ll-status="loaded">
+                    <span class="sr-only">(current)</span>
+                </a>
+                <a class="nav-link look_s d-lg-none nav-item "><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a class="nav-link d-lg-none" href="#"><img class="cart-img-icon" alt="Cart" src="https://nhaxinh.com/wp-content/uploads/2021/09/ic-shopping.png"></a>
+            </div>
+            <div class="collapse navbar-collapse " id="collapsibleNavId">
+                <ul class="navbar-nav d-flex  hide ">
+                    <li class="nav-item down ">
+                        <a class="navbar-brand navbar-toggler-icon menu_children" aria-labelledby="menusi" data-bs-toggle="offcanvas" data-bs-target="#menusi">
+                        </a>
+                        <div class="submenu_h " data-bs-spy="scroll" data-bs-target=".offcancas">
+                            <div class="offcanvas offcanvas-start " id="menusi">
+                                <div class="offcanvas-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                                </div>
+                                <div class="offcanvas-body ">
+                                    <ul id="accordion2" class="accordion ">
+                                        <li>
+                                            <div class="link">Sofa và Armchair<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Sofa</a></li>
+                                                <li><a href="#">Sofa góc</a></li>
+                                                <li><a href="#">Armchair</a></li>
+                                                <li><a href="#">Ghế dài & đôn</a></li>
+                                                <li><a href="#">Ghế thư dãn</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Bàn<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Bàn nước</a></li>
+                                                <li><a href="#">Bàn ăn</a></li>
+                                                <li><a href="#">Bàn bên</a></li>
+                                                <li><a href="#">Bàn làm việc</a></li>
+                                                <li><a href="#">Bàn trang điểm</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Ghế<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Ghế ăn</a></li>
+                                                <li><a href="#">Ghế bar</a></li>
+                                                <li><a href="#">Ghế làm việc</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Giường ngủ<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Giường</a></li>
+                                                <li><a href="#">Bàn đầu giường</a></li>
+                                                <li><a href="#">Nệm</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Tủ và kệ<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Tủ tivi</a></li>
+                                                <li><a href="#">Tủ trưng bày</a></li>
+                                                <li><a href="#">Tủ ly</a></li>
+                                                <li><a href="#">Tủ rượu</a></li>
+                                                <li><a href="#">Xe đẩy</a></li>
+                                                <li><a href="#">Tủ hộc kéo</a></li>
+                                                <li><a href="#">Tủ áo</a></li>
+                                                <li><a href="#">Tủ âm tường</a></li>
+                                                <li><a href="#">Tủ giầy</a></li>
+                                                <li><a href="#">Kệ phòng khách</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Bếp<i class="fa fa-chevron-down"></i></div>
+                                            <ul class="submenu">
+                                                <li><a href="#">Tủ bếp</a></li>
+                                                <li><a href="#">Phụ kiện bếp</a></li>
+                                                <li><a href="#">Đảo bếp</a></li>
+                                                <li><a href="#">Quầy bar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <div class="link">Hàng trang trí</div>
+                                        </li>
+                                        <li>
+                                            <div class="link">Ngoại thất</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/Home/Index">
+                            <img src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" alt="Nội thất Nhà Xinh" data-lazy-src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" data-ll-status="loaded">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                        <li class="nav-item dropdown down ">
+                            <a class="nav-link dropdown-toggle " href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SẢN PHẨM</a>
+                            <div class="dropdown-menu menu_first1 menu_first" aria-labelledby="dropdownId">
+                                <div class="row " style="width: 1250px; margin: auto;">
+                                    <div class="col ">
+                                        <a class="dropdown-item " href="#">Sofa</a>
+                                        <a class="dropdown-item " href="#">Sofa góc</a>
+                                        <a class="dropdown-item " href="#">Ghế thư giãn</a>
+                                        <a class="dropdown-item " href="#">Aimchair</a>
+                                        <a class="dropdown-item " href="#">Ghế dài và đôn</a>
+                                        <a class="dropdown-item " href="#">Bàn bên</a>
+                                        <a class="dropdown-item " href="#">Bàn nước</a>
+                                        <a class="dropdown-item " href="#">Bàn cosole</a>
+                                        <a class="dropdown-item " href="#">Tủ ti vi</a>
+                                    </div>
+                                    <div class="col reduce">
+                                        <a class="dropdown-item " href="#">Bàn ăn</a>
+                                        <a class="dropdown-item " href="#">Ghế ăn</a>
+                                        <a class="dropdown-item " href="#">Ghế Bar</a>
+                                        <a class="dropdown-item " href="#">Tủ ly</a>
+                                        <a class="dropdown-item " href="#">Xe đẩy</a>
+                                        <a class="dropdown-item " href="#">Tủ bếp</a>
+                                        <a class="dropdown-item " href="#">Thiết bị bếp</a>
+                                    </div>
+                                    <div class="col reduce">
+                                        <a class="dropdown-item " href="#">Giường ngủ</a>
+                                        <a class="dropdown-item " href="#">Bàn đầu giường</a>
+                                        <a class="dropdown-item " href="#">Bàn trang điểm</a>
+                                        <a class="dropdown-item " href="#">Tủ áo</a>
+                                        <a class="dropdown-item " href="#">Tủ âm tường</a>
+                                        <a class="dropdown-item " href="#">Tủ hộc kéo</a>
+                                        <a class="dropdown-item " href="#">Nệm</a>
+                                    </div>
+                                    <div class="col reduce">
+                                        <a class="dropdown-item " href="#">Bàn làm việc</a>
+                                        <a class="dropdown-item " href="#">Ghế làm việc</a>
+                                        <a class="dropdown-item " href="#">Kệ sách</a>
+                                        <a class="dropdown-item " href="#">Bàn ngoài trời</a>
+                                        <a class="dropdown-item " href="#">Ghế ngoài trời</a>
+                                    </div>
+                                    <div class="col reduce">
+                                        <a class="dropdown-item " href="#">Đèn trang trí</a>
+                                        <a class="dropdown-item " href="#">Thảm trang trí</a>
+                                        <a class="dropdown-item " href="#">Micheal Aram</a>
+                                        <a class="dropdown-item " href="#">Bình trang trí</a>
+                                        <a class="dropdown-item " href="#">Tranh</a>
+                                        <a class="dropdown-item " href="#">Gương</a>
+                                        <a class="dropdown-item " href="#">Hoa và cây</a>
+                                        <a class="dropdown-item " href="#">Đồng Hồ</a>
+                                        <a class="dropdown-item " href="#">Khung nhìn</a>
+                                    </div>
+                                    <div class="col reduce">
+                                        <a class="dropdown-item  " href="#">Dụng cụ trang trí</a>
+                                        <a class="dropdown-item  " href="#">Hàng trang trí khác</a>
+                                    </div>
+                                    <div class="col " style="margin-left: 50px">
+                                        <img width="300px" src="image/nha-xinh-phong-khach-hien-dai-poppy-1-1200x800.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown down ">
+                            <a class="nav-link dropdown-toggle " href="#" id="Room">PHÒNG</a>
+                            <ul class="dropdown-menu menu_first down" aria-labelledby="#Room">
+                                <li>
+                                    <a class="dropdown-item " href="">Phòng khách</a>
+                                    <a class="dropdown-item " href="">Phòng ăn</a>
+                                    <a class="dropdown-item " href="">Phòng ngủ</a>
+                                    <a class="dropdown-item " href="">Phòng làm việc</a>
+                                    <a class="dropdown-item " href="">Tủ bếp</a>
+                                    <a class="dropdown-item " href="">Hàng trang trí</a>
+                                    <a class="dropdown-item " href="">Ngoại thất</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item down">
+                            <a class="nav-link" href="#">BỘ SƯU TẬP</a>
+                        </li>
+                        <li class="nav-item down">
+                            <a class="nav-link" href="#">THIẾT KẾ NỘI THẤT</a>
+                        </li>
+                        <li class="nav-item down">
+                            <a class="nav-link" href="#">SHOWROOM ẢO</a>
+                        </li>
+                        <li class="nav-item down">
+                            <a class="nav-link" href="#">GÓC CẢM HỨNG</a>
+                        </li>
+                    
+
+                    <form class="d-flex down " style="height: 80%; margin-left: 20px;">
+                        <input class="form-control me-2 search" type="text" placeholder="Search">
+                        <button class="btn btn-primary look" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+

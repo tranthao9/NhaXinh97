@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    int i = 1;
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Quản lý sản phẩm <small></small></h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Quản lý sản phẩm</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive ">
+                                    <button class="float-right btn btn-warning mr-2 text-info">
+                                        <i class="glyphicon glyphicon-plus "></i>
+                                        @Html.ActionLink("Thêm mới ", "Create")
+                                    </button>
+
+                                    <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th><input type="checkbox" id="check-all" class="flat"></th>
+                                                <th>STT</th>
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.Category.CatName)
+                                                </th>
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.ProID)
+                                                </th>
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.ProName)
+                                                </th>
+                                                <th class="column-title no-link last">Tác vụ</th>
+                                                <th class="bulk-actions" colspan="7">
+                                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr id="row_@item.ProID">
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="table_records">
+                                                    </td>
+                                                    <td>@(i++)</td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Category.CatName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ProID)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ProName)
+                                                    </td>
+                                                    <td class="text-center text-danger" style="font-size: 16px">
+                                                        @Html.ActionLink(" ", "Edit", new { id = item.ProID }, new { @class = "text-danger glyphicon glyphicon-edit" }) |
+                                                        @Html.ActionLink(" ", "Details", new { id = item.ProID }, new { @class = "text-danger glyphicon glyphicon-info-sign" }) |
+                                                        @Ajax.ActionLink(" ", "Delete", new { @id = item.ProID }, new AjaxOptions
+                                                       {
+                                                           Confirm = "Bạn có chắc chắn muốn xóa ?",
+                                                           OnComplete = " $('#row_" + @item.ProID + "').remove()",
+                                                           HttpMethod = "GET"
+                                                       }, new { @class = "text-danger glyphicon glyphicon-remove" })
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

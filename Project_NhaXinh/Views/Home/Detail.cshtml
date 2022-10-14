@@ -1,0 +1,445 @@
+﻿@model ModelNhaXinh.EF.Product
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Look at the photo-->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 ps-5 pe-5 position-relative">
+            <div class="slider-for ">
+                <div><img class="fakeimg" src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-3.jpg" alt=""></div>
+                <div><img class="fakeimg" src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-4.jpg" alt=""></div>
+
+            </div>
+            <div class="slider-nav" style="width:50%;margin: auto;">
+                <div><img class="fakeimg" src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-3.jpg" alt=""></div>
+                <div><img class="fakeimg" src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-4.jpg" alt=""></div>
+            </div>
+            <div class="position-absolute discount">15%</div>
+        </div>
+        <div class="col-sm-6">
+            <h1>Sofa Combo góc trái vải 2041 9</h1>
+            <div class="line mt-2 "></div>
+            <div class="d-flex " style="font-size: 25px;">
+                <span class="nav-link text-muted hover_heart " href="#"><i class="fa-regular fa-heart"></i></span>
+                <bdi class="text-danger mt-2">32,215,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                <span class="text-decoration-line-through mt-3 text-muted ms-2" style="font-size: 18px">37,900,000<span class="woocommerce-Price-currencySymbol">₫</span></span>
+            </div>
+            <div class="div mt-3 d-flex">
+                <span class="fs-5 fw-bold font-monospace mt-1">Vật liệu</span>
+                <input type="text" class="form-control materials" value="Chân kim loại 2 màu đen/gold - nệm bọc vải cao cấp màu xanh">
+            </div>
+            <div class="div mt-3 d-flex">
+                <span class="fs-5 fw-bold font-monospace mt-1">Kích thước</span>
+                <input type="text" class="form-control materials w-50" value="D2800/1600 - R890 - C725 mm">
+            </div>
+            <div class="div mt-3 d-flex">
+                <span class=" me-2">Hàng có sẵn</span>
+                <a class="fw-bolder text-dark" href="">Xem cửa hàng trưng bày</a>
+            </div>
+            <p class="mt-3">Mã: 3*106391</p>
+            <p>Category: Sofa góc</p>
+            <div class="d-flex design_top ">
+                <button class="float-right btn btn-dark me-3">MUA NGAY</button>
+                <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+            </div>
+            <div>Liên hệ tư vấn đặt mua : <span class="text-danger contact cursor">18007200</span></div>
+            <div class="mt-3">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="evaluate-tab" data-bs-toggle="tab" data-bs-target="#evaluate" type="button" role="tab" aria-controls="evaluate" aria-selected="true">Đánh giá</button>
+                        <button class="nav-link" id="warranty-tab" data-bs-toggle="tab" data-bs-target="#warranty" type="button" role="tab" aria-controls="warranty" aria-selected="false">Bảo hành</button>
+                        <button class="nav-link" id="ship-tab" data-bs-toggle="tab" data-bs-target="#ship" type="button" role="tab" aria-controls="ship" aria-selected="false">Vận chuyển</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="evaluate" role="tabpanel" aria-labelledby="evaluate-tab">
+                        <p class="mt-5">Chưa có bài đánh giá</p>
+                        <div class="mt-5 bg-light " style=" margin: auto; padding: 20px; width: 95%;">
+                            <h4>Viết đánh giá cho "Sofa Combo góc trái vải 2041 9"</h4>
+                            <p>You must be logged in to post a review.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="warranty" role="tabpanel" aria-labelledby="warranty-tab">
+                        <div class="mt-5"><img src="/Assets/Client/image/check.png" alt=""><small>Các sản phẩm nội thất tại Nhà Xinh đa số đều được sản xuất tại nhà máy của công ty cổ phần xây dựng kiến trúc AA với đội ngũ nhân viên và công nhân ưu tú cùng cơ sở vật chất hiện đại (http://www.aacorporation.com/). Nhà Xinh đã kiểm tra kỹ lưỡng từ nguồn nguyên liệu cho đến sản phẩm hoàn thiện cuối cùng.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Nhà Xinh bảo hành một năm cho các trường hợp có lỗi về kỹ thuật trong quá trình sản xuất hay lắp đặt.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Quý khách không nên tự sửa chữa mà hãy báo ngay cho Nhà Xinh qua hotline: 1800 7200.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Sau thời gian hết hạn bảo hành, nếu quý khách có bất kỳ yêu cầu hay thắc mắc thì vui lòng liên hệ với Nhà Xinh để được hướng dẫn và giải quyết các vấn đề gặp phải.</small></div>
+                        <h6 class="mt-4">TUY NHIÊN NHÀ XINH KHÔNG BẢO HÀNH CHO CÁC TRƯỜNG HỢP SAU:</h6>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Khách hàng tự ý sửa chữa khi sản phẩm bị trục trặc mà không báo cho Nhà Xinh.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Sản phẩm được sử dụng không đúng quy cách của sổ bảo hành (được trao gửi khi quý khách mua sản phẩm) gây nên trầy xước, móp, dơ bẩn hay mất màu.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Sản phẩm bị biến dạng do môi trường bên ngoài bất bình thường (quá ẩm, quá khô, mối hay do tác động từ các thiết bị điện nước, các hóa chất hay dung môi khách hàng sử dụng không phù hợp).</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Sản phẩm hết hạn bảo hành.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><small>Sản phẩm không có phiếu bảo hành của Nhà Xinh.</small></div>
+                        <div class="mt-4"><img src="/Assets/Client/image/check.png" alt=""><a class="text-decoration-none text-dark" href="#">Xem nội dung sổ bảo hành</a></div>
+                    </div>
+                    <div class="tab-pane fade" id="ship" role="tabpanel" aria-labelledby="ship-tab">
+                        <h6 class="mt-4">GIAO HÀNG TẬN NƠI</h6>
+                        <p class="mt-3">Nhà Xinh cung cấp dịch vụ giao hàng tận nơi, lắp ráp và sắp xếp vị trí theo đúng ý muốn của quý khách:</p>
+                        <p class="mt-3">- MIỄN PHÍ giao hàng trong các Quận nội thành Tp.Hồ Chí Minh và Hà Nội, áp dụng cho các đơn hàng trị giá trên 10 triệu.</p>
+                        <p class="mt-3">- Đối với khu vực các tỉnh lân cận: Tính phí hợp lý theo dựa trên quãng đường vận chuyển</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- có thể bạn cũng thích -->
+<div class="container-fluid mt-5">
+    <h1 class="d-flex justify-content-center ">Có thể bạn cũng thích</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active1" class=" fakeimg img_hover " src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-4.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa Combo góc trái vải 20412 9</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">32,215,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">37,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total ">
+                <div class="hidden position-relative">
+                    <img id="img_active2" class=" fakeimg img_hover" src="/Assets/Client/image/ban-an-peak-van-may-hien-dai-ceramic-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Bàn ăn Peak hiện đại mặt Ceramic vân mây</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">38,165,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">44,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active3" class="fakeimg img_hover" src="/Assets/Client/image/armchair-osaka-hien-dai-sang-trong-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Arm chair Osaka bọc vải SO65</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">12,665,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">14,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active4" class=" fakeimg img_hover" src="/Assets/Client/image/CONSOLE-TABLE-GLORIA-GOLD-82379K-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Console Table Gloria Gold 82379K</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">30,090,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">35,400,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class="btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sản phẩm vừa xem -->
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-sm ">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse boder_bottom" id="navbarID2">
+                <div class="navbar-nav ">
+                    <h4 class="nav-link active text-dark" aria-current="page" href="#">Sản Phẩm Vừa Xem</h4>
+                </div>
+                <div class="navbar-nav cursor">
+                    <small class="nav-link active text-dark" aria-current="page" href="#"></small>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- DS sản phẩm -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_activebridge" class=" fakeimg img_hover " src="/Assets/Client/image/86220_1000-300x200.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa Bridge 3 chỗ hiện đại da Beige</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">93,406,500<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">109,890,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total ">
+                <div class="hidden position-relative">
+                    <img class=" fakeimg img_hover" src="/Assets/Client/image/102648-sofa-penny-3-cho-vai-xanh-xam2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa 3 chỗ Penny vải xanh MB.08</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">28,865,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">26,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_activesofa3" class="fakeimg img_hover" src="/Assets/Client/image/sofa-osaka-3-cho-3101896-1-600x354.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa 3 chỗ Osaka mẫu 1 vải 46</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">24,565,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">28,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active5" class=" fakeimg img_hover" src="/Assets/Client/image/Sofa-Combo-3-cho-da-Bali-520-1-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa combo 3 chỗ da Baili 520</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">50,915,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">59,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active1" class=" fakeimg img_hover " src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-4.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa Combo góc trái vải 20412 9</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">32,215,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">37,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total ">
+                <div class="hidden position-relative">
+                    <img id="img_active2" class=" fakeimg img_hover" src="/Assets/Client/image/ban-an-peak-van-may-hien-dai-ceramic-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Bàn ăn Peak hiện đại mặt Ceramic vân mây</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">38,165,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">44,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active3" class="fakeimg img_hover" src="/Assets/Client/image/armchair-osaka-hien-dai-sang-trong-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Arm chair Osaka bọc vải SO65</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">12,665,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">14,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class=" hover_total">
+                <div class="hidden position-relative">
+                    <img id="img_active4" class=" fakeimg img_hover" src="/Assets/Client/image/CONSOLE-TABLE-GLORIA-GOLD-82379K-2-600x400.jpg" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">Console Table Gloria Gold 82379K</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">30,090,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">35,400,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <button class="btn btn-outline-dark">THÊM VÀO GIỎ</button>
+                    <button class="float-right btn btn-dark">XEM THÊM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mẫu thiết kế -->
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-sm-6  ">
+            <div class="hidden">
+                <img class="fakeimg item " src="/Assets/Client/image/Rectangle.jpeg" alt="">
+            </div>
+
+        </div>
+        <div class="col-sm-6">
+            <div class="row d-flex">
+                <div class="col-sm-5">
+                    <h4>Không gian phòng khách</h4>
+                    <small>Phòng khách là không gian chính của ngôi nhà là nơi sum họp gia đình</small>
+                    <a class="nav-link design" href="#">
+                        MẪU THIẾT KẾ <i class="fa-solid fa-right-long"></i>
+                    </a>
+                    <div class="nav-item design_left">
+                        <h4>Đồ trang trí</h4>
+                        <small>Mang lại những nguồn cảm hứng và nét sinh động cho không gian</small>
+                        <a class="nav-link design" href="#">KHÁM PHÁ <i class="fa-solid fa-right-long"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <div class="hidden">
+                        <img class="fakeimg item" src="/Assets/Client/image/nha-xinh-phong-khach-may-net-viet-duong-dai-3.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Mẫ phòng ngủ -->
+<div class="container-fluid mt-5 mb-5">
+    <div class="row">
+        <div class="col-sm-6  ">
+            <div class="row ">
+                <div class="col-sm-7">
+                    <div class="hidden">
+                        <img class="fakeimg item" src="/Assets/Client/image/SHOWROOM_007.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="nav-item design_left">
+                        <h4>Không gian phòng ngủ</h4>
+                        <small>Những mẫu phòng ngủ của Nhà Xinh mang đến cảm giác ấm cúng, gần gũi và thoải mái</small>
+                        <a class="nav-link design" href="#">MẪU PHÒNG NGỦ <i class="fa-solid fa-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="hidden">
+                <img class="fakeimg item" src="/Assets/Client/image/Rectangle4.jpeg" alt="">
+            </div>
+            <div class="nav-item ">
+                <h4 class="design_top">Không gian phòng ăn</h4>
+                <small>Một bữa ăn ngon luôn là mong ước của mỗi gia đình. Không gian phòng ăn đóng vai trò rất quan trọng trong văn hóa Việt</small>
+                <a class="nav-link design" href="#">MẪU PHÒNG ĂN <i class="fa-solid fa-right-long"></i></a>
+            </div>
+        </div>
+    </div>
+</div>

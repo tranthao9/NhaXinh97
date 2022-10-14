@@ -1,0 +1,26 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "cb7220fa-8703-4ac6-8a8b-075a5fa78132": {
+      "ProjectGuid": "cb7220fa-8703-4ac6-8a8b-075a5fa78132",
+      "DisplayName": "Project_NhaXinh",
+      "ColorIndex": 0
+    },
+    "e0bbd571-f2d7-4a85-85c8-ea140bd170c1": {
+      "ProjectGuid": "e0bbd571-f2d7-4a85-85c8-ea140bd170c1",
+      "DisplayName": "ModelNhaXinh",
+      "ColorIndex": 1
+    },
+    "0f82efa9-8d79-4695-9947-dbe0aeaca83f": {
+      "ProjectGuid": "0f82efa9-8d79-4695-9947-dbe0aeaca83f",
+      "DisplayName": "NhaXinhBUS",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

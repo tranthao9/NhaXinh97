@@ -1,0 +1,222 @@
+﻿@model ModelNhaXinh.EF.User_
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Thêm mới User</h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Thông tin cá nhân </h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content ">
+                        @using (Html.BeginForm("Create", "User_", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal ">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <input type="number" class="form-control bg-light datepicker" name="UserID" disabled value="@Html.ViewBag.id" />
+                                             @ViewBag.ErrorMessage
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control bg-light", required = true })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.UserEmail, new { @class = "form-control bg-light", required = true })
+                                            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserAddress, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.UserAddress, new { @class = "form-control bg-light ", required = true })
+                                            @Html.ValidationMessageFor(model => model.UserAddress, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserPhone, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.UserPhone, new { @class = "form-control bg-light", required = true })
+                                            @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DateofBirth, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <input type="date" class="form-control bg-light datepicker" name="DateofBirth" />
+                                            @Html.ValidationMessageFor(model => model.DateofBirth, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Identification, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.Identification, new { @class = "form-control bg-light", required = true })
+                                            @Html.ValidationMessageFor(model => model.Identification, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.DateofIssueinIDcard, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <input type="date" class="form-control bg-light datepicker" name="DateofIssueinIDcard" />
+                                            @Html.ValidationMessageFor(model => model.DateofIssueinIDcard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.PlaceofIssueofIdentityCard, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.PlaceofIssueofIdentityCard, new { @class = "form-control bg-light", required = true })
+                                            @Html.ValidationMessageFor(model => model.PlaceofIssueofIdentityCard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <select class="form-control bg-light text-muted" name="Gender">
+                                                <option>-Chọn giới tính-</option>
+                                                <option>Nam</option>
+                                                <option>Nữ</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Degree, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <select class="form-control bg-light text-muted" name="Degree">
+                                                <option>-Chọn bằng cấp-</option>
+                                                <option>Tốt nghiệp cấp 3</option>
+                                                <option>Đại học</option>
+                                                <option>Cao đẳng</option>
+                                                <option>Khác</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Degree, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.Position, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <select class="form-control bg-light text-muted" name="Position">
+                                                <option>-Chọn chức vụ-</option>
+                                                <option>Nhân viên bán hàng</option>
+                                                <option>Nhân viên kho</option>
+                                                <option>Nhân viên vận chuyển</option>
+                                                <option>Admin</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.MaritalSatus, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            <select class="form-control bg-light text-muted" name="MaritalSatus">
+                                                <option>-Chọn tình trạng hôn nhân-</option>
+                                                <option>Độc thân</option>
+                                                <option>Đã kết hôn</option>
+                                            </select>
+                                            @Html.ValidationMessageFor(model => model.MaritalSatus, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control bg-light", required = true, @value = "" })
+                                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group  ">
+                                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.PasswordFor(model => model.Password, new { @class = "form-control bg-light", required = true, @value="" } )
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="d-flex">
+                                            <p style="font-weight:bold;color:black">Ảnh 3x4 nhân viên</p>
+                                            <div class="text-center ml-5">
+                                                <img width="100px" src="/Assets/Admin/images/pngtree-no-avatar-vector-isolated-on-white-background-png-image_4979074.jpg" id="userIG"  /><br />
+                                                <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                                                <input type="text" id="SrcImg" class="d-none" name="UserImage"  />
+                                                @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4" style="margin-top:15px">
+                                        <div class="form-group  ">
+                                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "text-dark font-weight-bold" })
+                                            @Html.CheckBoxFor(model => model.Status, new { @class = "ml-2 ", @checked = "checked" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center">
+                                    <div class="col-md-offset-2 ">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                        @Html.ActionLink("Back to List", "Index")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $("#btnSelectImage").on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                document.getElementById("userIG").src = url;
+                $("#SrcImg").val(url);
+            };
+            finder.popup();
+        })
+    </script>
+}
+
+
+

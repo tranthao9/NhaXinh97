@@ -1,0 +1,160 @@
+﻿@model ModelNhaXinh.EF.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div class="right_col" role="main">
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal ">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-sm-7" style="margin-left:10px">
+                    <h4 class="text-dark font-weight-bold">Thêm mới sản phẩm</h4>
+
+                    <div class=" " style="width:100% ;margin: auto">
+                        <p class="font-weight-bold mt-3">_Thông tin cơ bản_</p>
+                        <div class="row mt-3">
+                            <label class="col-4   text-dark" for="">Mã sản phẩm (<span class="text-danger font-weight-bold">*</span>)</label>
+                            <input type="text" value="@Model.ProID" id="proID" name="ProID" class="col-7 pl-1 pt-1">
+
+                        </div>
+                        <div class="row mt-2">
+                            <label class="col-4 text-dark" for="">Tên sản phẩm (<span class="text-danger font-weight-bold">*</span>)</label>
+                            <input type="text" value="@Model.ProName" name="ProName" class="col-7 pl-1 pt-1">
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-4 text-dark" for="">Chất liệu (<span class="text-danger font-weight-bold">*</span>)</label>
+                            <input type="text" value="@Model.Materials" name="Materials" class="col-7 pl-1 pt-1">
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-4 text-dark" for="">Kích thước (<span class="text-danger font-weight-bold">*</span>)</label>
+                            <input type="text" value="@Model.Size" name="Size" class="col-7 pl-1 pt-1">
+                        </div>
+                        <p class="font-weight-bold mt-3">_Thông tin chi tiết_</p>
+                        <div class="row mt-3">
+                            @Html.LabelFor(model => model.CatID, "CatID", htmlAttributes: new { @class = "col-4 text-dark" })
+                            @Html.DropDownList("CatID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "CatID" })
+
+                            @Html.ValidationMessageFor(model => model.CatID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row mt-3">
+                            @Html.LabelFor(model => model.RooID, "RooID", htmlAttributes: new { @class = "col-4 text-dark" })
+                            @Html.DropDownList("RooID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "RooID" })
+                            @Html.ValidationMessageFor(model => model.RooID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row mt-3">
+                            @Html.LabelFor(model => model.StuID, "StuID", htmlAttributes: new { @class = "col-4 text-dark" })
+                            @Html.DropDownList("StuID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "StuID" })
+                            @Html.ValidationMessageFor(model => model.StuID, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-4 text-dark" for="">Chế độ hiển thị</label>
+                            @Html.CheckBoxFor(model => model.Status, new { @class = "ml-2 " })
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-4 text-dark" for="">Loại hiển thị </label>
+                            <select name="Displayhome" class="w-50 pl-1 pt-1">
+                                <option>@Model.Displayhome</option>
+                                <option>Sản phẩm mới</option>
+                                <option>Sản phẩm vừa xem</option>
+                            </select>
+
+                        </div>
+                        <div class="row mt-3">
+                            <label class="col-4 text-dark" for="">Mô tả </label>
+                            <textarea id="ProDescription" name="ProDescription" class="col-6 pl-1 pt-1 ">@Html.Raw(Model.ProDescription)</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4" style="margin-left: 20px; padding-left:20px; border-left: 1px solid rgb(186, 186, 186)">
+                    <h5 class=" text-dark mt-3" for="">Ảnh sản phẩm (<span class="text-danger font-weight-bold">*</span>)</h5>
+                    <p>Tối đa 10 ảnh <span class="text-danger ml-3">@Html.ViewBag.errorImg</span></p>
+                    <div class=" ">
+                        <a style="background-color: #252222; color: white; font-size: 23px; border-radius:3px  " id="btnSelectImagePro" href="#"><i class="fa fa-upload ml-5 mr-5 "></i></a><br />
+                        <input type="text" id="SrcImgProEdit" value="@Model.MoreImage" class="d-none" name="MoreImage" />
+                        <div class="row  " id="ImageList2">
+                            @if (Model.MoreImage == null)
+                            {
+                                <div class="mt-3 col-sm-4 d-flex ProNo">
+                                    <img width="90%" height="90%" src="/Assets/Admin/images/istockphoto-1357365823-612x612.jpg" />
+                                    <a class="ml-1 " href="#"><i class="fa fa-times text-danger"></i></a>
+                                </div>
+                            }
+                        </div>
+
+                        @Html.ValidationMessageFor(model => model.ProImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="col-md-offset-2 mt-3">
+                    <input type="submit" value="Save" class="btn btn-primary" id="saveImgPro" />
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts
+{
+    <script>
+        var product = {
+            init: function () {
+                product.registerEvents();
+            },
+            registerEvents: function () {
+                $("#btnSelectImagePro").off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var finder = new CKFinder();
+                    finder.selectActionFunction = function (url) {
+                        $('.ProNo').remove();
+                        $('#ImageList2').append('<div class="mt-3 col-sm-4 d-flex"> <img width = "90%" height = "90%" src = "' + url + '"/><a class="ml-1 removeImg" href="#"> <i class="fa fa-times text-danger"> </i> </a> </div >')
+                        $('.removeImg').off('click').on('click', function (e) {
+                            e.preventDefault();
+                            $(this).parent().remove();
+                        })
+                    };
+                    finder.popup();
+                });
+                $('#saveImgPro').off('click').on('click', function () {
+                    var images = [];
+                    $.each($('#ImageList2 img'), function (i, item) {
+                        images.push($(item).prop('src'));
+                    })
+                    $("#SrcImgProEdit").val(images);
+                });
+
+            },
+        }
+        product.init();
+
+        var a = $('#SrcImgProEdit').val();
+        function loadImage() {
+            if (a != "") {
+                let array_images = new Array();
+                array_images = a.split(',');
+                for (x of array_images) {
+                    $('#ImageList2').append('<div class="mt-3 col-sm-4 d-flex"> <img width = "90%" height = "90%" src = "' + x + '"/><a class="ml-1 removeImg" href="#"> <i class="fa fa-times text-danger"> </i> </a> </div >')
+                }
+                $('.removeImg').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                })
+            }
+        }
+        loadImage();
+    </script>
+    <script>
+        var editor = CKEDITOR.replace('ProDescription', {
+            customConfig: '/Assets/Admin/Plugin/ckeditor/config.js'
+        })
+    </script>
+}
+
+

@@ -1,0 +1,330 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Price>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    int i = 1;
+
+}
+@{
+    // define format VND
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<div ng-app='myApp' ng-controller="MyCtrl">
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Quản lý giá sản phẩm <small></small></h3>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Danh sách sản phẩm đã làm giá</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="table-responsive">
+                                        <button class="float-right btn btn-warning mr-2 text-info" data-toggle="modal" data-target="#ModelPrice">
+                                            <i class="glyphicon glyphicon-plus "></i>
+                                            Thêm giá
+                                        </button>
+                                        <button class="btn btn-primary float-right" data-toggle="modal" data-target="#ModelPriceUpdate">Cập nhập giá</button>
+                                        <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th><input type="checkbox" id="check-all" class="flat"></th>
+                                                    <th>STT</th>
+                                                    <th>Mã SP</th>
+                                                    <th class="column-title">
+                                                        Tên sản phẩm
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Giá
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Giá so sánh
+                                                    </th>
+                                                    <th class="column-title no-link last">Tác vụ</th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr id="row_@item.ProID">
+                                                        <td class="a-center ">
+                                                            <input type="checkbox" class="flat" name="table_records">
+                                                        </td>
+                                                        <td>@(i++)</td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ProID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Product.ProName)
+                                                        </td>
+                                                        <td>
+                                                            @String.Format(format, "{0:c0}", item.Cost)
+                                                        </td>
+                                                        <td>
+                                                            @String.Format(format, "{0:c0}", item.PreCost)
+                                                        </td>
+                                                        <td class="text-center text-danger" style="font-size: 16px">
+                                                            @Html.ActionLink(" Quản lý giá ", "PriProduct", new { id = item.ProID }, new { @class = "text-danger font-weight-bold" }) |
+                                                            @Ajax.ActionLink(" ", "Delete", new { @id = item.ProID }, new AjaxOptions
+                                                           {
+                                                               Confirm = "Bạn có chắc chắn muốn xóa ?",
+                                                               OnComplete = " $('#row_" + @item.ProID + "').remove()",
+                                                               HttpMethod = "GET"
+                                                           }, new { @class = "text-danger glyphicon glyphicon-remove" })
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Danh sách sản phẩm chưa làm giá</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12 ">
+                                    <div class="table-responsive">
+                                        <table id="datatable-keytable" class="table   jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th>STT</th>
+                                                    <th class="column-title">
+                                                        Mã SP
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Tên sản phẩm
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Giá
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Giá so sánh
+                                                    </th>
+                                                    <th class="column-title no-link last">Tác vụ</th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="data in datas">
+                                                <tr>
+                                                    <td>{{$index+1}}</td>
+                                                    <td>
+                                                        <input id="ids" value="{{data.ProID}}" class="d-none" />
+                                                        {{data.ProID}}
+                                                    </td>
+                                                    <td>
+                                                        {{data.ProName}}
+                                                    </td>
+                                                    <td>
+                                                        null
+                                                    </td>
+                                                    <td>
+                                                        null
+                                                    </td>
+                                                    <td>
+                                                        <a id="themgia" class="btn btn-danger fa fa-pencil text-white  " ng-click="themgia(data.ProID)" data-toggle="modal" data-target="#ModelPrice">&nbsp; Thêm giá</a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="ModelPrice" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> Thêm giá sản phẩm </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div>
+                    <form ng-submit="Create()">
+                        <div class="modal-body">
+                            <div class="form-horizontal ">
+                                <div class="row">
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Mã sản phẩm:  </label>
+                                        <input type="text" id="Masp" ng-model="price.ProID" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Giá bán:  </label>
+                                        <input type="number" ng-model="price.Cost" />
+                                    </div>
+                                    <div class="col-sm-5 mt-3 ml-4 form-group">
+                                        <label>Giá so sánh : </label>
+                                        <input type="number" ng-model="price.PreCost" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Ngày bắt đầu : </label>
+                                        <input id="datePrice" style="width:92%" type="date" ng-model="price.StartedDate" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="Create()" class="btn btn-warning ">Cập nhập</button>
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /page content -->
+    <div class="modal fade" id="ModelPriceUpdate" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> Cập nhập giá sản phẩm  </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form ng-submit="Update()">
+                    <div class="modal-body">
+                        <div class="form-horizontal ">
+                            <div class="row">
+                                <div class="col-sm-5 ml-4 form-group">
+                                    <label>Loại cập nhập:  </label>
+                                    <select class="w-100 h-50" ng-model="value">
+                                        <option value="0">Tăng</option>
+                                        <option value="1">Giảm</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-5 ml-4 form-group">
+                                    <label>Số Tiền </label>
+                                    <input class="h-50" type="number" ng-model="gia" />
+                                </div>
+                                <div class="col-sm-5 ml-4 mt-3 form-group">
+                                    <label>Ngày bắt đầu : </label>
+                                    <input class="w-100" id="datePriceU" type="date" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="ml-3"><span class="text-danger">*</span> Áp dụng tất cả các sản phẩm</p>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="Update()" class="btn btn-warning ">Cập nhập</button>
+                        <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="/Assets/Admin/build/js/angular.min.js"></script>
+    <script>
+        $("#datePrice").val(new Date().toISOString().substring(0, 10))
+        $("#datePriceU").val(new Date().toISOString().substring(0, 10))
+        var myapp = angular.module("myApp", []);
+        var time = $("#datePrice").val();
+        myapp.controller('MyCtrl', mycontrol);
+        function mycontrol($scope, $http) {
+            $http({
+                url: "/Admin/Prices/getPronoPrice",
+                method: "GET"
+            }).then(function (res) {
+                $scope.datas = res.data;
+            });
+            $scope.price = {};
+            $scope.price.StartedDate = time;
+            $scope.themgia = function (id) {
+                $scope.price.ProID = id;
+            }
+            $scope.Create = function () {
+                var date = ($scope.price.StartedDate);
+                so = parseInt(date.getMonth()) + 1;
+                var url1 = "/Admin/Prices/Create/?id=" + $scope.price.ProID + "&giaban=" + $scope.price.Cost + "&giasosanh=" + $scope.price.PreCost + "&thoigian=" + date.getFullYear() + "-" + so + "-" + date.getDate();
+                $http({
+                    method: "GET",
+                    url: url1
+                }).then(function (res) {
+                    if (res.ms = true) {
+                        alert("Thêm bản ghi thành công");
+                        window.location.href = "/Admin/Prices/Index"
+                    }
+                    else {
+                        alert("Lỗi thêm bản ghi")
+                    }
+                })
+            }
+            $scope.value = "0";
+            $scope.gia = 1;
+            $scope.Update = function () {
+                $http({
+                    method: "GET",
+                    url: "/Admin/Prices/updateList/?value=" + $scope.value + "&gia=" + $scope.gia
+                }).then(function (res) {
+                    if (res.msp = true) {
+                        alert("Thêm bản ghi thành công");
+                        window.location.href = "/Admin/Prices/Index"
+                    }
+                    else {
+                        alert("Lỗi thêm bản ghi")
+                    }
+                })
+            }
+
+        }
+    </script>
+
+
+}

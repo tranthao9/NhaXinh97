@@ -1,0 +1,207 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Price>
+
+@{
+    ViewBag.Title = "PriProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    int i = 1;
+}
+@{
+    // define format VND
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+  
+}
+
+<!-- page content -->
+<div ng-app='ProApp' ng-controller="ProController">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Quản lý giá sản phẩm </h3>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Danh sách giá</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box datatable-responsive" style="padding-right:10px">
+                                        <button type="button" class="float-right btn btn-warning mr-3 text-info " data-toggle="modal" data-target="#myModal">Chỉnh sửa giá</button>
+
+                                        <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover " style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.PriID)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Product.ProID)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Cost)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.PreCost)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.StartedDate)
+                                                    </th>
+                                                    <th class="column-title ">
+                                                        @Html.DisplayNameFor(model => model.StopedDate)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Status)
+                                                    </th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr id="row_@item.ProID">
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.PriID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Product.ProName)
+                                                        </td>
+                                                        <td>
+                                                            @String.Format(format, "{0:c0}", item.Cost)
+                                                        </td>
+                                                        <td>
+                                                            @String.Format(format, "{0:c0}", item.PreCost)
+                                                        </td>
+                                                        <td>
+                                                            @Html.FormatValue(item.StartedDate, "{0:MM/dd/yyyy}")
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.FormatValue(item.StopedDate, "{0:MM/dd/yyyy}")
+                                                        </td>
+                                                        <td class="text-primary">
+                                                            @Html.DisplayFor(modelItem => item.Status)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        if (item.Status == true)
+        {
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"> @item.Product.ProName </h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <form ng-submit="Create()">
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Giá cũ :  </label>
+                                        <input value=" @String.Format(format, "{0:c0}", item.Cost)" id="money" type="text" />
+                                        <input id="idP" value="@item.ProID" ng-model="price.ProID" class="d-none" type="text" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Giá mới : </label>
+                                        <input type="number" ng-model="price.Cost" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Giá so sánh mới : </label>
+                                        <input type="number" ng-model="price.PreCost" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Ngày bắt đầu : </label>
+                                        <input id="datePrice2" style="width:92%" type="date" ng-model="price.StartedDate" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click="Create()" class="btn btn-warning ">Cập nhập</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            break;
+        }
+    }
+</div>
+<!-- /page content -->
+
+@section Scripts
+{
+
+    <script>
+        
+        $("#datePrice2").val(new Date().toISOString().substring(0, 10));
+
+    </script>
+    <script>
+        var myapp2 = angular.module("ProApp", []);
+        var id = $("#idP").val();
+        var timeP = ($("#datePrice2").val());
+        myapp2.controller('ProController', mycontrol2);
+        function mycontrol2($scope, $http) {
+            $scope.price = {};
+            $scope.price.StartedDate = timeP;
+            $scope.price.ProID = id;
+            $scope.Create = function () {
+                var date = ($scope.price.StartedDate);
+                so = parseInt(date.getMonth()) + 1;
+                var url1 = "/Admin/Prices/Create/?id=" + $scope.price.ProID + "&giaban=" + $scope.price.Cost + "&giasosanh=" + $scope.price.PreCost + "&thoigian=" + date.getFullYear() + "-" + so + "-" + date.getDate();
+                $http({
+                    method: "GET",
+                    url: url1
+                }).then(function (res) {
+                    if (res.ms = true) {
+                        alert("Thêm bản ghi thành công");
+                        window.location.href = "/Admin/Prices/PriProduct/" + $scope.price.ProID
+                    }
+                    else {
+                        alert("Lỗi thêm bản ghi")
+                    }
+                })
+            }
+        }
+    </script>
+
+}

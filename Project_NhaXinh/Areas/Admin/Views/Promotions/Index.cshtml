@@ -1,0 +1,288 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Promotion>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+@{
+    // define format VND
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<!-- page content -->
+<div ng-app="PromotionApp" ng-controller="PromController">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Quản lý chương trình khuyến mại<small></small></h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Chương trình khuyến mại</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive ">
+                                        <button class="float-right btn btn-warning mr-2 text-info" data-toggle="modal" data-target="#ModelPromotion">
+                                            <i class="glyphicon glyphicon-plus "></i>
+                                            Thêm mới
+                                        </button>
+
+                                        <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th><input type="checkbox" id="check-all" class="flat"></th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.ProMID)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.ProMName)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Form)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.SoGiam)
+                                                    </th>
+                                                    <th class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Status)
+                                                    </th>
+                                                    <th class="column-title no-link last">Tác vụ</th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr id="row_@item.ProMID">
+                                                        <td class="a-center ">
+                                                            <input type="checkbox" class="flat" name="table_records">
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ProMID)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ProMName)
+                                                        </td>
+                                                        @if (item.Form == "0")
+                                                        {
+                                                            <td>
+                                                                Giảm giá số tiền
+                                                            </td>
+                                                            <td>
+                                                                @String.Format(format, "{0:c0}", item.SoGiam)
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>
+                                                                Giảm giá phần trăm
+                                                            </td>
+                                                            <td>@item.SoGiam <span>%</span> </td>
+
+                                                        }
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Status)
+                                                        </td>
+                                                        <td class="text-center text-danger" style="font-size: 16px">
+                                                            <a data-toggle="modal" ng-click="edit2(@item.ProMID)"  data-target="#ModelPromotionEdit" class = "text-danger glyphicon glyphicon-edit" ng-class="Edit()"></a>  |
+                                                            @Ajax.ActionLink(" ", "Delete", new { @id = item.ProMID }, new AjaxOptions
+                                                           {
+                                                               Confirm = "Bạn có chắc chắn muốn xóa ?",
+                                                               OnComplete = " $('#row_" + @item.ProMID + "').remove()",
+                                                               HttpMethod = "Get"
+                                                           }, new { @class = "text-danger glyphicon glyphicon-remove" })
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModelPromotion" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-dark"> Thêm mới chương trình khuyến mại </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <form ng-submit="Create()">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+                            <div class="form-horizontal ">
+                                <div class="row">
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Mã khuyến mại:  </label>
+                                        <input id="proID" class="h-50" value="@Html.ViewBag.id" type="text" ng-model="promotion.ProMID" disabled />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Tên khuyến mại </label>
+                                        <input class="h-50" type="text" ng-model="promotion.ProMName" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Hình thức khuyến mại : </label>
+                                        <select style="width:92%; height:48%" ng-model="promotion.Form">
+                                            <option value="0">Giảm giá số tiền</option>
+                                            <option value="1">Giảm giá phần trăm</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Số giảm : </label>
+                                        <input class="w-100" type="number" ng-model="promotion.SoGiam" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="Create()" class="btn btn-warning ">Thêm mới</button>
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="ModelPromotionEdit" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-dark"> Chỉnh sửa thông tin CTKM </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <form ng-submit="Edit()">
+                        <div class="modal-body">
+                            <div class="form-horizontal ">
+                                <div class="row">
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Mã khuyến mại:  </label>
+                                        <input class="h-50"  type="text" ng-model="promotion.ProMID2" disabled />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Tên khuyến mại </label>
+                                        <input class="h-50" type="text" ng-model="promotion.ProMName" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Hình thức khuyến mại : </label>
+                                        <select style="width:92%; height:48%" ng-model="promotion.Form">
+                                            <option value="0">Giảm giá số tiền</option>
+                                            <option value="1">Giảm giá phần trăm</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Số giảm : </label>
+                                        <input class="w-100" type="number" ng-model="promotion.SoGiam" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                    </div>
+                                    <div class="col-sm-12 ml-4  form-group">
+                                        <label>Trạng thái hoạt động  </label>
+                                        <input class=" ml-3" type="checkbox" ng-model="promotion.Status"/>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="Edit()" class="btn btn-warning ">Thêm mới</button>
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+@section Scripts
+ {
+    <script>
+        var myapp = angular.module("PromotionApp", []);
+        myapp.controller("PromController", mycontrol);
+        var id = $("#proID").val();
+        function mycontrol($scope, $http, $httpParamSerializerJQLike) {
+            $scope.promotion = {};
+            $scope.promotion.ProMID = id
+            $scope.promotion.Form = "0";
+            $scope.Create = function () {
+                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                $scope.promotion.__RequestVerificationToken = Token;
+                dataRequest = $scope.promotion;
+                console.log(dataRequest);
+                $http({
+                    method: "POST",
+                    url: '/Admin/Promotions/Create',
+                    data: $httpParamSerializerJQLike(dataRequest),
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+
+                }).then(function (res) {
+                    if (res.ms == false) {
+                        alert("Lỗi thêm bản ghi")
+                    }
+                    else {
+                        alert("Thêm bản ghi thành công");
+                        window.location.href = "/Admin/Promotions/Index"
+
+                    }
+                })
+            }
+            $scope.edit2 = function (id2) {
+                alert(id2)
+                $scope.promotion.ProMID2 = id2;
+            }
+            //$scope.Edit = function () {
+            //    Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+            //    $scope.promotion.__RequestVerificationToken = Token;
+            //    dataRequest = $scope.promotion;
+            //    console.log(dataRequest);
+            //    $http({
+            //        method: "POST",
+            //        url: '/Admin/Promotions/Edit',
+            //        data: $httpParamSerializerJQLike(dataRequest),
+            //        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+            //    }).then(function (res) {
+            //        if (res.mse == false) {
+            //            alert("Lỗi sửa bản ghi")
+            //        }
+            //        else {
+            //            alert("Sửa bản ghi thành công");
+            //            window.location.href = "/Admin/Promotions/Index"
+
+            //        }
+            //    })
+            //}
+        }
+    </script>
+}
+
