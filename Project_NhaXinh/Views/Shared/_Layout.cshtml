@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/Assets/Client/css/style.css">
@@ -16,6 +16,55 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/Assets/Client/slick-1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="/Assets/Client/slick-1.8.1/slick/slick-theme.css" />
+    <link href="/Assets/Client/css/Login.css" rel="stylesheet" />
+    <link href="/Assets/Notification.css" rel="stylesheet" />
+
+    <style>
+        #ui-id-1 {
+            position: fixed !important;
+        }
+
+        #recaptcha-container {
+            margin-bottom: 10px;
+            margin-top: 10px
+        }
+
+        #txtKeySP > ul {
+            max-width: 300px;
+            padding-top: 30px
+        }
+
+        #SPkey:hover {
+            background-color: antiquewhite !important;
+        }
+
+        .user-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(22, 21, 22, 0.4);
+            z-index: 32423;
+            overflow-y: auto;
+            cursor: pointer;
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: opacity 0.3s 0, visibility 0 0.3s;
+            -moz-transition: opacity 0.3s 0, visibility 0 0.3s;
+            transition: opacity 0.3s 0, visibility 0 0.3s;
+        }
+
+        .jq-toast-wrap {
+            display: block;
+            position: fixed;
+            width: 250px;
+            pointer-events: none !important;
+            letter-spacing: normal;
+            z-index: 999999945456 !important;
+            right: 15% !important;
+        }
+    </style>
 </head>
 <body>
     <header class="bg-light container-fluid border-bottom">
@@ -31,22 +80,11 @@
                             VN
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tel:1800 7200" style="color: black !important;font-weight: 500;"><i class="fas fa-phone-volume"></i> 1800 7200</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://nhaxinh.com/gioi-thieu/" style="color: rgba(102,102,102,.85) !important;">Giới thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://nhaxinh.com/khuyen-mai/" style="color: rgba(102,102,102,.85) !important;">Khuyến mãi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: #fe0808!important;">Giảm Giá Đặc Biệt</a>
-                    </li>
+                    @{Html.RenderAction("ViewMenuTopL", "Home");}
                 </ul>
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: rgba(102,102,102,.85) !important ">
+                        <a class="nav-link" href="/Home/HeThong" style="color: rgba(102,102,102,.85) !important ">
                             <i class="fa-solid fa-location-dot"></i>
                         </a>
                     </li>
@@ -56,25 +94,207 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><img class="cart-img-icon" alt="Cart" src="https://nhaxinh.com/wp-content/uploads/2021/09/ic-shopping.png"></a>
+                        <div class="submenu_h2 " data-bs-spy="scroll" aria-labelledby="cart_first" data-bs-target="#cart_first">
+                            <div class="offcanvas offcanvas-end " id="cart_first">
+                                <div class="offcanvas-header">
+                                    <button type="button" id="closeCart" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                                </div>
+                                <div class="offcanvas-body d-block">
+                                    <h4 class="text-center">Cart</h4>
+                                    <div class="line mt-1" style="margin-left: 46%"></div>
+                                    <div id="AddCart">
+
+                                    </div>
+                                    <div class="text-right mt-3">Tổng Tiền : <span id="Tongtien"></span></div>
+                                    <a onclick="Checkout2()" class=" btn btn-dark w-75 mt-3 mx-auto d-block h3 fw-bold">XEM GIỎ HÀNG</a>
+                                    <a onclick="Checkout()" class=" btn btn-outline-dark w-75 mt-3 mx-auto d-block h3">CHECKOUT</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="nav-link menu_children2" data-bs-toggle="offcanvas" data-bs-target="#cart_first" href="#"><img class="cart-img-icon" alt="Cart" src="https://nhaxinh.com/wp-content/uploads/2021/09/ic-shopping.png"><span id="Soluong" class="badge rounded-pill bg-warning">0</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: rgba(102,102,102,.85) !important ">Đăng nhập <i class="fa-solid fa-user-large"></i></a>
+                        <div class="dropdown dropdown-menu-end ">
+                            <nav class="main-nav">
+                                <a class="nav-link signin" id="Singin" href="#0" style="color: rgba(102,102,102,.85) !important "> <span id="Dangnhap">Đăng nhập</span> <i class="fa-solid fa-user-large"></i></a>
+                            </nav>
+                            <div id="Taikhoan" style="display:none">
+                                <ul class='dropdown-menu' style='z-index:243556000!important;min-width:6rem!important;'>
+                                    <li class='dropdown-item '><a class="text-decoration-none text-warning" href="/Customer/Account#0">Tài khoản</a>  </li>
+                                    <li onclick="logout()" class='dropdown-item cursor text-warning'>Đăng xuất</li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </li>
                 </ul>
             </div>
         </nav>
+        <!-- The Modal -->
+        <div>
+
+
+            <div class="user-modal">
+                <div class="user-modal-container">
+                    <input id="error" class="d-none" type="button" value="Error!" />
+                    <input id="success" class="d-none" type="button" value="Success!" />
+                    <ul class="switcher">
+                        <li><a href="#0">Đăng nhập</a></li>
+                        <li><a href="#0">Đăng ký</a></li>
+                    </ul>
+
+                    <div id="login">
+                        <form onsubmit="LoginP()" class="form">
+                            <p class="fieldset">
+                                <label class="image-replace username" for="signin-email">UserName</label>
+                                <input class="full-width has-padding has-border" id="us" type="text" placeholder="Username" required>
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace password" for="signin-password">Password</label>
+                                <input class="full-width has-padding has-border" id="pas" type="password" placeholder="Password" required>
+                                <a href="#0" class="hide-password"> <i class="fa fa-eye"></i></a>
+                                <span class="error-message">Wrong password! Try again.</span>
+                            </p>
+
+                            <div class="fieldset d-flex">
+                                <div>
+                                    <input type="checkbox" id="remember" checked>
+                                    <label for="remember-me">Remember me</label>
+                                </div>
+                                <div class="form-bottom-message"><a href="#0">Forgot your password?</a></div>
+                            </div>
+
+                            <p class="fieldset">
+                                <input class="full-width" type="submit" value="Login">
+                            </p>
+                        </form>
+
+
+                        <!-- <a href="#0" class="close-form">Close</a> -->
+                    </div>
+
+                    <div id="signup">
+                        <form onsubmit="login.ExamEmail()" class="form">
+                            <p class="fieldset">
+                                <label class="image-replace username" for="signup-username">Họ Tên</label>
+                                <input class="full-width has-padding has-border" id="name" type="text" placeholder="Trần Thị Thảo" required>
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace " for="signup-email">Địa chỉ</label>
+                                <input class="full-width has-padding has-border" id="occupation" placeholder="Đức Hợp - Kim Động - Hưng Yên" type="text" required>
+
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace email"></label>
+                                <input class="full-width has-padding has-border" id="emailogin" placeholder="tt088038@gmail.com" required type="email">
+
+
+                            </p>
+                            <p class="fieldset">
+                                <label class="image-replace username">Username</label>
+                                <input class="full-width has-padding has-border" type="text" id="username" placeholder="Thao123@abc" required>
+
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace "></label>
+                                <input class="full-width has-padding has-border" type="date" id="date" required='required'>
+
+                            </p>
+
+                            <p class="fieldset">
+                                <label class="image-replace password">Password</label>
+                                <input class="full-width has-padding has-border" type="password" id="password1" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@Html.Raw('@')#$%^&*]).{8,}" title="Tối thiểu 8 ký tự bao gồm chữ cái hoa, thường, số và ký tự đặc biệt" required>
+                                <a href="#0" class="hide-password"><i class="fa fa-eye"></i></a>
+
+                            </p>
+                            <p class="fieldset">
+                                <label class="image-replace ">Password</label>
+                                <input class="full-width has-padding has-border" type="tel" id="phone" placeholder="0832297222" required>
+                                <div id="recaptcha-container"></div>
+                            </p>
+                            <div id="verify" class="fieldset" style="display:none">
+                                <label class="image-replace"></label>
+                                <div class=" col-sm-6 d-flex ml-5">
+                                    <input class="mr-4  pl-2" type="text" id="verificationcode" />
+                                    <button type="submit" class="btn btn-warning" id="verrify" onclick="codeverity()">Verify</button>
+
+                                </div>
+                            </div>
+                            <p class="fieldset">
+                                <input class="full-width has-padding" type="submit" value="Create account">
+                                <button id="reset" type='reset' class="d-none">Reset</button>
+                            </p>
+                        </form>
+
+                        <!-- <a href="#0" class="cd-close-form">Close</a> -->
+                    </div>
+
+                    <div id="reset-password">
+                        <div id="reset-password2">
+                            <h3 id="nhapsdt" class="form-message">Vui lòng nhập số điện thoại bạn đăng ký</h3>
+                            <h3 id="nhapmaxt" class="form-message" style="display:none">Vui lòng nhập mã OTP</h3>
+                            <form onsubmit="phoneAuthLost()" class="form">
+                                <p class="fieldset" id="lostpas">
+                                    <label class="image-replace" for="reset-email">Phone</label>
+                                    <input class="full-width has-padding has-border" id="reset-phone" type="tel">
+                                    <span class="error-message">Số điện thoại không tồn tại</span>
+                                </p>
+                                <div id="recaptcha-container2"></div>
+                                <p class="fieldset" id="maverify" style="display:none">
+                                    <label class="image-replace" for="reset-email">Phone</label>
+                                    <input class="full-width has-padding has-border" id="reset-phone-code" type="tel">
+                                    <span class="error-message">Số điện thoại không tồn tại</span>
+                                </p>
+                                <p class="form-bottom-message mt-2 ml-1"><a class="text-decoration-none" href="#0">Back to log-in</a></p>
+                                <p class="fieldset">
+                                    <input class="full-width has-padding" type="submit" id="layma" value="Lấy mã">
+                                    <input class="full-width has-padding" style="background-color: #e9d837 !important;display:none" type="submit" id="xacthucma" value="Xác thực" onclick="codeverityLost()">
+                                </p>
+                            </form>
+                        </div>
+                        <div id="return-password" style="display:none">
+                            <h3 class="form-message">Vui lòng nhập mật khẩu mới</h3>
+                            <form class="form" onsubmit="LostPass()">
+                                <label>Nhập mật khẩu mới</label>
+                                <p class="fieldset">
+                                    <label class="image-replace password">Password</label>
+                                    <input class="full-width has-padding has-border" type="password" id="Lostpassword" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@Html.Raw('@')#$%^&*]).{8,}" title="Tối thiểu 8 ký tự bao gồm chữ cái hoa, thường, số và ký tự đặc biệt" required>
+                                    <a href="#0" class="hide-password"><i class="fa fa-eye"></i></a>
+
+                                </p>
+                                <label>Nhập lại mật khẩu mới</label>
+                                <p class="fieldset">
+                                    <label class="image-replace password">Password</label>
+                                    <input class="full-width has-padding has-border" type="password" id="Lostpassword2" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@Html.Raw('@')#$%^&*]).{8,}" title="Tối thiểu 8 ký tự bao gồm chữ cái hoa, thường, số và ký tự đặc biệt" required>
+                                    <a href="#0" class="hide-password"><i class="fa fa-eye"></i></a>
+
+                                </p>
+                                <p class="form-bottom-message mt-2 ml-1"><a class="text-decoration-none" href="#0">Back to log-in</a></p>
+                                <p class="fieldset">
+                                    <input class="full-width has-padding" type="submit" value="Lưu mật khẩu">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <a href="#0" class="close-form">Close</a>
+                </div>
+            </div>
+        </div>
 
     </header>
     <!-- Menu -->
-   @Html.Action("Menu")
+    @{Html.RenderAction("ViewMenu", "Home");}
 
     @RenderBody()
 
     <footer class="container-fluid bg-dark text-white ">
         <div class="row">
             <div class="col mt-5">
-                <img src="image/logo.png" alt="">
+                <img src="/Assets/Client/image/logo.png" alt="">
                 <p class="mt-4">FOLLOW US</p>
                 <div class="mt-3 ">
                     <a>Instagram</a>-
@@ -136,7 +356,7 @@
                 Từ năm 1999 - thương hiệu đăng ký số 284074 Cục sở hữu trí tuệ
             </small>
             <div class="float-end mt-4 mr-5">
-                <img src="image/image-15.png" alt="">
+                <img src="/Assets/Client/image/image-15.png" alt="">
             </div>
         </div>
     </div>
@@ -149,6 +369,542 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/slick-1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="/Assets/Client/js/slick.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <!-- Angular -->
+    <script src="/Assets/Admin/build/js/angular.min.js"></script>
+    <script src="/Assets/Client/js/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+
+    <script src="/Assets/Notification.js"></script>
+    <script id="addCart" type="x-tmpl-mustache">
+        <div class="row mt-3 border-bottom">
+        <div class="col-4">
+        <img class="fakeimg" src="{{ProImage}}" alt="">
+        </div>
+        <div class="col-6">
+            <a class="text-decoration-none text-dark h6" href=""><p>{{ProName}}</p></a>
+            <div class="d-flex"><span class="mt-2"> {{Quantity}} x {{Cost}}</span><input id="{{Id}}" onchange="common.updateCart('{{Id}}')" class="text-muted form-control ms-4 mb-3" style="width:45px !important; padding: 0 5px 0 5px!important; line-height:  none !important;" type="number"  min="1" value="{{Quantity}}"></div>
+        </div>
+        <div class="col-2">
+            <a class="border rounded-circle text-muted text-decoration-none ps-2 pe-2 cursor pb-1" onclick="common.removeCart('{{Id}}')">x</a><br>
+        </div>
+         </div>
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+            var $form_modal = $('.user-modal'),
+                $form_login = $form_modal.find('#login'),
+                $form_signup = $form_modal.find('#signup'),
+                $form_forgot_password = $form_modal.find('#reset-password'),
+                $form_modal_tab = $('.switcher'),
+                $tab_login = $form_modal_tab.children('li').eq(0).children('a'),
+                $tab_signup = $form_modal_tab.children('li').eq(1).children('a'),
+                $forgot_password_link = $form_login.find('.form-bottom-message a'),
+                $back_to_login_link = $form_forgot_password.find('.form-bottom-message a'),
+                $main_nav = $('.main-nav');
+
+            //open modal
+            $main_nav.on('click', function (event) {
+                if ($("#Dangnhap").html() == "Đăng nhập") {
+                    if ($(event.target).is($main_nav)) {
+                        // on mobile open the submenu
+                        $(this).children('ul').toggleClass('is-visible');
+                    } else {
+                        // on mobile close submenu
+                        $main_nav.children('ul').removeClass('is-visible');
+                        //show modal layer
+                        $form_modal.addClass('is-visible');
+                        //show the selected form
+                        ($(event.target).is('.signup')) ? signup_selected() : login_selected();
+
+                    }
+                }
+                else {
+                    window.location.href = "/Customer/Account#0"
+
+                }
+
+
+            });
+
+
+            //close modal
+            $('.user-modal').on('click', function (event) {
+                if ($(event.target).is($form_modal) || $(event.target).is('.close-form')) {
+                    $form_modal.removeClass('is-visible');
+                }
+            });
+            //close modal when clicking the esc keyboard button
+            $(document).keyup(function (event) {
+                if (event.which == '27') {
+                    $form_modal.removeClass('is-visible');
+                }
+            });
+
+            //switch from a tab to another
+            $form_modal_tab.on('click', function (event) {
+                event.preventDefault();
+                ($(event.target).is($tab_login)) ? login_selected() : signup_selected();
+            });
+
+            //hide or show password
+            $('.hide-password').on('click', function () {
+                var $this = $(this),
+                    $password_field = $this.prev('input');
+
+                ('password' == $password_field.attr('type')) ? $password_field.attr('type', 'text') : $password_field.attr('type', 'password');
+                ('<i class="fa fa-eye-slash"></i>' == $this.html()) ? $this.html('<i class="fa fa-eye"></i>') : $this.html('<i class="fa fa-eye-slash"></i>');
+                //focus and move cursor to the end of input field
+                $password_field.putCursorAtEnd();
+            });
+
+            //show forgot-password form
+            $forgot_password_link.on('click', function (event) {
+                event.preventDefault();
+                forgot_password_selected();
+            });
+
+            //back to login from the forgot-password form
+            $back_to_login_link.on('click', function (event) {
+                event.preventDefault();
+                login_selected();
+            });
+
+            function login_selected() {
+                $form_login.addClass('is-selected');
+                $form_signup.removeClass('is-selected');
+                $form_forgot_password.removeClass('is-selected');
+                $tab_login.addClass('selected');
+                $tab_signup.removeClass('selected');
+            }
+
+            function signup_selected() {
+                $form_login.removeClass('is-selected');
+                $form_signup.addClass('is-selected');
+                $form_forgot_password.removeClass('is-selected');
+                $tab_login.removeClass('selected');
+                $tab_signup.addClass('selected');
+            }
+
+            function forgot_password_selected() {
+                $form_login.removeClass('is-selected');
+                $form_signup.removeClass('is-selected');
+                $form_forgot_password.addClass('is-selected');
+            }
+
+        });
+
+        function logout() {
+            sessionStorage.setItem("User", "");
+            document.cookie = "User = ; path=/";
+            $("#Dangnhap").text("Đăng nhập");
+            $("#success").click(function () {
+                $.toast({
+                    heading: 'Success',
+                    text: 'Đăng xuất thành công',
+                    icon: 'success',
+                    loader: true,
+                    loaderBg: '#fff',
+                    showHideTransition: 'fade',
+                    hideAfter: 5000,
+                    allowToastClose: false,
+                    position: {
+                        right: 5,
+                        top: 30
+                    }
+                })
+            })
+            $("#success").click()
+            common.loadData();
+            document.getElementById("Taikhoan").style.display = 'none';
+            $("#resettt").click();
+
+        }
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA1zs6YvAU9qStE9h5yRf0h_iM9VOIUqM4",
+            authDomain: "otpnhaxinh.firebaseapp.com",
+            projectId: "otpnhaxinh",
+            storageBucket: "otpnhaxinh.appspot.com",
+            messagingSenderId: "821260390931",
+            appId: "1:821260390931:web:e57e99a7fdbcfcd1f8a5e6",
+            measurementId: "G-FCN1CTGHJN"
+        };
+        firebase.initializeApp(firebaseConfig);
+        render();
+        render2();
+        function render() {
+            window.recaptcharVetifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+            recaptcharVetifier.render();
+        };
+        function render2() {
+            window.recaptcharVetifier = new firebase.auth.RecaptchaVerifier('recaptcha-container2');
+            recaptcharVetifier.render();
+        };
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        function SetUser() {
+            if (sessionStorage.getItem("User") == "" && getCookie("User") == null || getCookie("User") == "") {
+                $("#Dangnhap").text("Đăng nhập")
+            }
+            else {
+                $("#Dangnhap").text("Tài khoản")
+                document.getElementById('Taikhoan').style.display = 'block';
+            }
+        }
+        SetUser();
+        function LoginP() {
+            event.preventDefault();
+            var cus = {
+                user: document.getElementById('us').value,
+                password: document.getElementById('pas').value
+            }
+            $.ajax({
+                url: '/Customer/LoginP',
+                type: 'post',
+                dataType: 'json',
+                data: { model: JSON.stringify(cus) }
+            }).success(function (res) {
+                if (res.mslg == true) {
+                    if (document.getElementById("remember").checked == true) {
+                        document.cookie = "User=" + cus.user + "; path=/";
+                    }
+                    else {
+                        sessionStorage.setItem("User", cus.user);
+                        document.cookie = "User = ";
+                    }
+                    $('.user-modal').removeClass('is-visible')
+                    $("#success").click(function () {
+                        $.toast({
+                            heading: 'Success',
+                            text: 'Đăng nhập thành công',
+                            icon: 'success',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'fade',
+                            hideAfter: 5000,
+                            allowToastClose: false,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    $("#success").click()
+                    $("#Dangnhap").text("Tài khoản")
+                    document.getElementById("Taikhoan").style.display = 'block';
+                    var listCart = JSON.parse(localStorage.getItem("Cart")) || [];
+                    if (listCart.length != 0) {
+                        for (let x of listCart) {
+                            $.ajax({
+                                url: "/Home/AddCart",
+                                dataType: "json",
+                                data: { id: x.Id, quantity: x.Quantity, Username: cus.user },
+                                success: function () {
+                                    common.loadData();
+                                    window.localStorage.removeItem("Cart")
+                                }, error: function (er) {
+                                    alert(er.responseText);
+                                }
+                            });
+                        }
+                    }
+                    common.loadData();
+                    Thongtin()
+                }
+                else {
+                    $("#error").click(function () {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Tài khoản đăng nhập sai',
+                            icon: 'error',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'plain',
+                            hideAfter: 5000,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    $("#error").click();
+                }
+            })
+        }
+        var data = {};
+        var login = {
+            addCus: function () {
+                $.ajax({
+                    url: "/Customer/Register",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        model: JSON.stringify(data)
+                    }, success: function (res) {
+                        alert(res.ms)
+                        if (res.ms == true) {
+                            $("#success").click(function () {
+                                $.toast({
+                                    heading: 'Success',
+                                    text: 'Đăng ký thành công',
+                                    icon: 'success',
+                                    loader: true,
+                                    loaderBg: '#fff',
+                                    showHideTransition: 'fade',
+                                    hideAfter: 5000,
+                                    allowToastClose: false,
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#reset").click()
+                            document.getElementById("verify").style.display = 'none';
+                            $('.user-modal').removeClass('is-visible')
+                            document.cookie = "User=" + data.UserName + "; path=/";
+                            $("#success").click();
+                            SetUser();
+                        }
+                    }, error: function () {
+                        alert("Vui lòng kiểm tra lại thông tin")
+                    }
+                })
+            },
+
+            ExamEmail: function () {
+                event.preventDefault();
+                data.CusAddress = document.getElementById('occupation').value;
+                data.CusName = document.getElementById('name').value;
+                data.CusPhone = document.getElementById('phone').value;
+                data.CusEmail = document.getElementById('emailogin').value;
+                data.UserName = document.getElementById('username').value;
+                data.Password = document.getElementById('password1').value;
+                data.Brithday = document.getElementById('date').value
+                $.ajax({
+                    url: "/Customer/ExamEmail",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        email: data.CusEmail
+                    }, success: function (res) {
+                        if (res.mse == true) {
+                            $.ajax({
+                                url: "/Customer/ExamADT",
+                                type: 'POST',
+                                dataType: "json",
+                                data: {
+                                    sdt: data.CusPhone
+                                }, success: function (res) {
+                                    if (res.msdt == true) {
+                                        $.ajax({
+                                            url: "/Customer/ExamUserName",
+                                            type: 'POST',
+                                            dataType: "json",
+                                            data: {
+                                                username: data.UserName
+                                            }, success: function (res) {
+                                                if (res.msn == true) {
+                                                    phoneAuth();
+                                                }
+                                                else {
+                                                    $("#error").click(function () {
+                                                        $.toast({
+                                                            heading: 'Error',
+                                                            text: 'UserName đã tồn tại',
+                                                            icon: 'error',
+                                                            loader: true,
+                                                            loaderBg: '#fff',
+                                                            showHideTransition: 'plain',
+                                                            hideAfter: 5000,
+                                                            position: {
+                                                                right: 5,
+                                                                top: 30
+                                                            }
+                                                        })
+                                                    })
+                                                    $("#error").click();
+
+                                                }
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        $("#error").click(function () {
+                                            $.toast({
+                                                heading: 'Error',
+                                                text: 'Số điện thoại đã tồn tại',
+                                                icon: 'error',
+                                                loader: true,
+                                                loaderBg: '#fff',
+                                                showHideTransition: 'plain',
+                                                hideAfter: 5000,
+                                                position: {
+                                                    right: 5,
+                                                    top: 30
+                                                }
+                                            })
+                                        })
+                                        $("#error").click();
+
+                                    }
+                                }
+                            })
+                        }
+                        else {
+                            $("#error").click(function () {
+                                $.toast({
+                                    heading: 'Error',
+                                    text: 'Email đã tồn tại',
+                                    icon: 'error',
+                                    loaderBg: '#fff',
+                                    hideAfter: 5000,
+                                    showHideTransition: 'plain',
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#error").click();
+
+                        }
+                    }
+                })
+
+            },
+
+        }
+
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+
+
+        function phoneAuth() {
+            var a = document.getElementById('phone').value;
+            var b = "+84";
+            var number = b + a.slice(-9);
+            firebase.auth().signInWithPhoneNumber(number, window.recaptcharVetifier).then(function (confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                alert("Đã gửi mã thành công")
+                document.getElementById("verify").style.display = 'flex';
+            }).catch(function (error) {
+                alert(error.message);
+            });
+        };
+
+        function codeverity() {
+            var code = document.getElementById('verificationcode').value;
+            coderesult.confirm(code).then(function () {
+                login.addCus();
+            }).catch(function () {
+                alert("nhap ma sai")
+            })
+        }
+
+        function phoneAuthLost() {
+            event.preventDefault();
+            var a = document.getElementById('reset-phone').value;
+            var b = "+84";
+            var number = b + a.slice(-9);
+            firebase.auth().signInWithPhoneNumber(number, window.recaptcharVetifier).then(function (confirmationResult) {
+                window.confirmationResult = confirmationResult;
+                coderesult = confirmationResult;
+                document.getElementById("lostpas").style.display = 'none';
+                document.getElementById("maverify").style.display = 'block';
+                document.getElementById("layma").style.display = 'none';
+                document.getElementById("xacthucma").style.display = 'block';
+                document.getElementById("recaptcha-container2").style.display = 'none';
+                document.getElementById("nhapmaxt").style.display = 'block';
+                document.getElementById("nhapsdt").style.display = 'none';
+            }).catch(function (error) {
+                alert(error.message);
+            });
+        };
+
+        function codeverityLost() {
+            var code = document.getElementById('reset-phone-code').value;
+            coderesult.confirm(code).then(function () {
+                document.getElementById('reset-password2').style.display = 'none';
+                document.getElementById('return-password').style.display = 'block';
+            }).catch(function () {
+                $("#error").click(function () {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Mã OTP không đúng',
+                        icon: 'error',
+                        loader: true,
+                        loaderBg: '#fff',
+                        showHideTransition: 'plain',
+                        hideAfter: 5000,
+                        position: {
+                            right: 5,
+                            top: 30
+                        }
+                    })
+                })
+                $("#error").click();
+            })
+        }
+
+        function LostPass() {
+            event.preventDefault()
+            var phone = document.getElementById('reset-phone').value;
+            var newmk;
+            if ($("#Lostpassword").val() == $("#Lostpassword").val()) {
+                newmk = $("#Lostpassword").val();
+                $.ajax({
+                    url: "/Customer/LostPass",
+                    type: 'post',
+                    dataType: 'json',
+                    data: { phone, newmk },
+                    success: function (res) {
+                        $("#success").click(function () {
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Cập nhập thành công',
+                                icon: 'success',
+                                loader: true,
+                                loaderBg: '#fff',
+                                showHideTransition: 'fade',
+                                hideAfter: 5000,
+                                allowToastClose: false,
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $('.user-modal').removeClass('is-visible')
+                        document.cookie = "User=" + res.data.UserName + "; path=/";
+                        $("#success").click();
+                        SetUser();
+                        Thongtin();
+                    }
+                })
+            }
+        }
+    </script>
+    <script src="/Assets/Admin/js/Cart.js"></script>
+    @RenderSection("Scripts", false)
 </body>
 
 

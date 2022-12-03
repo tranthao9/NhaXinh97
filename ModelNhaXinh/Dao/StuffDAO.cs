@@ -8,7 +8,7 @@ using ModelNhaXinh.Dao.IDAO;
 
 namespace ModelNhaXinh.Dao
 {
-	public partial class StuffDAO:IStuffDAO
+	public partial class StuffDAO
 	{
 		NhaXinhEntities db = new NhaXinhEntities();
 
@@ -23,22 +23,22 @@ namespace ModelNhaXinh.Dao
 			db.SaveChanges();
 		}
 
+		public bool CheckStuff(string id)
+		{
+			return db.Stuffs.Count(s => s.StuID == id) > 0;
+		}
+
+		public void addProductTag(ProductTag productTag)
+		{
+			db.ProductTags.Add(productTag);
+			db.SaveChanges();
+		}
+
 		public Stuff findStuf(string id)
 		{
 			return db.Stuffs.Find(id);
 		}
 
-		public void editStuff(Stuff stu)
-		{
-			Stuff stuff = db.Stuffs.Find(stu.StuID);
-			if(stuff != null)
-			{
-				stuff.StuName = stu.StuName;
-				stuff.StuDescription = stu.StuDescription;
-				stuff.CatID = stu.CatID;
-				db.SaveChanges();
-			}	
-		}
 
 		public void removeStuff(string stuID)
 		{

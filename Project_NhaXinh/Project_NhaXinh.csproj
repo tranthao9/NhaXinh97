@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assets\Admin\js\plugin\ckfinder\bin\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Azure.Core, Version=1.25.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.25.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assets\Admin\Plugin\ckfinder\bin\Release\CKFinder.dll</HintPath>
@@ -73,29 +76,119 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus.Core, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Core.1.5.4\lib\net46\EPPlus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Library.Common">
+      <HintPath>..\..\..\Fit UTEHY\Library.Common\Library.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteDB, Version=4.1.4.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.4.1.4\lib\net40\LiteDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assets\Admin\js\plugin\ckfinder\bin\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Assets\Admin\js\plugin\ckfinder\bin\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.2\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -108,8 +201,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
@@ -148,6 +239,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -161,17 +253,32 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ImportBillController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PricesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromotionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProvidersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoomDetailsController.cs" />
     <Compile Include="Areas\Admin\Controllers\StuffsController.cs" />
     <Compile Include="Areas\Admin\Controllers\User_Controller.cs" />
     <Compile Include="Areas\Admin\Data\LoginModel.cs" />
+    <Compile Include="Common\Cart.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Encryptor.cs" />
+    <Compile Include="Common\Startup.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\GiamGiaController.cs" />
+    <Compile Include="Controllers\GocCamHungController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\RoomViewController.cs" />
+    <Compile Include="Controllers\ThietKeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +301,7 @@
     <Content Include="Assets\Admin\build\js\custom.min.js" />
     <Content Include="Assets\Admin\build\js\Printuser.js" />
     <Content Include="Assets\Admin\css\maps\jquery-jvectormap-2.0.3.css" />
+    <Content Include="Assets\Admin\images\27_Pdf_File_Type_Adobe_logo_logos-512.jpg" />
     <Content Include="Assets\Admin\images\american-express.png" />
     <Content Include="Assets\Admin\images\cropper.jpg" />
     <Content Include="Assets\Admin\images\img.jpg" />
@@ -202,17 +310,28 @@
     <Content Include="Assets\Admin\images\Logo.ico" />
     <Content Include="Assets\Admin\images\mastercard.png" />
     <Content Include="Assets\Admin\images\media.jpg" />
+    <Content Include="Assets\Admin\images\modern-flat-design-logo-xls-file-icon-document-type-208206583.jpg" />
+    <Content Include="Assets\Admin\images\nha-xinh-phong-khach-may-net-viet-duong-dai-3.jpg" />
+    <Content Include="Assets\Admin\images\nha-xinh-phong-khach-sofa-jazz-mau-cognac-phong-cach-new-768x512.jpg" />
     <Content Include="Assets\Admin\images\paypal.png" />
     <Content Include="Assets\Admin\images\picture.jpg" />
+    <Content Include="Assets\Admin\images\exel.jpg" />
     <Content Include="Assets\Admin\images\pngtree-no-avatar-vector-isolated-on-white-background-png-image_4979074.jpg" />
     <Content Include="Assets\Admin\images\prod-1.jpg" />
     <Content Include="Assets\Admin\images\prod-2.jpg" />
     <Content Include="Assets\Admin\images\prod-3.jpg" />
     <Content Include="Assets\Admin\images\prod-4.jpg" />
     <Content Include="Assets\Admin\images\prod-5.jpg" />
+    <Content Include="Assets\Admin\images\Rectangle.jpeg" />
+    <Content Include="Assets\Admin\images\Rectangle4.jpeg" />
+    <Content Include="Assets\Admin\images\SHOWROOM_007.jpg" />
     <Content Include="Assets\Admin\images\user.png" />
     <Content Include="Assets\Admin\images\visa.png" />
+    <Content Include="Assets\Admin\js\Cart.js" />
     <Content Include="Assets\Admin\js\datepicker\daterangepicker.js" />
+    <Content Include="Assets\Admin\js\dirPagination.js" />
+    <Content Include="Assets\Admin\js\dirPagination.tpl.html" />
+    <Content Include="Assets\Admin\js\FileSave.js" />
     <Content Include="Assets\Admin\js\moment\moment.min.js" />
     <Content Include="Assets\Admin\Plugin\ckfinder\bin\Debug\CKFinder.dll" />
     <Content Include="Assets\Admin\Plugin\ckfinder\bin\Debug\CKFinder.pdb" />
@@ -4978,6 +5097,9 @@
     <Content Include="Assets\Admin\vendors\validator\index.html" />
     <Content Include="Assets\Admin\vendors\validator\multifield.js" />
     <Content Include="Assets\Admin\vendors\validator\validator.js" />
+    <Content Include="Assets\City.js" />
+    <Content Include="Assets\Client\css\jquery-ui.css" />
+    <Content Include="Assets\Client\css\Login.css" />
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\fontawesome-free-6.1.1-web\fontawesome-free-6.1.1-web\css\all.css" />
     <Content Include="Assets\Client\fontawesome-free-6.1.1-web\fontawesome-free-6.1.1-web\css\all.min.css" />
@@ -7177,9 +7299,15 @@
     <Content Include="Assets\Client\image\thiet-ke-noithat-dep-nhaxinh.jpg" />
     <Content Include="Assets\Client\image\TU-LY-BARBIER-WALNUT-410043Z-1-600x400.jpg" />
     <Content Include="Assets\Client\image\TU-LY-BARBIER-WALNUT-410043Z-6-600x400.jpg" />
+    <Content Include="Assets\Client\js\cart-layout.js" />
+    <Content Include="Assets\Client\js\Cart.js" />
     <Content Include="Assets\Client\js\javascript.js" />
     <Content Include="Assets\Client\js\jquery-3.6.0.js" />
     <Content Include="Assets\Client\js\jquery-3.6.0.min.js" />
+    <Content Include="Assets\Client\js\jquery-ui.js" />
+    <Content Include="Assets\Client\js\LayoutLogin.js" />
+    <Content Include="Assets\Client\js\Login.js" />
+    <Content Include="Assets\Client\js\mustache.js" />
     <Content Include="Assets\Client\js\slick.js" />
     <Content Include="Assets\Client\js\total.js" />
     <Content Include="Assets\Client\slick-1.8.1\.gitignore" />
@@ -7189,6 +7317,9 @@
     <Content Include="Assets\Client\slick-1.8.1\slick\slick.css" />
     <Content Include="Assets\Client\slick-1.8.1\slick\slick.js" />
     <Content Include="Assets\Client\slick-1.8.1\slick\slick.min.js" />
+    <Content Include="Assets\Cookie.js" />
+    <Content Include="Assets\Notification.css" />
+    <Content Include="Assets\Notification.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -8354,6 +8485,26 @@
     <Content Include="Areas\Admin\Views\Prices\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Prices\PriProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Providers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportBill\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportBill\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ImportBill\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomDetails\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomDetails\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contents\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contents\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contents\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Contents\Detail.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomDetails\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\RoomDetails\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getDonHangChuaXuLy.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getDangVanChuyen.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getDaThanhToan.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getChuaXacThuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getDaXacThuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\getDaHuy.cshtml" />
+    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -8379,14 +8530,33 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\viewCart.cshtml" />
+    <Content Include="Views\Home\Category.cshtml" />
+    <Content Include="Views\Shared\ViewMenu.cshtml" />
+    <Content Include="Views\Shared\ViewMenuTopL.cshtml" />
+    <Content Include="Views\Shared\ViewMenuTopD.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\RoomView\PhongKhach.cshtml" />
+    <Content Include="Views\Home\SanPham.cshtml" />
+    <Content Include="Views\GocCamHung\Ytuong.cshtml" />
+    <Content Include="Views\ThietKe\Mau.cshtml" />
+    <Content Include="Views\ThietKe\MauThietKe.cshtml" />
+    <Content Include="Views\Home\HeThong.cshtml" />
+    <Content Include="Views\Home\Showroom.cshtml" />
+    <Content Include="Views\Home\GioiThieu.cshtml" />
+    <Content Include="Views\Content\Index.cshtml" />
+    <Content Include="Views\Content\Detail.cshtml" />
+    <Content Include="Views\Content\Tag.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\Account.cshtml" />
+    <Content Include="Views\GiamGia\DacBiet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

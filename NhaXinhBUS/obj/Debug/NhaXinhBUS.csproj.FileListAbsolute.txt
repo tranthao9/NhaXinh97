@@ -10,3 +10,4 @@ D:\DoAn3\Project_NhaXinh\NhaXinhBUS\obj\Debug\NhaXinhBUS.csproj.CoreCompileInput
 D:\DoAn3\Project_NhaXinh\NhaXinhBUS\obj\Debug\NhaXinhBUS.csproj.CopyComplete
 D:\DoAn3\Project_NhaXinh\NhaXinhBUS\obj\Debug\NhaXinhBUS.dll
 D:\DoAn3\Project_NhaXinh\NhaXinhBUS\obj\Debug\NhaXinhBUS.pdb
+D:\DoAn3\Project_NhaXinh\NhaXinhBUS\bin\Debug\NhaXinhBUS.dll.config

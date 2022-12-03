@@ -41,19 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\CartBUS.cs" />
     <Compile Include="BUS\CategoryBUS.cs" />
+    <Compile Include="BUS\ContentBUS.cs" />
+    <Compile Include="BUS\CustomerBUS.cs" />
     <Compile Include="BUS\IBUS\ICategoryBUS.cs" />
     <Compile Include="BUS\IBUS\IPriceBUS.cs" />
     <Compile Include="BUS\IBUS\IProductBUS.cs" />
+    <Compile Include="BUS\IBUS\IProviderBUS.cs" />
     <Compile Include="BUS\IBUS\IRoomBUS.cs" />
     <Compile Include="BUS\IBUS\IStuffBUS.cs" />
     <Compile Include="BUS\IBUS\IUserBUS.cs" />
+    <Compile Include="BUS\ImportBillBUS.cs" />
+    <Compile Include="BUS\ImportBillDetailBUS.cs" />
+    <Compile Include="BUS\MenuBUS.cs" />
+    <Compile Include="BUS\OderBUS.cs" />
+    <Compile Include="BUS\OrderDetailBUS.cs" />
     <Compile Include="BUS\PriceBUS.cs" />
     <Compile Include="BUS\ProductBUS.cs" />
     <Compile Include="BUS\PromotionBUS.cs" />
+    <Compile Include="BUS\ProviderBUS.cs" />
     <Compile Include="BUS\RoomBUS.cs" />
+    <Compile Include="BUS\RoomDetailBUS.cs" />
     <Compile Include="BUS\StuffBUS.cs" />
     <Compile Include="BUS\UserBUS.cs" />
+    <Compile Include="common\RandomExtension.cs" />
+    <Compile Include="common\Stringhelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +77,9 @@
       <Project>{e0bbd571-f2d7-4a85-85c8-ea140bd170c1}</Project>
       <Name>ModelNhaXinh</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

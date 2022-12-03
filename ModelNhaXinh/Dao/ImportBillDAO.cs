@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ModelNhaXinh.EF;
 using ModelNhaXinh.Dao.IDAO;
+using System.Data.Entity;
 
 namespace ModelNhaXinh.Dao
 {
@@ -14,8 +15,13 @@ namespace ModelNhaXinh.Dao
 
 		public List<ImportBill> GetAllImportBill()
 		{
-			List<ImportBill> list = db.ImportBills.ToList();
+			List<ImportBill> list = db.ImportBills.Include(s=>s.Provider).Include(x=>x.User_).ToList();
 			return list;
+		}
+
+		public ImportBill import(string id)
+		{
+			return db.ImportBills.Find(id);
 		}
 
 		public void addImportBill(ImportBill item)
@@ -30,7 +36,7 @@ namespace ModelNhaXinh.Dao
 			if (newsp != null)
 			{
 				newsp.ProID = item.ProID;
-				newsp.StaffID = item.StaffID;
+				newsp.UserID = item.UserID;
 				newsp.ImpDate = item.ImpDate;
 				newsp.MoneyTotal = item.MoneyTotal;
 				db.SaveChanges();
@@ -40,6 +46,7 @@ namespace ModelNhaXinh.Dao
 		public void removeProvider(string item)
 		{
 			db.ImportBills.Remove(db.ImportBills.Find(item));
+			db.SaveChanges();
 		}
 	}
 }

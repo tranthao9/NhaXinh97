@@ -1,0 +1,27 @@
+﻿@model ModelNhaXinh.EF.Content
+@{
+    ViewBag.Title = Model.MetaTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-3 mb-5">
+    
+    <div>
+        @Html.Raw(Model.Details)
+        <div class="text-danger">
+            Tags :
+            @{
+                var tags = (List<ModelNhaXinh.EF.Tag>)ViewBag.Tags;
+                if (tags.Count > 0)
+                {
+                    for (int i = 0; i < tags.Count - 1; i++)
+                    {
+                        <a class="text-dark text-decoration-none" href="/tag/@tags[i].TagID">@tags[i].Name,</a>
+                    }
+                }
+                <a class="text-dark text-decoration-none" href="/tag/@tags[tags.Count-1].TagID">@tags[tags.Count-1].Name</a>
+            }
+        </div>
+    </div>
+</div>
+

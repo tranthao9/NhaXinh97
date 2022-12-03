@@ -46,6 +46,7 @@ namespace NhaXinhBUS.BUS
 
 		public void removeCat(string id)
 		{
+
 			catDAO.removeCategory(id);
 		}
 	}

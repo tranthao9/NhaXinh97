@@ -14,6 +14,12 @@ namespace ModelNhaXinh.EF
     
     public partial class User_
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User_()
+        {
+            this.ImportBills = new HashSet<ImportBill>();
+        }
+    
         public int UserID { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
@@ -31,5 +37,8 @@ namespace ModelNhaXinh.EF
         public string UserImage { get; set; }
         public string Position { get; set; }
         public bool Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImportBill> ImportBills { get; set; }
     }
 }

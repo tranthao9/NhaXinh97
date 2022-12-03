@@ -37,33 +37,31 @@
                         </div>
                         <p class="font-weight-bold mt-3">_Thông tin chi tiết_</p>
                         <div class="row mt-3">
-                            @Html.LabelFor(model => model.CatID, "CatID", htmlAttributes: new { @class = "col-4 text-dark" })
+                            <label class="col-4 text-dark">Mã Loại</label>
                             @Html.DropDownList("CatID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "CatID" })
 
-                            @Html.ValidationMessageFor(model => model.CatID, "", new { @class = "text-danger" })
                         </div>
                         <div class="row mt-3">
-                            @Html.LabelFor(model => model.RooID, "RooID", htmlAttributes: new { @class = "col-4 text-dark" })
-                            @Html.DropDownList("RooID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "RooID" })
-                            @Html.ValidationMessageFor(model => model.RooID, "", new { @class = "text-danger" })
+                            <label class="col-4 text-dark" for="">Tags </label>
+                            <input type="text" id="Tags" value="@Model.Tags" name="Tags" class="col-7 pl-1 pt-1">
                         </div>
                         <div class="row mt-3">
-                            @Html.LabelFor(model => model.StuID, "StuID", htmlAttributes: new { @class = "col-4 text-dark" })
-                            @Html.DropDownList("StuID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "StuID" })
-                            @Html.ValidationMessageFor(model => model.StuID, "", new { @class = "text-danger" })
+                            <label class="col-4 text-dark" for="">Meta Description </label>
+                            <textarea type="text" id="MetaDescriptions" name="MetaDescriptions" class="col-7 pl-1 pt-1">@Model.MetaDescriptions</textarea>
                         </div>
                         <div class="row mt-3">
-                            <label class="col-4 text-dark" for="">Chế độ hiển thị</label>
-                            @Html.CheckBoxFor(model => model.Status, new { @class = "ml-2 " })
+                            <label class="col-4 text-dark" for="">Trạng thái </label>
+                            @Html.CheckBoxFor(model => model.Status, new { @class = "ml-2 ", })
+
                         </div>
                         <div class="row mt-3">
                             <label class="col-4 text-dark" for="">Loại hiển thị </label>
-                            <select name="Displayhome" class="w-50 pl-1 pt-1">
+                            <select name="Displayhome" id="Displayhome" class="w-50 pl-1 pt-1">
                                 <option>@Model.Displayhome</option>
+                                <option>Normal</option>
                                 <option>Sản phẩm mới</option>
                                 <option>Sản phẩm vừa xem</option>
                             </select>
-
                         </div>
                         <div class="row mt-3">
                             <label class="col-4 text-dark" for="">Mô tả </label>

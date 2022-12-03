@@ -54,7 +54,7 @@
                                     <div class="col-sm-6 pl-3 pr-3" style="margin-top:15px">
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.StuID, htmlAttributes: new { @class = "text-dark font-weight-bold" })
-                                            @Html.TextBoxFor(model => model.StuID, new { @class = "form-control bg-light", required = true })
+                                            <input name="StuID" id="StuID" class="form-control bg-light" type="text" disabled value="@ViewBag.StuID" />
                                             @Html.ValidationMessageFor(model => model.StuID, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                     <div class="col-sm-6 pl-3 pr-3" style="margin-top:15px">
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.StuDescription, htmlAttributes: new { @class = "text-dark font-weight-bold" })
-                                            @Html.TextAreaFor(model => model.StuDescription, new { @class = "form-control bg-light ", required = true })
+                                            @Html.TextAreaFor(model => model.StuDescription, new { @class = "form-control bg-light " })
                                             @Html.ValidationMessageFor(model => model.StuDescription, "", new { @class = "text-danger" })
                                         </div>
                                     </div>

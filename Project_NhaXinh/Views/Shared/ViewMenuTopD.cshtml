@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Menu>
+
+@foreach (var item in Model.Where(s => s.ParentID == null))
+{
+    var child = Model.Where(s => s.ParentID == item.ID);
+    <li>
+        @if (child.Count() > 0)
+        {
+            <div class="link">
+                @item.Text<i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                @foreach (var item2 in child)
+                {
+                    <li><a href="@item2.Link">@item2.Text</a></li>
+                }
+            </ul>
+        }
+        else
+        {
+            <div class="link">
+                @item.Text
+            </div>
+        }
+
+    </li>
+}
+

@@ -1,0 +1,264 @@
+﻿@model ModelNhaXinh.EF.Product
+@{
+
+    ViewBag.Title = ViewBag.sp;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    // define format VND
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+<!-- slide -->
+<div>
+    <div class="container-fluid">
+        <div id="myCarousel" class="carousel" data-ride="carousel">
+            <div class="carousel-inner  position-relative" style="height:450px;">
+                <img class="fakeimg" src="/Assets/Admin/images/nha-xinh-phong-khach-sofa-jazz-mau-cognac-phong-cach-new-768x512.jpg" alt="">
+                <div class="position-absolute d-flex design_color_slide ps-2 pe-2">
+                    <div style="margin-top: 30%">
+                        <a class="text-white text-decoration-none fw-bold" href="">@Model.ProName</a> <br>
+                        <a class="text-white text-decoration-none" href="">Trang chủ </a>
+                       
+                        <span class="text-white "> / @Model.ProName</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- List product -->
+    <div class="container-fluid mt-5">
+        <div class="row">
+
+            <div class="col-3">
+                <div class=" hover_total">
+                    <div class="hidden position-relative">
+                        <img id="img_active1" class=" fakeimg img_hover " src="@Model.ProImage" alt="">
+                        <div class="position-absolute discount">1%</div>
+                    </div>
+                    <div class="d-block ">
+                        <div class="me-auto">
+                            <div class="nav-link text-muted cursor" aria-current="page" href="/Home/Detail/@Model.ProID">@Model.ProName</div>
+                        </div>
+                        <div class="text-right " style="margin-top:-35px">
+                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                            <div><bdi class="text-danger ">@(Model.Prices.FirstOrDefault(s => s.Status == true).Cost.HasValue ? @String.Format(format, "{0:c0}", Model.Prices.FirstOrDefault(s => s.Status == true).Cost)  : "Liên Hệ") </bdi></div>
+                            <div><small class="text-decoration-line-through mt-3 text-muted ">@(Model.Prices.FirstOrDefault(s => s.Status == true).PreCost.HasValue ? @String.Format(format, "{0:c0}", Model.Prices.FirstOrDefault(s => s.Status == true).PreCost) : "")</small></div>
+                        </div>
+                    </div>
+                    <div class="d-flex design_top hidden_img">
+                        <a onclick="common.AddCart('@Model.ProID')" class=" btn btn-outline-dark cursor">THÊM VÀO GIỎ</a>
+                        <a href="/Home/Detail/@Model.ProID" class="float-right btn btn-dark">XEM THÊM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- sản phẩm vừa xem -->
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm ">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse boder_bottom" id="navbarID2">
+                    <div class="navbar-nav ">
+                        <h4 class="nav-link active text-dark" aria-current="page" href="#">Sản Phẩm Vừa Xem</h4>
+                    </div>
+                    <div class="navbar-nav cursor">
+                        <small class="nav-link active text-dark" aria-current="page" href="#"></small>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- DS sản phẩm -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-3">
+                <div class=" hover_total">
+                    <div class="hidden position-relative">
+                        <img id="img_active1" class=" fakeimg img_hover " src="@Model.ProImage" alt="">
+                        <div class="position-absolute discount">1%</div>
+                    </div>
+                    <div class="d-block ">
+                        <div class="me-auto">
+                            <div class="nav-link text-muted cursor" aria-current="page" href="/Home/Detail/@Model.ProID">@Model.ProName</div>
+                        </div>
+                        <div class="text-right " style="margin-top:-35px">
+                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                            <div><bdi class="text-danger ">@(Model.Prices.FirstOrDefault(s => s.Status == true).Cost.HasValue ? @String.Format(format, "{0:c0}", Model.Prices.FirstOrDefault(s => s.Status == true).Cost)  : "Liên Hệ") </bdi></div>
+                            <div><small class="text-decoration-line-through mt-3 text-muted ">@(Model.Prices.FirstOrDefault(s => s.Status == true).PreCost.HasValue ? @String.Format(format, "{0:c0}", Model.Prices.FirstOrDefault(s => s.Status == true).PreCost) : "")</small></div>
+                        </div>
+                    </div>
+                    <div class="d-flex design_top hidden_img">
+                        <a onclick="common.AddCart('@Model.ProID')" class=" btn btn-outline-dark">THÊM VÀO GIỎ</a>
+                        <a href="/Home/Detail/@Model.ProID" class="float-right btn btn-dark">XEM THÊM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-sm-6  ">
+                <div class="hidden">
+                    <img class="fakeimg item " src="/Assets/Admin/images/Rectangle.jpeg" alt="">
+                </div>
+
+            </div>
+            <div class="col-sm-6">
+                <div class="row d-flex">
+                    <div class="col-sm-5">
+                        <h4>Không gian phòng khách</h4>
+                        <small>Phòng khách là không gian chính của ngôi nhà là nơi sum họp gia đình</small>
+                        <a class="nav-link design" href="#">
+                            MẪU THIẾT KẾ <i class="fa-solid fa-right-long"></i>
+                        </a>
+                        <div class="nav-item design_left">
+                            <h4>Đồ trang trí</h4>
+                            <small>Mang lại những nguồn cảm hứng và nét sinh động cho không gian</small>
+                            <a class="nav-link design" href="#">KHÁM PHÁ <i class="fa-solid fa-right-long"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-7">
+                        <div class="hidden">
+                            <img class="fakeimg item" src="/Assets/Admin/images/nha-xinh-phong-khach-may-net-viet-duong-dai-3.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mẫ phòng ngủ -->
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-sm-6  ">
+                <div class="row ">
+                    <div class="col-sm-7">
+                        <div class="hidden">
+                            <img class="fakeimg item" src="/Assets/Admin/images/SHOWROOM_007.jpg"
+                                 alt="">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="nav-item design_left">
+                            <h4>Không gian phòng ngủ</h4>
+                            <small>Những mẫu phòng ngủ của Nhà Xinh mang đến cảm giác ấm cúng, gần gũi và thoải mái</small>
+                            <a class="nav-link design" href="#">MẪU PHÒNG NGỦ <i class="fa-solid fa-right-long"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="hidden">
+                    <img class="fakeimg item" src="/Assets/Admin/images/Rectangle4.jpeg" alt="">
+                </div>
+                <div class="nav-item ">
+                    <h4 class="design_top">Không gian phòng ăn</h4>
+                    <small>Một bữa ăn ngon luôn là mong ước của mỗi gia đình. Không gian phòng ăn đóng vai trò rất quan trọng trong văn hóa Việt</small>
+                    <a class="nav-link design" href="#">MẪU PHÒNG ĂN <i class="fa-solid fa-right-long"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        const currencyFractionDigits = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0
+        }).resolvedOptions().maximumFractionDigits;
+        var common = {
+            init: function () {
+                common.GetData();
+            },
+            registerEvent: function () {
+
+            },
+            AddCart: function (idd) {
+                var ob = idd;
+                $.ajax({
+                    url: "/Home/AddCart",
+                    dataType: "json",
+                    data: { id: ob },
+                    success: function () {
+                        common.loadData();
+                        $('.submenu_h2').show();
+
+                    }, error: function (er) {
+                        alert(er.responseText);
+                    }
+                });
+
+            },
+            loadData: function () {
+                $.ajax({
+                    url: "/Home/Cart",
+                    dataType: "json",
+                    success: function (res) {
+                        if (res.status) {
+                            var details = res.Data;
+                            var html = '';
+                            var datatable = $('#addCart').html();
+                            var x = 0;
+                            $.each(details, function (i, item) {
+                                x = x + item.Quantity * item.Cost;
+                                html += Mustache.render(datatable, {
+                                    Id: item.ProID,
+                                    ProImage: item.ProImage,
+                                    ProName: item.ProName,
+                                    Cost: (item.Cost).toLocaleString('de-DE', {
+                                        maximumFractionDigits: currencyFractionDigits
+                                    }) + 'đ ',
+                                    Quantity: item.Quantity
+                                });
+                            });
+                            $('#AddCart').html(html);
+                            $('#Tongtien').html(x.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ')
+                        }
+                    },
+                })
+            },
+            updateCart: function (idd) {
+                var data = {
+                    ProID: idd,
+                    Quantity: document.getElementById(idd).value
+                };
+                $.ajax({
+                    url: "/Home/UpdateSLC",
+                    type: 'POST',
+                    dataType: "json",
+                    data: {
+                        model: JSON.stringify(data)
+                    }, success: function () {
+                        common.loadData();
+                    }
+                })
+            },
+            removeCart: function (s) {
+                var ob = s;
+                $.ajax({
+                    url: "/Home/RemoveCart",
+                    type: 'Post',
+                    dataType: "json",
+                    data: { id: ob },
+                    success: function (res) {
+
+                        alert("Bạn đã xóa khỏi giỏ hàng")
+                        common.loadData();
+                    }
+                });
+            }
+
+        }
+        common.init();
+    </script>
+}
+
+

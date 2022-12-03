@@ -40,9 +40,22 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -51,9 +64,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Twilio, Version=6.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.6.0.1\lib\net451\Twilio.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\CartDAO.cs" />
     <Compile Include="Dao\CategoryDAO.cs" />
+    <Compile Include="Dao\ContentDAO.cs" />
+    <Compile Include="Dao\CustomerDAO.cs" />
     <Compile Include="Dao\IDAO\ICategoryDAO.cs" />
     <Compile Include="Dao\IDAO\IImportBillDAO.cs" />
     <Compile Include="Dao\IDAO\IPriceDAO.cs" />
@@ -64,14 +83,22 @@
     <Compile Include="Dao\IDAO\IStuffDAO.cs" />
     <Compile Include="Dao\IDAO\IUserDAO.cs" />
     <Compile Include="Dao\ImportBillDAO.cs" />
+    <Compile Include="Dao\ImportBillDetailDAO.cs" />
+    <Compile Include="Dao\MenuDAO.cs" />
+    <Compile Include="Dao\OrderDAO.cs" />
+    <Compile Include="Dao\OrderDetailDAO.cs" />
     <Compile Include="Dao\PriceDAO.cs" />
     <Compile Include="Dao\ProductDAO.cs" />
     <Compile Include="Dao\PromotionDAO.cs" />
     <Compile Include="Dao\ProviderDAO.cs" />
     <Compile Include="Dao\RoomDAO.cs" />
+    <Compile Include="Dao\RoomDetailDAO.cs" />
     <Compile Include="Dao\StuffDAO.cs" />
     <Compile Include="Dao\UserDAO.cs" />
     <Compile Include="EF\About.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Cart.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\CartDetail.cs">
@@ -80,7 +107,16 @@
     <Compile Include="EF\Category.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\CategoryNew.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Contact.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Content.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ContentTag.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Customer.cs">
@@ -99,6 +135,9 @@
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Menu.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\MenuType.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\ModelNhaXinh.Context.cs">
@@ -134,6 +173,9 @@
     <Compile Include="EF\Product.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\ProductTag.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Promotion.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
@@ -143,6 +185,9 @@
     <Compile Include="EF\Room.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\RoomDetail.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Silde.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
@@ -150,6 +195,9 @@
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\sysdiagram.cs">
+      <DependentUpon>ModelNhaXinh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Tag.cs">
       <DependentUpon>ModelNhaXinh.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\User_.cs">

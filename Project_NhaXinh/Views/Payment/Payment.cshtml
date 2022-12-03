@@ -1,0 +1,678 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Information -->
+<div class="container-fluid mt-3 mb-3">
+    <div class="row">
+        <div class="col-sm-7 ps-3 pe-3 mt-2" id="export">
+            <h3>Địa chỉ giao hàng</h3>
+            <form >
+                <div class="mt-3 ">
+                    <label for="" class="form-lable mb-1">Họ và tên <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" name="" placeholder="Nhập họ và tên" required id="namett">
+                </div>
+                <div class="mt-3 ">
+                    <div class="row">
+                        <div class="col">
+                            <label for="" class="form-lable mb-1">Số điện thoại <span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" name="" placeholder="Nhập số điện thoại" required id="sdt">
+                        </div>
+                        <div class="col">
+                            <label for="" class="form-lable mb-1">Địa chỉ email <span class="text-danger"> *</span></label>
+                            <input type="email" class="form-control" name="" placeholder="Nhập email" id="email" required>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="mt-4 ">
+                    <div class="row">
+                        <select class="form-select mb-3 col mr-2" id="city" aria-label=".form-select-sm">
+                            <option value="" selected>Chọn tỉnh thành</option>
+                        </select>
+
+                        <select class="form-select  mb-3 col mr-2 ml-2" id="district" aria-label=".form-select-sm">
+                            <option value="" selected>Chọn quận huyện</option>
+                        </select>
+
+                        <select class="form-select col ml-2" id="ward" aria-label=".form-select-sm">
+                            <option value="" selected>Chọn phường xã</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="mt-3 ">
+                    <label for="" class="form-lable mb-1">Địa chỉ <span class="text-danger"> *</span></label>
+                    <input type="text" class="form-control" name="" placeholder="Nhập địa chỉ" id="address">
+                </div>
+                <div class="form-check mt-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember" id="check">  Set as default
+                    </label>
+                </div>
+            </form>
+            <h3 class="mt-3 mb-3">THÔNG TIN THÊM</h3>
+            <h5>Lưu ý cho đơn hàng (tùy chọn)</h5>
+            <textarea name="" id="note" class="form-control mt-3" placeholder="Viết các lưu ý cho đơn hàng của bạn, ví dụ: lưu ý đặc biệt khi vận chuyển."></textarea>
+            <h4 class="mt-3 mb-3">PHƯƠNG THỨC THANH TOÁN</h4>
+            <div class=" d-flex  ">
+                <div class="text-center border border-dark mx-auto ps-3 pe-3 pt-3 pb-3 cursor" id="transfer">
+                    <img src="/Assets/Client/image/ic-bacs.png" alt="">
+                    <small>Chuyển khoản ngân hàng</small>
+                </div>
+                <div class="text-center border mx-auto ps-3 pe-3 pt-3 pb-3 cursor" id="cod">
+                    <img src="/Assets/Client/image/ic-cod.png" alt="">
+                    <small>Thanh toán khi nhận hàng</small>
+                </div>
+            </div>
+            <div class="mt-5" id="payment_note1">
+                <h4>Ngân hàng Vietcombank</h4>
+                <p>Số tài khoản : 0071000745809</p>
+                <p>Tên chủ tài khoản:</p>
+                <p>CT CP NOI THAT AKA VIETCOMBANK – CHI NHÁNH TP.HCM.</p>
+            </div>
+            <div class="mt-5 " style="display:none" id="payment_note2">
+                <p>Pay with cash upon delivery.</p>
+            </div>
+            <button id="XacMinh" onclick="phoneAuth3()"  data-bs-toggle="modal" data-bs-target="#XacThucDonHang"   class="btn btn-danger mt-3 float-right h6 fw-bold">ĐẶT HÀNG</button>
+        </div>
+        <div class="col-sm-5">
+            <div class="border ps-3 pe-3 pt-3 pb-3">
+                <h4>Tóm tắt đơn hàng</h4>
+                <div class="mt-3 pb-2 border-bottom">
+                    <span class="h6">Tạm tính</span>
+                    <span id="tamtinh" class=" float-right"></span>
+                </div>
+                <div class="mt-3 pb-2 border-bottom">
+                    <span class="h6">Giảm giá</span>
+                    <span class=" float-right"><span id="Sogiam">0%</span></span>
+                </div>
+                <div class="mt-3 pb-2 border-bottom">
+                    <span class="h6">Vận chuyển</span>
+                    <span class="float-right text-right">
+                        Liên hệ phí vận chuyển sau
+                    </span>
+                </div>
+                <div class="mt-3 pb-2 border-bottom">
+                    <span class="h6">Thành tiền (Đã bao gồm VAT 10%)</span>
+                    <span id="thanhtien" class=" float-right"></span>
+                </div>
+                <h5 class="mt-3">Sản phẩm</h5>
+                <div class="line"></div>
+                <div id="sanpham">
+
+                </div>
+                <div style="height:250px; overflow:auto;">
+                    <div>
+                        <h4 class="mt-3">CHÍNH SÁCH BÁN HÀNG</h4>
+                        <h5>1. Thanh toán</h5>
+                        <p>Nhà Xinh chỉ áp dụng duy nhất một hình thức thanh toán online qua thẻ tín dụng, chuyển khoản, cụ thể:</p>
+                        <p>Bước 1: Khách hàng tìm hiểu thông tin về sản phẩm.</p>
+                        <p>Bước 2: Khách hàng xác thực đơn hàng (điện thoại, tin nhắn, email).</p>
+                        <p>Bước 3: Khách hàng đồng ý các điều khoản mua hàng, chi phí giao hàng và lắp đặt.</p>
+                        <p>Bước 4: Khách hàng thanh toán qua các thẻ ATM/VISA/CREDIT CARD.</p>
+                        <p>Bước 5: Hệ thống Nhà Xinh xác nhận thông tin khách hàng và giao hàng.</p>
+                        <p>Bước 6: Khách hàng nhận hàng, kiểm tra và xác nhận với nhân viên.</p>
+                        <h5>2. Chính sách lưu kho (Bên mua gửi/ lưu giữ hàng hóa tại kho của bên bán).</h5>
+                        <p>Thỏa thuận lưu kho, phí lưu kho và điều kiện lưu kho sẽ được ký kết nếu khách hàng có nhu cầu kí gửi hàng hóa.</p>
+                        <h5>3. ĐƠN HÀNG CÓ HIỆU LỰC.</h5>
+                        <p>Đơn hàng có hiệu lực là đơn hàng sau khi Quý khách đã thanh toán và nhận được xác nhận của nhân viên bán hàng Nhà Xinh.</p>
+                        <p>Quý khách không được hủy đơn hàng sau khi đã thanh toán và nhận được xác nhận của nhân viên bán hàng Nhà Xinh.</p>
+                        <h5>4. QUY ĐỊNH ĐỔI TRẢ HÀNG HÓA.</h5>
+                        <h6>4.1. Các trường hợp hợp được đổi hàng:</h6>
+                        <p>Nhà Xinh sẽ thực hiện việc đổi, trả hàng hóa theo các điều kiện sau:</p>
+                        <p>Hàng không đủ số lượng, đủ bộ, hoặc không đúng chủng loại theo như trong đơn đặt hàng của Quý khách.</p>
+                        <p>Hàng bị lỗi, không đạt chất lượng.</p>
+                        <h6>4.2. Các trường hợp KHÔNG được đổi trả hàng hóa:</h6>
+                        <p>– Sản phẩm đã sử dụng, dơ bẩn, hoặc hư hại.</p>
+                        <p>– Sản phẩm không có đầy đủ chứng từ, hóa đơn.</p>
+                        <p>– Sản phẩm mua theo các diện thanh lý, khuyến mại, bán hiện trạng.</p>
+                        <p>– Sản phẩm đã được Quý khách ký vào biên bản nhận hàng.</p>
+                        <h4>CHÍNH SÁCH GIAO HÀNG</h4>
+                        <h5>1. PHẠM VI ÁP DỤNG</h5>
+                        <p>Tất cả các đơn hàng có nhu cầu giao hàng và lắp đặt tại nhà được đặt mua theo hình thức mua online (qua website nhaxinh.com, điện thoại, fanpage…).</p>
+                        <h5>2. THỜI GIAN GIAO HÀNG.</h5>
+                        <p>– Chính sách giao hàng được áp dụng trong giờ hành chính từ thứ 2 đến hết thứ 7 (trừ chủ nhật, ngày lễ, tết).</p>
+                        <p>– Đối với các đơn hàng có sản phẩm cần lắp đặt, nhân viên giao hàng và kỹ thuật sẽ đến tận nhà lắp đặt cho Quý khách.</p>
+                        <p>– Đơn hàng giao tại nội thành Hà Nội, Hồ Chí Minh:</p>
+                        <small>• Đối với các sản phẩm có sẵn tại kho và showroom: khách hàng đặt hàng từ 09h-17h sẽ được giao vào ngày hôm sau.</small>
+                        <br><small>• Đối với đơn hàng phát sinh sau 17h: sẽ được giao trong 02 ngày làm việc.</small>
+                        <br><small>• Đối với các sản phẩm đặt hàng: thời gian giao hàng sẽ được thỏa thuận giữa hai bên.</small>
+                        <p>– Đơn hàng đi tỉnh hoặc khu vực ngoại thành Hà Nội, Hồ Chí Minh sẽ được hoàn tất trong 02 – 04 ngày làm việc (trừ trường hợp chờ hàng).</p>
+                        <p>– Lịch giao hàng trong thời gian diễn ra chương trình khuyến mại sẽ được nhân viên chúng tôi thông báo cụ thể tới quý khách.</p>
+                        <h5>3. BIỂU PHÍ GIAO HÀNG – LẮP ĐẶT.</h5>
+                        <p>– Biểu phí giao hàng bao gồm chi phí vận chuyển và chi phí nhân công giao hàng – lắp đặt (nếu có và đã bao gồm VAT).</p>
+                        <p>– Áp dụng lắp đặt cho các nhóm hàng nội thất. Không bao gồm nhóm đèn điện và các nhóm hàng khác.</p>
+                        <p>– Biểu phí giao hàng:</p>
+                        <small>• Đơn hàng dưới 10 triệu đồng: 250.000đ/ 1 chuyến trong nội thành Hà Nội và Hồ Chí Minh.</small>
+                        <br><small>• Đơn hàng từ 10 triệu đồng trở lên: miễn phí vận chuyển và lắp đặt trong nội thành Hà Nội và Hồ Chí Minh.</small>
+                        <br><small>• Đơn hàng đi tỉnh hoặc khu vực ngoại thành Hà Nội, Hồ Chí Minh sẽ được thông báo mức phí cụ thể tới Quý khách sau khi Nhà Xinh tiếp nhận thông tin đơn hàng.</small>
+                        <p>– Lưu ý: Các loại phụ phí khác như lưu kho, phí khoan tường, phí tháo dỡ, phí giao tới địa điểm không thuận lợi như trên tầng/ lầu cao không có hoặc không sử dụng được thang máy; hoặc khu vực lắp đặt phải thuê xe cẩu đưa hàng hóa lên cao; hoặc mặt bằng khu vực lắp đặt không đảm bảo điều kiện có phát sinh chi phí vận chuyển; hoặc các trường hợp khác,… Chúng tôi sẽ thông báo mức phí cụ thể tới quý khách.</p>
+                        <h5>4. CÁC ĐIỀU KIỆN KHÁC.</h5>
+                        <p>– Quý khách vui lòng kiểm tra hàng hóa trước khi ký nhận hàng hóa. Quý khách có thể từ chối nhận hàng nếu hàng hóa đã bị vỡ hỏng do quá trình vận chuyển hoặc Quý khách liên hệ trực tiếp với nhân viên bán hàng để được tư vấn cụ thể.</p>
+                        <p>– Trường hợp công ty đã vận chuyển đến địa điểm giao nhận như thỏa thuận, nhưng vì một lý do khách hàng thay đổi địa điểm nhận hàng; khách hàng phải chịu chi phí vận chuyển cho việc đổi địa điểm giao hàng theo biểu phí của công ty. Mức phí này sẽ được nhân viên Nhà Xinh thông báo đến Quý khách.</p>
+                        <p>– Trong trường hợp khách hàng có thay đổi về thời gian nhận hàng so với thỏa thuận khi mua hàng, cần báo trước cho chúng tôi ít nhất trước 24h với khách hàng nội thành và ít nhất 48h đối với khách hàng có khoảng cách trên 30km từ showroom mua hàng.</p>
+                        <p>– Trường hợp công ty đã vận chuyển đến địa điểm giao nhận nhưng không liên lạc được với quý khách, chúng tôi sẽ để lại tin nhắn thông báo. Chúng tôi sẽ tính phí giao hàng nếu giao hàng không thành công.</p>
+                        <p>– Trong một số trường hợp khách quan chúng tôi có thể giao hàng chậm do điều kiện bất khả kháng: thời tiết xấu, thiên tai, điều kiện giao thông, giờ cấm đường hoặc vào thời điểm lễ tết, sự kiện đặc biệt dẫn tới thay đổi thời gian giao hàng, công ty sẽ liên lạc thông báo và điều chỉnh thời gian giao hàng cụ thể cho khách hàng.</p>
+                        <p>– Nhân viên của chúng tôi chỉ lắp đặt sản phẩm trong điều kiện mặt bằng sử dụng đã sẵn sàng. Nhân viên không được phép thực hiện bất kỳ công việc nào khác ngoài việc lắp đặt sản phẩm.</p>
+                        <p>– Nhân viên giao hàng – lắp đặt không được phép thu thêm bất cứ khoản chi phí nào ngoài các chi phí được thông báo từ bộ phận bán hàng.</p>
+                        <p>– Với tất cả các điều kiện trên, quý khách hàng có yêu cầu khác, vui lòng hệ với nhân viên chăm sóc khách hàng hoặc cửa hàng để được tư vấn, hỗ trợ đầy đủ nhất.</p>
+                        <p>– Các chính sách và điều khoản có thể được chúng tôi thay đổi cho phù hợp nhất mà không cần báo trước.</p>
+                        <h4>CHÍNH SÁCH BẢO HÀNH</h4>
+                        <h5>1. ĐIỀU KHOẢN CHUNG VỀ THỜI HẠN BẢO HÀNH.</h5>
+                        <p>– Thời gian bảo hành các sản phẩm: 01 năm, kể từ khi nhận hàng. Nếu có trường hợp đặc biệt, nhân viên Nhà Xinh sẽ thông báo đến Quý khách.</p>
+                        <p>– Các sản phẩm hàng trang trí không áp dụng bảo hành nhưng áp dụng theo chính sách đổi trả hàng hoá.</p>
+                        <p>– Chính sách bảo hành có hiệu lực từ thời điểm bên mua nhận sản phẩm (Căn cứ theo Phiếu xuất kho kiêm biên bản bàn giao & phiếu bảo hành).</p>
+                        <h5>2. ĐIỀU KIỆN BẢO HÀNH.</h5>
+                        <p>– Các sản phẩm vẫn nằm trong thời gian bảo hành của bên bán.</p>
+                        <p>– Khách hàng cung cấp đầy đủ Phiếu xuất kho kiêm biên bản bàn giao & phiếu bảo hành.</p>
+                        <p>– Bên bán chỉ bảo hành cho các lỗi phát sinh trong quá trình sản xuất sản phẩm.</p>
+                        <h5>3. QUY TRÌNH BẢO HÀNH.</h5>
+                        <p>– Cửa hàng phụ trách kiểm tra sản phẩm, xác định các trường hợp thuộc phạm vi bảo hành.</p>
+                        <p>– Với sản phẩm thuộc phạm vi bảo hành, cửa hàng sẽ quyết định việc sửa chữa hoặc thay thế hoặc hoàn đổi lại sản phẩm.</p>
+                        <p>– Đối với các sản phẩm không còn tiếp tục kinh doanh, nếu nằm trong phạm vi bảo hành, không thể sửa chữa thì bên bán sẽ thay thế bằng sản phẩm có giá trị tương đồng.</p>
+                        <p>– Bên bán kiểm tra sản phẩm trong vòng 48h, hoàn tất bảo hành trong vòng 48h tiếp theo. Với trường hợp đặc biệt bên mua và bên bán thống nhất thời gian bảo hành.</p>
+                        <h5>4. PHẠM VI BẢO HÀNH.</h5>
+                        <p>Nhà Xinh bảo hành cho các sản phẩm đáp ứng đủ hai điều kiện sau:</p>
+                        <small>• Sản phẩm hư hỏng do lỗi kỹ thuật của nhà sản xuất và;</small>
+                        <br><small>• Sản phẩm còn trong thời hạn bảo hành.</small>
+                        <p>Nhà Xinh không bảo hành trong các trường hợp sau:</p>
+                        <small>• Khách hàng tự ý sửa chữa khi sản phẩm gặp trục trặc.</small>
+                        <br><small>• Sản phẩm trầy xước, hư hỏng do khách hàng không sử dụng theo đúng hướng dẫn.</small>
+                        <br><small>• Sản phẩm được xử lý chống mọt từ bên trong, mọi tác động do môi trường bên ngoài như: ẩm ướt, mối, chuột,… sẽ không được bảo hành.</small>
+                        <br><small>• Sản phẩm bị ngập nước, gây nở, cong, vênh.</small>
+                        <br><small>• Sản phẩm bị tác động của hơi nước, lửa,… do việc lắp đặt của các thiết bị điện nước của khách hàng không đảm bảo an toàn.</small>
+                        <br><small>• Sản phẩm không có phiếu bảo hành của công ty.</small>
+                        <br><small>• Sản phẩm bị hao mòn tự nhiên theo tính chất của từng loại vật liệu.</small>
+                        <br><small>• Sản phẩm không được bảo dưỡng đúng cách.</small>
+                        <p>Để biết thêm thông tin, vui lòng liên hệ với cửa hàng hoặc liên hệ trực tiếp bộ phận chăm sóc khách hàng:</p>
+                        <small>• Hotline: 1800 7200</small>
+                        <br><small>• Email: nhaxinhcare@akacompany.com.vn</small>
+                        <small>• Website: www.nhaxinh.com</small>
+                        <h4>CHÍNH SÁCH BẢO MẬT THANH TOÁN</h4>
+                        <h5>1. CAM KẾT BẢO MẬT.</h5>
+                        <p>Hệ thống thanh toán thẻ được cung cấp bởi các đối tác cổng thanh toán (“Đối Tác Cổng Thanh Toán”) đã được cấp phép hoạt động hợp pháp tại Việt Nam. Theo đó, các tiêu chuẩn bảo mật thanh toán thẻ tại Nhà Xinh đảm bảo tuân thủ theo các tiêu chuẩn bảo mật ngành.</p>
+                        <h5>2. QUY ĐỊNH BẢO MẬT.</h5>
+                        <p>– Chính sách giao dịch thanh toán bằng thẻ quốc tế và thẻ nội địa (internet banking) đảm bảo tuân thủ các tiêu chuẩn bảo mật của các Đối Tác Cổng Thanh Toán gồm:</p>
+                        <p>Thông tin tài chính của Khách hàng sẽ được bảo vệ trong suốt quá trình giao dịch bằng giao thức SSL (Secure Sockets Layer).</p>
+                        <p>Chứng nhận tiêu chuẩn bảo mật dữ liệu thông tin thanh toán (PCI DSS) do Trustwave cung cấp.</p>
+                        <p>Mật khẩu sử dụng một lần (OTP) được gửi qua SMS để đảm bảo việc truy cập tài khoản được xác thực.</p>
+                        <p>Tiêu chuẩn mã hóa MD5 128 bit.</p>
+                        <p>Các nguyên tắc và quy định bảo mật thông tin trong ngành tài chính ngân hàng theo quy định của Ngân hàng nhà nước Việt Nam.</p>
+                        <p>– Chính sách bảo mật giao dịch trong thanh toán của Nhà Xinh áp dụng với Khách hàng:</p>
+                        <small>Nhà Xinh cung cấp tiện ích lưu giữ token – chỉ lưu chuỗi đã được mã hóa bởi Đối Tác Cổng Thanh Toán cung cấp. Nhà Xinh không trực tiếp lưu trữ thông tin thẻ khách hàng. Việc bảo mật thông tin thẻ thanh toán Khách hàng được thực hiện bởi Đối Tác Cổng Thanh Toán đã được cấp phép.</small>
+                        <br><small>Đối với thẻ quốc tế: thông tin thẻ thanh toán của Khách hàng mà có khả năng sử dụng để xác lập giao dịch không được lưu trên hệ thống của www.nhaxinh.com . Đối Tác Cổng Thanh Toán sẽ lưu trữ và bảo mật.</small>
+                        <br><small>Đối với thẻ nội địa (internet banking), Nhà Xinh chỉ lưu trữ mã đơn hàng, mã giao dịch và tên ngân hàng.</small>
+                        <p>Nhà Xinh cam kết đảm bảo thực hiện nghiêm túc các biện pháp bảo mật cần thiết cho mọi hoạt động thanh toán thực hiện trên website www.nhaxinh.com.</p>
+                        <p>Tôi đã đọc và đồng ý điều kiện đổi trả hàng, giao hàng, chính sách bảo mật, điều khoản dịch vụ mua hàng online.</p>
+                    </div>
+                </div>
+                <div class="form-check mt-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input " id="agree" type="checkbox"> <span class="fw-bold">Tôi đã đọc và đồng ý điều kiện đổi trả hàng, giao hàng, chính sách bảo mật, điều khoản dịch vụ mua hàng online *</span>
+                        <span class="text-danger " style="display:none" id="disagree">Vui lòng đồng ý với điều khoản </span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- The Modal -->
+
+        <div class="modal fade" id="XacThucDonHang">
+            <div class="modal-dialog pt-5">
+                <div class="modal-content ">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title " style="margin-left:23%">Vui lòng nhập mã OTP</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="control-group" style="margin-left:15%">
+                            <input id="verificationcode3" type="number" />
+                            <button onclick="codeverity3()" class="btn btn-warning ml-2">Xác thực</button>
+                            <div id="recaptcha-container3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="CloseOTP" data-bs-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+  
+</div>
+
+@section Scripts{
+    <script>
+        
+        function phoneAuth3() {
+            event.preventDefault();
+            var isAgree = document.getElementById("agree").checked;
+            if (isAgree == true) {
+                $('#disagree').css({ "display": "none " });
+                const appVerifier = new firebase.auth.RecaptchaVerifier('XacMinh', { size: 'invisible' });
+                var a = document.getElementById('sdt').value;
+                var b = "+84";
+                var number = b + a.slice(-9);
+                firebase.auth().signInWithPhoneNumber(number, appVerifier).then(function (confirmationResult) {
+                    window.confirmationResult = confirmationResult;
+                    coderesult = confirmationResult;
+                    appVerifier.reset();
+                }).catch(function (error) {
+                    alert(error.message);
+                    appVerifier.reset();
+                });
+            }
+            else {
+                $('#disagree').css({ "display": "block " });
+                appVerifier.reset();
+
+            }
+            
+        };
+        function codeverity3() {
+            var code = document.getElementById('verificationcode3').value;
+            coderesult.confirm(code).then(function () {
+                $("#CloseOTP").click()
+                var ob = {
+                    ReceivingName: $('#namett').val(),
+                    ReceivingPhone: $('#sdt').val(),
+                    ReceivingAddress: $('#address').val() + '-' + $('#ward').val() + '-' + $('#district').val() + '-' + $('#city').val(),
+                    ReceivingEmail: $('#email').val(),
+                    Payment: payment,
+                    Note: $('#note').val(),
+                    MoneyTotal: x
+                }
+                var isCheck = document.getElementById("check").checked;;
+                if (isCheck == true) {
+                    var cus = {
+                        ReceivingName: $('#namett').val(),
+                        ReceivingPhone: $('#sdt').val(),
+                        ReceivingAddress: $('#address').val() + '-' + $('#ward').val() + '-' + $('#district').val() + '-' + $('#city').val(),
+                        ReceivingEmail: $('#email').val()
+                    }
+                    $.ajax({
+                        url: "/Payment/CreateCus",
+                        type: 'POST',
+                        dataType: "json",
+                        data: cus
+                    })
+                }
+                $.ajax({
+                    url: "/Payment/Create",
+                    type: 'POST',
+                    dataType: "json",
+                    data: ob,
+                    success: function (result) {
+                        alert("Cảm ơn bạn đã đặt hàng ! Đơn hàng của bạn thành công");
+                        let printContents, popupWin;
+                        printContents = document.getElementById('export').innerHTML;
+                        popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                        popupWin.document.open();
+                        popupWin.document.write(`
+                                        <html>
+                                        <head>
+                                            <title>Print tab</title>
+                                        <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                                            <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+                                            <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet" />
+                                    <style>
+                                                body{
+                            background-color: white;}
+                            table th{
+                            color:black;
+                            font-weight:bold
+                            }
+                                    </style>
+                                    </head>
+                                <body onload="window.print();window.close()">
+                                <h3 style=" color:black;" align = "center">Thống Kê Nhà Cung Cấp</h3><br>
+
+
+                                ${printContents}</body>
+                                </html>`
+                        );
+                        popupWin.document.close();
+
+                    }, error: function (er) {
+                        alert(er.responseText);
+                    }
+
+                })
+            }).catch(function () {
+                $("#error").click(function () {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Mã không đúng',
+                        icon: 'error',
+                        loader: true,
+                        loaderBg: '#fff',
+                        showHideTransition: 'plain',
+                        hideAfter: 5000,
+                        position: {
+                            right: 5,
+                            top: 30
+                        }
+                    })
+                })
+                $("#error").click();
+            })
+        }
+        function Thongtin() {
+            var username;
+            if (sessionStorage.getItem("User") != null) {
+                if (sessionStorage.getItem("User") != "") {
+                    username = sessionStorage.getItem("User")
+                }
+                else {
+                    username = getCookie("User");
+                }
+            }
+            else {
+                username = getCookie("User");
+            }
+            $.ajax({
+                url: "/Customer/ExamUserName",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    username: username
+                }, success: function (res) {
+                    if (res.msn == false) {
+                        
+                        $("#namett").val(res.data.CusName);
+                        $("#sdt").val(res.data.CusPhone);
+                        $("#email").val(res.data.CusEmail);
+                        $("#address").val(res.data.CusAddress);
+                        $("#city").val(res.data.City).change();
+                        $("#district").val(res.data.district).change();
+                        $("#ward").val(res.data.ward);
+                    }
+                }
+            })
+        }
+        Thongtin()
+        const currencyFractionDigits = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0
+        }).resolvedOptions().maximumFractionDigits;
+        var payment = 'transfer';
+        var x = 0;
+        var commonPay = {
+            init: function () {
+                commonPay.registerEvent();
+                commonPay.pay();
+            },
+            registerEvent: function () {
+                commonPay.loadData();
+            },
+            loadData: function () {
+                if (sessionStorage.getItem("User") != null) {
+                    if (sessionStorage.getItem("User") != "") {
+                        LoadCartSQL(sessionStorage.getItem("User"))
+                    }
+                    else {
+                        if (getCookie("User") != "") {
+                            LoadCartSQL(getCookie("User"))
+                        }
+                    }
+                }
+                else {
+                    if (getCookie("User") != "") {
+                        LoadCartSQL(getCookie("User"))
+                    }
+                }
+            },
+
+            pay: function () {
+                $(document).ready(function () {
+                    $('#cod').click(function (e) {
+                        payment = 'cod';
+                        $('#transfer').removeClass(' border-dark');
+                        $('#cod').addClass(' border-dark');
+                        $('#payment_note1').hide();
+                        $('#payment_note2').show();;
+                    });
+                    $('#transfer').click(function (e) {
+                        payment = 'transfer';
+                        $('#cod').removeClass(' border-dark');
+                        $('#transfer').addClass(' border-dark');
+                        $('#payment_note2').hide();
+                        $('#payment_note1').show();
+                    });
+                });
+            },
+            SaveOrder: function () {
+                var isAgree = $('#agree').prop('checked');
+                if (isAgree == true) {
+                    var ob = {
+                        ReceivingName: $('#name').val(),
+                        ReceivingPhone: $('#sdt').val(),
+                        ReceivingAddress: $('#address').val() + '-' + $('#ward').val() + '-' + $('#district').val() + '-' + $('#city').val(),
+                        ReceivingEmail: $('#email').val(),
+                        Payment: payment,
+                        Note: $('#note').val(),
+                        MoneyTotal: x
+                    }
+                    var isCheck = $('#check').prop('checked');
+                    if (isCheck == true) {
+                        var cus = {
+                            ReceivingName: $('#name').val(),
+                            ReceivingPhone: $('#sdt').val(),
+                            ReceivingAddress: $('#address').val() + '-' + $('#ward').val() + '-' + $('#district').val() + '-' + $('#city').val(),
+                            ReceivingEmail: $('#email').val()
+                        }
+                        $.ajax({
+                            url: "/Payment/CreateCus",
+                            type: 'POST',
+                            dataType: "json",
+                            data: cus
+                        })
+                    }
+                    $.ajax({
+                        url: "/Payment/Create",
+                        type: 'POST',
+                        dataType: "json",
+                        data: ob,
+                        success: function (result) {
+                            alert("Cảm ơn bạn đã đặt hàng ! Đơn hàng của bạn thành công");
+                            let printContents, popupWin;
+                            printContents = document.getElementById('export').innerHTML;
+                            popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                            popupWin.document.open();
+                            popupWin.document.write(`
+                                        <html>
+                                        <head>
+                                            <title>Print tab</title>
+                                        <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                                            <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+                                            <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet" />
+                                    <style>
+                                                body{
+                            background-color: white;}
+                            table th{
+                            color:black;
+                            font-weight:bold
+                            }
+                                    </style>
+                                    </head>
+                                <body onload="window.print();window.close()">
+                                <h3 style=" color:black;" align = "center">Thống Kê Nhà Cung Cấp</h3><br>
+
+
+                                ${printContents}</body>
+                                </html>`
+                            );
+                            popupWin.document.close();
+
+                        }, error: function (er) {
+                            alert(er.responseText);
+                        }
+
+                    })
+                }
+                else {
+                    $('#disagree').css({ "display": "block !important" });
+                }
+
+
+            }
+
+
+        }
+        commonPay.init();
+        function LoadCartSQL(use) {
+            $.ajax({
+                url: "/Home/Cart",
+                dataType: "json",
+                data: { Username: use },
+                success: function (res) {
+                    if (res.status) {
+                        var details = res.Data;
+                        var html = '';
+                        var datatable = $('#addItem').html();
+                        var x = 0;
+                        var s = 0;
+                        var form = sessionStorage.getItem('Form');
+                        var SoGiam = sessionStorage.getItem('SoGiam')
+                        console.log(form)
+                        if (form == null) {
+                            $.each(details, function (i, item) {
+                                console.log(promotion)
+                                promotion.forEach(function (s) {
+                                    var arary = s.Apply.split(',')
+                                    if (arary.includes(item.ProName)) {
+                                        item.Cost = item.Cost * (100 - s.SoGiam) / 100
+                                    }
+                                })
+                                s = s + item.Quantity
+                                x = x + item.Quantity * item.Cost;
+                                html += Mustache.render(datatable, {
+                                    Id: item.ProID,
+                                    ProImage: item.ProImage,
+                                    ProName: item.ProName,
+                                    Cost: (item.Cost).toLocaleString('de-DE', {
+                                        maximumFractionDigits: currencyFractionDigits
+                                    }) + 'đ ',
+                                    Quantity: item.Quantity
+                                });
+                            });
+                            $("#Soluong").html(s);
+                            $('#Tongtien').html(x.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ')
+
+                            $('#sanpham').html(html);
+                            $('#tamtinh').html(x.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                            var s = x * 1.1;
+                            $('#thanhtien').html(s.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                        }
+                        else {
+                            if (form == "Giảm giá phần trăm") {
+                                $.each(details, function (i, item) {
+                                    s = s + item.Quantity
+                                    x = x + item.Quantity * item.Cost;
+                                    html += Mustache.render(datatable, {
+                                        Id: item.ProID,
+                                        ProImage: item.ProImage,
+                                        ProName: item.ProName,
+                                        Cost: (item.Cost).toLocaleString('de-DE', {
+                                            maximumFractionDigits: currencyFractionDigits
+                                        }) + 'đ ',
+                                        Quantity: item.Quantity
+                                    });
+                                });
+                                $("#Soluong").html(s);
+                                $('#Tongtien').html(x.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ')
+
+                                $('#sanpham').html(html);
+                                $('#tamtinh').html(x.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ');
+                                $("#Sogiam").html(SoGiam + '%')
+                                var thanhtien = (x * SoGiam / 100) * 1.1;
+                                $('#thanhtien').html(thanhtien.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ');
+                            }
+                            else {
+                                $.each(details, function (i, item) {
+                                    s = s + item.Quantity
+                                    x = x + item.Quantity * item.Cost;
+                                    html += Mustache.render(datatable, {
+                                        Id: item.ProID,
+                                        ProImage: item.ProImage,
+                                        ProName: item.ProName,
+                                        Cost: (item.Cost).toLocaleString('de-DE', {
+                                            maximumFractionDigits: currencyFractionDigits
+                                        }) + 'đ ',
+                                        Quantity: item.Quantity
+                                    });
+                                });
+                                $("#Soluong").html(s);
+                                $('#Tongtien').html(x.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ')
+
+                                $('#sanpham').html(html);
+                                $('#tamtinh').html(x.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ');
+                                $('#Sogiam').html((SoGiam).toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ');
+                                var thanhtien = (x - SoGiam) * 1.1;
+                                $('#thanhtien').html(thanhtien.toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ');
+                            }
+                            sessionStorage.removeItem('Form')
+                            sessionStorage.removeItem('SoGiam')
+                        }
+                        
+                        
+                    }
+                },
+            })
+        }
+        
+    </script>
+    <script id="addItem" type="x-tmpl-mustache">
+        <div class="row  border-bottom mt-3 pb-3">
+        <div class="col-4">
+            <img class="fakeimg" src="{{ProImage}}" alt="">
+        </div>
+        <div class="col-5 ">
+            <a class="text-decoration-none text-dark  " href=""><p>{{ProName}} <span onclick="commonPay.removeCart('{{Id}}')" class=" mb-2 fw-bold cursor"> x {{Quantity}}</span></p></a>
+        </div>
+        <div class="col-3">
+            <span class="mb-2"> {{Cost}}</span></span>
+        </div>
+    </div>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="/Assets/City.js"></script>
+   
+
+}
+
+
+
+

@@ -1,0 +1,254 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.ImportBill>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<!-- page content -->
+<div ng-app="ImpApp" ng-controller="ImpController">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Quản lý hóa đơn nhập<small></small></h3>
+                </div>
+
+                <div class="title_right">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="d-flex">
+                                        <div class="dropdown ml-3">
+                                            <a class=" btn btn-info dropdown-toggle  text-white" data-toggle="dropdown"><i class="glyphicon glyphicon-export text-white"></i></a>
+                                            <div class="dropdown-menu" style="width:30px" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item font-weight-bolder " ng-click="exportExcel()">
+                                                    <img width="25px" src="/Assets/Admin/images/modern-flat-design-logo-xls-file-icon-document-type-208206583.jpg" />
+                                                    Exel
+                                                </a>
+                                                <a class="dropdown-item font-weight-bolder" ng-click="exportPdf()" href="#">
+                                                    <img width="25px" src="/Assets/Admin/images/27_Pdf_File_Type_Adobe_logo_logos-512.jpg" />  Pdf
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <a class="glyphicon glyphicon-print btn btn-info text-white" ng-click="print()"></a>
+                                    </div>
+                                    <div class="float-right d-inline-block">
+                                        <button ng-click="Create()" style="margin-left:200px" class=" btn btn-warning mt-3  text-white" data-toggle="modal" data-target="#ModelProvider">
+                                            <i class="glyphicon glyphicon-plus "></i>
+                                            Thêm mới
+                                        </button>
+                                        <div class=" mt-3 mb-3 ml-5 d-flex">
+                                            <label class="h6 mt-1 mr-2">Tìm kiếm : </label>
+                                            <input style=" border: 1px solid #b1b0b0; height: 30px; border-radius: 3px; width: 200px" type="text" ng-model="Search">
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive " id="export">
+                                        <table id="" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+
+                                                    <th class="column-title">
+                                                        STT
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+                                                    </th>
+                                                    <th ng-click="sort('ProName')" class="column-title">
+                                                        @Html.DisplayNameFor(model => model.Provider.ProName)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+                                                    </th>
+                                                    <th ng-click="sort('UserName')" class="column-title">
+                                                        @Html.DisplayNameFor(model => model.User_.UserName)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+                                                    </th>
+                                                    <th ng-click="sort('ImpDate')" class="column-title">
+                                                        @Html.DisplayNameFor(model => model.ImpDate)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+                                                    </th>
+                                                    <th ng-click="sort('MoneyTotal')" class="column-title">
+                                                        @Html.DisplayNameFor(model => model.MoneyTotal)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+                                                    </th>
+                                                    <th class="column-title no-link last">Tác vụ</th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="s in ListImp | filter:Search | orderBy:sortKey:sortReverse | itemsPerPage: itemsPerPage" pagination-id="ListImp">
+                                                    <td>{{$index+1}}</td>
+                                                    <td>
+                                                        {{s.ProName}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.UserName}}
+                                                    </td>
+                                                    <td>{{s.ImpDate | datetimes}}</td>
+                                                    <td>{{s.MoneyTotal | currency :"":0}}đ</td>
+                                                    <td class="text-center text-danger" style="font-size: 16px">
+                                                        <a href="/Admin/ImportBill/Edit/{{s.ImpID}}"  class="text-danger glyphicon glyphicon-edit"></a>  |
+                                                        <a ng-click="Delete(s.ProID)" class="text-danger glyphicon glyphicon-remove"></a>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dataTables_paginate ">
+                                        <dir-pagination-controls pagination-id="ListImp" direction-links="true" max-size="5"
+                                                                 boundary-links="true" class="pull-right "></dir-pagination-controls>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- /page content -->
+@section Scripts
+ {
+    <script src="/Assets/Admin/js/FileSave.js"></script>
+    <script src="/Assets/Admin/js/dirPagination.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script>
+        var myapp = angular.module("ImpApp", ['angularUtils.directives.dirPagination']);
+        myapp.filter('datetimes', function () {
+            return function (input) {
+                var today = Date.parse(input)
+                var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear() 
+                return date;
+            }
+        });
+        myapp.controller("ImpController", function ($scope, $http, $httpParamSerializerJQLike) {
+            $scope.ListImp = [];
+            $http.get("/Admin/ImportBill/getallImport").then(function (res) {
+                $scope.ListImp = res.data;
+            });
+           
+            $scope.exportExcel = function () {
+                var blob = new Blob([document.getElementById('export').innerHTML], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                });
+                saveAs(blob, "ImportBill.xls");
+            };
+            $scope.exportPdf = function () {
+                html2canvas(document.getElementById('export'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("ImportBill.pdf");
+                    }
+                });
+            }
+            $scope.print = function () {
+                let printContents, popupWin;
+                printContents = document.getElementById('export').innerHTML;
+                popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                popupWin.document.open();
+                popupWin.document.write(`
+                                  <html>
+                                    <head>
+                                      <title>Print tab</title>
+                                    <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                                     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+                                      <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet" />
+                                <style>
+                                          body{
+                        background-color: white;}
+                        table th{
+                        color:black;
+                        font-weight:bold
+                        }
+                                </style>
+                                </head>
+                            <body onload="window.print();window.close()">
+                            <h3 style=" color:black;" align = "center">Thống Kê Hóa Đơn Nhập</h3><br>
+
+
+                            ${printContents}</body>
+                          </html>`
+                );
+                popupWin.document.close();
+            }
+            $scope.itemsPerPage = 10;
+            $scope.provider = {}
+            $scope.Create = function () {
+                $scope.importBill.ProID = "";
+                $scope.importBill.UserID = "";
+                $scope.importBill.ImpDate = "";
+                $scope.importBill.MoneyTotal = "";
+                $scope._function = "Thêm mới";
+                $scope.buttext = "Thêm mới";
+            };
+            $scope.Edit = function (idm) {
+                $scope.importBill.ProID = idm.ProID;
+                $scope.importBill.ProName = idm.ProName;
+                $scope.importBill.ProAddress = idm.ProAddress;
+                $scope.importBill.ProEmail = idm.ProEmail;
+                $scope.importBill.ProPhone = idm.ProPhone;
+                $scope._function = "Lưu chỉnh sửa";
+                $scope.buttext = "Lưu chỉnh sửa";
+
+            }
+            
+            $scope.Delete = function (idd) {
+                if (confirm('Bạn có chắc chắm muốn xóa?')) {
+                    $http({
+                        method: "GET",
+                        url: '/Admin/ImportBill/Delete/' + idd
+                    }).then(function (res) {
+                        if (res.msd = true) {
+                            alert("Xóa bản ghi thành công");
+                            window.location.href = "/Admin/ImportBill/Index";
+                        }
+                    })
+                }
+
+            }
+            $scope.sortKey = 'ProID';
+            $scope.sortReverse = false;
+            $scope.sort = function (key) {
+                $scope.sortReverse = ($scope.sortKey == key) ? !$scope.sortReverse : $scope.sortReverse;
+                $scope.sortKey = key;
+            }
+
+        });
+    </script>
+}
+
+
+
+

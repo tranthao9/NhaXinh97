@@ -14,10 +14,15 @@ namespace ModelNhaXinh.EF
     
     public partial class ImportBillDetail
     {
+        public string ImpDID { get; set; }
+        public string ImpID { get; set; }
         public string ProID { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<int> ImportPrice { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public Nullable<int> ToTalMoney { get; set; }
     
+        public virtual ImportBill ImportBill { get; set; }
         public virtual Product Product { get; set; }
     }
 }

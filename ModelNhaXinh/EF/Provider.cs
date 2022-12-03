@@ -25,6 +25,8 @@ namespace ModelNhaXinh.EF
         public string ProAddress { get; set; }
         public string ProEmail { get; set; }
         public string ProPhone { get; set; }
+        public Nullable<int> debt { get; set; }
+        public bool Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ImportBill> ImportBills { get; set; }

@@ -1,0 +1,133 @@
+﻿
+@model  List<ModelNhaXinh.EF.Menu>
+
+
+<nav class="navbar navbar-expand-sm navbar-light bg-white sticky-top border-bottom ">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="d-flex">
+                <a class="navbar-brand navbar-toggler-icon d-lg-none down menu_children" aria-labelledby="menusi" data-bs-toggle="offcanvas" data-bs-target="#menusi">
+                </a>
+                <div class="submenu_h " data-bs-spy="scroll" data-bs-target=".offcancas">
+                    <div class="offcanvas offcanvas-start " id="menusi">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                        </div>
+                        <div class="offcanvas-body ">
+                            <ul id="accordion" class="accordion ">
+                                @{Html.RenderAction("ViewMenuTopD", "Home");}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="nav-link d-lg-none" href="/Home/Index" style="margin: auto">
+                    <img src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" alt="Nội thất Nhà Xinh" data-lazy-src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" data-ll-status="loaded">
+                    <span class="sr-only">(current)</span>
+                </a>
+                <a class="nav-link look_s d-lg-none nav-item "><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a class="nav-link d-lg-none" href="#"><img class="cart-img-icon" alt="Cart" src="https://nhaxinh.com/wp-content/uploads/2021/09/ic-shopping.png"></a>
+            </div>
+            <div class="collapse navbar-collapse " id="collapsibleNavId">
+                <ul class="navbar-nav d-flex  hide ">
+                    <li class="nav-item down ">
+                        <a class="navbar-brand navbar-toggler-icon menu_children" aria-labelledby="menusi" data-bs-toggle="offcanvas" data-bs-target="#menusi">
+                        </a>
+                        <div class="submenu_h " data-bs-spy="scroll" data-bs-target=".offcancas">
+                            <div class="offcanvas offcanvas-start " id="menusi">
+                                <div class="offcanvas-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                                </div>
+                                <div class="offcanvas-body ">
+                                    <ul id="accordion2" class="accordion ">
+                                        @{Html.RenderAction("ViewMenuTopD", "Home");}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/Home/Index">
+                            <img src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" alt="Nội thất Nhà Xinh" data-lazy-src="https://nhaxinh.com/wp-content/uploads/2022/04/logo-nha-xinh-moi-200422.png" data-ll-status="loaded">
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    @foreach (var item in Model.Where(x => x.ParentID == null))
+                    {
+                        var child = Model.Where(s => s.ParentID == item.ID);
+                        var parentClass = child.Count() > 0 ? " nav-item dropdown  down  " : " nav-item down";
+                        var ChildClass = child.Count() > 0 ? " nav-link dropdown-toggle  " : "nav-link";
+                        <li class="@parentClass">
+                            <a href="/@item.Link" class="@ChildClass">@item.Text</a>
+                            @if (child.Count() > 10)
+                            {
+                                <div class="dropdown-menu menu_first1 menu_first">
+                                    <div class="row " style="width: 1250px; margin: auto;">
+                                        <div class="col ">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 1))
+                                            {
+
+                                                <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col reduce">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 2))
+                                            {
+
+                                            <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col reduce">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 3))
+                                            {
+
+                                            <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col reduce">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 4))
+                                            {
+
+                                            <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col reduce">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 5))
+                                            {
+
+                                            <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col reduce">
+                                            @foreach (var item2 in child.Where(s => s.DisplayOrder == 6))
+                                            {
+                                            <a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a>
+                                            }
+                                        </div>
+                                        <div class="col " style="margin-left: 50px">
+                                            <img width="300px" src="/Assets/Client/image/nha-xinh-phong-khach-hien-dai-poppy-1-1200x800.jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if(child.Count() > 0)
+                            {
+                                <ul class="dropdown-menu menu_first ">
+                                    @foreach (var item2 in child)
+                                    {
+                                        <li><a class="dropdown-item " href="/@item.MetaTitle/@item2.MetaTitle-@item2.Link">@item2.Text</a></li>
+                                    }
+
+                                </ul>
+                            }
+                        </li>
+                    }
+                    <form class="d-flex down " style="height: 80%; margin-left: 20px;">
+                        <input id="txtKeySP" class="form-control me-2 search" type="text" placeholder="Search">
+                        <button class="btn btn-primary look" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+

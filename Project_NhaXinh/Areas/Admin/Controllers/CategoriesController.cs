@@ -11,7 +11,7 @@ using NhaXinhBUS.BUS;
 
 namespace Project_NhaXinh.Areas.Admin.Controllers
 {
-    public class CategoriesController : Controller
+    public class CategoriesController : BaseController
     {
         CategoryBUS catBUS = new CategoryBUS();
         List<Category> catList;

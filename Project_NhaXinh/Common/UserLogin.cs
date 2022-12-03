@@ -13,9 +13,17 @@ namespace Project_NhaXinh
 		public string UserName { get; set;}
 	}
 
+	public class Cus
+	{
+		public string user { get; set; }
+		public string password { get; set; }
+	}
+
 	public class MyCurrency
 	{
 		[Display(Name = "Giá")]
 		public decimal? Price { get; set; }
 	}
+
+	
 }

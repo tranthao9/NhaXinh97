@@ -11,7 +11,7 @@ using NhaXinhBUS.BUS;
 
 namespace Project_NhaXinh.Areas.Admin.Controllers
 {
-    public class StuffsController : Controller
+    public class StuffsController : BaseController
     {
         StuffBUS stuBUS = new StuffBUS();
         List<Stuff> stuList;
@@ -25,6 +25,22 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
         // GET: Admin/Stuffs/Create
         public ActionResult Create()
         {
+            int a1 = stuBUS.getAllStuff().Count();
+            stuList = stuBUS.getAllStuff();
+            if (a1 == 0)
+            {
+                ViewBag.StuID = "ST01";
+            }
+            else if (a1 < 9)
+            {
+                a1 = int.Parse(stuList[a1 - 1].StuID.Substring(2)) + 1;
+                ViewBag.StuID = "ST0" + a1;
+            }
+            else
+            {
+                a1 = int.Parse(stuList[a1 - 1].StuID.Substring(2)) + 1;
+                ViewBag.StuID = "ST" + a1;
+            }
             ViewBag.CatID = new SelectList(stuBUS.getCat(), "CatID", "CatName");
             return View();
         }
@@ -38,7 +54,23 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(stuBUS.addStuff(stuff) == true)
+                int a1 = stuBUS.getAllStuff().Count();
+                stuList = stuBUS.getAllStuff();
+                if (a1 == 0)
+                {
+                    stuff.StuID = "ST01";
+                }
+                else if (a1 < 9)
+                {
+                    a1 = int.Parse(stuList[a1 - 1].StuID.Substring(2)) + 1;
+                    stuff.StuID = "ST0" + a1;
+                }
+                else
+                {
+                    a1 = int.Parse(stuList[a1 - 1].StuID.Substring(2)) + 1;
+                    stuff.StuID = "ST" + a1;
+                }
+                if (stuBUS.addStuff(stuff) == true)
 				{
                     return RedirectToAction("Index");
                 }      
@@ -48,30 +80,6 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
                     return View();
 				}                    
                
-            }
-            ViewBag.CatID = new SelectList(stuBUS.getCat(), "CatID", "CatName");
-            return View(stuff);
-        }
-
-        // GET: Admin/Stuffs/Edit/5
-        public ActionResult Edit(string id)
-        {
-            Stuff stuff = stuBUS.findStuff(id);
-            ViewBag.CatID = new SelectList(stuBUS.getCat(), "CatID", "CatName",stuff.CatID);
-            return View(stuff);
-        }
-
-        // POST: Admin/Stuffs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StuID,StuName,StuDescription,CatID")] Stuff stuff)
-        {
-            if (ModelState.IsValid)
-            {
-                stuBUS.editSufff(stuff);
-                return RedirectToAction("Index");
             }
             ViewBag.CatID = new SelectList(stuBUS.getCat(), "CatID", "CatName");
             return View(stuff);

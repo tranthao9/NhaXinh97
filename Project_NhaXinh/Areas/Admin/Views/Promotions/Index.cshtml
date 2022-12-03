@@ -2,12 +2,37 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    <style>
+
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        .ui-autocomplete {
+            max-height: 200px !important;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden !important;
+            z-index: 99999 !important
+        }
+
+            .ui-autocomplete li:hover {
+                background-color: antiquewhite
+            }
+    </style>
+    <link href="/Assets/Client/css/jquery-ui.css" rel="stylesheet" />
 }
 @{
-    // define format VND
+
     var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 
 }
+
 <!-- page content -->
 <div ng-app="PromotionApp" ng-controller="PromController">
     <div class="right_col" role="main">
@@ -35,95 +60,112 @@
                                 <li>
                                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
+                                <li>
+
+                                </li>
+
                             </ul>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="card-box table-responsive ">
-                                        <button class="float-right btn btn-warning mr-2 text-info" data-toggle="modal" data-target="#ModelPromotion">
+                                    <div class="d-flex">
+                                        <div class="dropdown ml-3">
+                                            <a class=" btn btn-info dropdown-toggle  text-white" data-toggle="dropdown"><i class="glyphicon glyphicon-export text-white"></i></a>
+                                            <div class="dropdown-menu" style="width:30px" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item font-weight-bolder " ng-click="exportExcel()">
+                                                    <img width="25px" src="/Assets/Admin/images/modern-flat-design-logo-xls-file-icon-document-type-208206583.jpg" />
+                                                    Exel
+                                                </a>
+                                                <a class="dropdown-item font-weight-bolder" ng-click="exportPdf()" href="#">
+                                                    <img width="25px" src="/Assets/Admin/images/27_Pdf_File_Type_Adobe_logo_logos-512.jpg" />  Pdf
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <a class="glyphicon glyphicon-print btn btn-info text-white" ng-click="print()"></a>
+                                    </div>
+
+
+                                    <div class="float-right d-inline-block">
+
+                                        <button ng-click="Create()" style="margin-left:200px" class=" btn btn-warning mt-3  text-white" data-toggle="modal" data-target="#ModelPromotion">
                                             <i class="glyphicon glyphicon-plus "></i>
                                             Thêm mới
                                         </button>
+                                        <div class=" mt-3 mb-3 ml-5 d-flex">
+                                            <label class="h6 mt-1 mr-2">Tìm kiếm : </label>
+                                            <input style=" border: 1px solid #b1b0b0; height: 30px; border-radius: 3px; width: 200px" type="text" ng-model="Search">
+                                        </div>
+                                    </div>
 
-                                        <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                    <div class="table-responsive " id="export">
+                                        <table id="" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
                                             <thead>
                                                 <tr class="headings">
-                                                    <th><input type="checkbox" id="check-all" class="flat"></th>
-                                                    <th class="column-title">
+                                                    <th align="center">STT</th>
+                                                    <th ng-click="sort('ProMID')" class="column-title">
                                                         @Html.DisplayNameFor(model => model.ProMID)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
                                                     </th>
-                                                    <th class="column-title">
+                                                    <th ng-click="sort('ProMName')" class="column-title">
                                                         @Html.DisplayNameFor(model => model.ProMName)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
                                                     </th>
-                                                    <th class="column-title">
-                                                        @Html.DisplayNameFor(model => model.Form)
-                                                    </th>
-                                                    <th class="column-title">
+                                                    <th ng-click="sort('SoGiam')" class="column-title">
                                                         @Html.DisplayNameFor(model => model.SoGiam)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
                                                     </th>
-                                                    <th class="column-title">
+                                                    <th ng-click="sort('Status')" class="column-title ">
                                                         @Html.DisplayNameFor(model => model.Status)
+                                                        <i class="glyphicon glyphicon-sort-by-attributes float-right"></i>
+
                                                     </th>
                                                     <th class="column-title no-link last">Tác vụ</th>
-                                                    <th class="bulk-actions" colspan="7">
-                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                                    </th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var item in Model)
-                                                {
-                                                    <tr id="row_@item.ProMID">
-                                                        <td class="a-center ">
-                                                            <input type="checkbox" class="flat" name="table_records">
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.ProMID)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.ProMName)
-                                                        </td>
-                                                        @if (item.Form == "0")
-                                                        {
-                                                            <td>
-                                                                Giảm giá số tiền
-                                                            </td>
-                                                            <td>
-                                                                @String.Format(format, "{0:c0}", item.SoGiam)
-                                                            </td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td>
-                                                                Giảm giá phần trăm
-                                                            </td>
-                                                            <td>@item.SoGiam <span>%</span> </td>
+                                                <tr dir-paginate="s in ListPromotion | filter:Search | orderBy:sortKey:sortReverse | itemsPerPage: itemsPerPage" pagination-id="ListPromotion">
+                                                    <td align="center">
+                                                        {{$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.ProMID}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.ProMName}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.SoGiam | currency : "" : 0}}{{s.Form | checkForm}}
 
-                                                        }
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Status)
-                                                        </td>
-                                                        <td class="text-center text-danger" style="font-size: 16px">
-                                                            <a data-toggle="modal" ng-click="edit2(@item.ProMID)"  data-target="#ModelPromotionEdit" class = "text-danger glyphicon glyphicon-edit" ng-class="Edit()"></a>  |
-                                                            @Ajax.ActionLink(" ", "Delete", new { @id = item.ProMID }, new AjaxOptions
-                                                           {
-                                                               Confirm = "Bạn có chắc chắn muốn xóa ?",
-                                                               OnComplete = " $('#row_" + @item.ProMID + "').remove()",
-                                                               HttpMethod = "Get"
-                                                           }, new { @class = "text-danger glyphicon glyphicon-remove" })
-                                                        </td>
-                                                    </tr>
-                                                }
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" ng-checked="{{s.Status}}" disabled>
+
+                                                    </td>
+                                                    <td class="text-center text-danger" style="font-size: 16px">
+                                                        <a data-toggle="modal" ng-click="Apdung(s.ProMID)" data-target="#ModelApDung" class="text-white btn btn-success">Áp dụng</a>  |
+                                                        <a data-toggle="modal" ng-click="Edit(s)" data-target="#ModelPromotion" class="text-danger glyphicon glyphicon-edit"></a>  |
+                                                        <a ng-click="Delete(s.ProMID)" class="text-danger glyphicon glyphicon-remove"></a>
+
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div class="dataTables_paginate ">
+                                        <dir-pagination-controls pagination-id="ListPromotion" direction-links="true" max-size="5"
+                                                                 boundary-links="true" class="pull-right "></dir-pagination-controls>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="modal fade" id="ModelPromotion" role="dialog">
@@ -135,14 +177,14 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
-                    <form ng-submit="Create()">
+                    <form ng-submit="Save()">
                         @Html.AntiForgeryToken()
                         <div class="modal-body">
                             <div class="form-horizontal ">
                                 <div class="row">
                                     <div class="col-sm-5 ml-4 form-group">
                                         <label>Mã khuyến mại:  </label>
-                                        <input id="proID" class="h-50" value="@Html.ViewBag.id" type="text" ng-model="promotion.ProMID" disabled />
+                                        <input class="h-50" type="text" ng-model="promotion.ProMID" />
                                     </div>
                                     <div class="col-sm-5 ml-4 form-group">
                                         <label>Tên khuyến mại </label>
@@ -151,19 +193,36 @@
                                     <div class="col-sm-5 ml-4 mt-3 form-group">
                                         <label>Hình thức khuyến mại : </label>
                                         <select style="width:92%; height:48%" ng-model="promotion.Form">
-                                            <option value="0">Giảm giá số tiền</option>
-                                            <option value="1">Giảm giá phần trăm</option>
+                                            <option value="Giảm giá số tiền">Giảm giá số tiền</option>
+                                            <option value="Giảm giá phần trăm">Giảm giá phần trăm</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-5 ml-4 mt-3 form-group">
                                         <label>Số giảm : </label>
-                                        <input class="w-100" type="number" ng-model="promotion.SoGiam" />
+                                        <input style="width:95%" type="number" ng-model="promotion.SoGiam" />
+                                    </div>
+                                    <label class="col-sm-5 ml-4 mt-3 form-group">Loại khuyến mại : </label>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <select style=" height: 25px" ng-model="promotion.Type">
+                                            <option value="Voucher">Voucher</option>
+                                            <option value="Chương trình khuyến mại">Chương trình khuyến mại</option>
+                                        </select>
+                                    </div>
+                                    
+
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Trạng thái hoạt động : </label>
+                                        <input type="checkbox" ng-model="promotion.Status" ng-checked="promotion.Status" />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Show trang chủ : </label>
+                                        <input type="checkbox" ng-model="promotion.ShowMenu" ng-checked="promotion.ShowMenu" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" ng-click="Create()" class="btn btn-warning ">Thêm mới</button>
+                            <button type="button" ng-click="Save()" class="btn btn-warning ">{{buttext}}</button>
                             <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -171,50 +230,56 @@
 
             </div>
         </div>
-        <div class="modal fade" id="ModelPromotionEdit" role="dialog">
-            <div class="modal-dialog">
+        <div class="modal fade" id="ModelApDung" role="dialog">
+            <div class="modal-dialog" style="max-width:800px !important">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title text-dark"> Chỉnh sửa thông tin CTKM </h4>
+                        <h4 class="modal-title text-dark"> Áp dụng sản phẩm </h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
-                    <form ng-submit="Edit()">
+                    <form ng-submit="Save()">
+                      
                         <div class="modal-body">
                             <div class="form-horizontal ">
-                                <div class="row">
-                                    <div class="col-sm-5 ml-4 form-group">
-                                        <label>Mã khuyến mại:  </label>
-                                        <input class="h-50"  type="text" ng-model="promotion.ProMID2" disabled />
+                                <div class="ui-widget form-group ml-3">
+
+                                    <label for="birds">Tên sản phẩm : </label>
+                                    <input class="w-75" id="txtKeyP">
+                                </div>
+                                <div class="d-flex mt-3">
+                                    <div class="ml-5">
+                                        <label> Ngày bắt đầu</label>
+                                        <input onchange="ChangeTime()" id="StartDate" type="datetime-local" />
                                     </div>
-                                    <div class="col-sm-5 ml-4 form-group">
-                                        <label>Tên khuyến mại </label>
-                                        <input class="h-50" type="text" ng-model="promotion.ProMName" />
+                                    <div class="ml-5">
+                                        <label> Ngày kết thúc</label>
+                                        <input id="StopDate" type="datetime-local" ng-model="StopDate" />
                                     </div>
-                                    <div class="col-sm-5 ml-4 mt-3 form-group">
-                                        <label>Hình thức khuyến mại : </label>
-                                        <select style="width:92%; height:48%" ng-model="promotion.Form">
-                                            <option value="0">Giảm giá số tiền</option>
-                                            <option value="1">Giảm giá phần trăm</option>
-                                        </select>
+
+
+                                </div>
+                                <div class="mt-3 ml-2">
+                                    <input id="checkapply" type="checkbox" />
+                                    <span>Áp dụng tất cả sản phẩm</span>
+                                </div>
+
+                                <div class="ui-widget" style="margin-top:1em; font-family:Arial">
+                                    <div class="text-dark font-weight-bolder">Áp dụng sản phẩm:</div>
+                                    <div class="row">
+                                        <div ng-repeat="s in ListProName" class="col-sm-6 mt-2">
+                                            <div class="row">
+                                                <div class="col-10">{{s}}</div>
+                                                <div class="col-2"><i ng-click="removeapply(s)" class='glyphicon glyphicon-trash text-danger col-1'></i></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-5 ml-4 mt-3 form-group">
-                                        <label>Số giảm : </label>
-                                        <input class="w-100" type="number" ng-model="promotion.SoGiam" />
-                                    </div>
-                                    <div class="col-sm-5 ml-4 mt-3 form-group">
-                                    </div>
-                                    <div class="col-sm-12 ml-4  form-group">
-                                        <label>Trạng thái hoạt động  </label>
-                                        <input class=" ml-3" type="checkbox" ng-model="promotion.Status"/>
-                                    </div>
-                                    
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" ng-click="Edit()" class="btn btn-warning ">Thêm mới</button>
+                            <button type="button" id="updateDis" ng-click="AddApply()" class="btn btn-warning ">Cập nhập</button>
                             <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
                         </div>
                     </form>
@@ -227,62 +292,505 @@
 <!-- /page content -->
 @section Scripts
  {
-    <script>
-        var myapp = angular.module("PromotionApp", []);
-        myapp.controller("PromController", mycontrol);
-        var id = $("#proID").val();
-        function mycontrol($scope, $http, $httpParamSerializerJQLike) {
-            $scope.promotion = {};
-            $scope.promotion.ProMID = id
-            $scope.promotion.Form = "0";
-            $scope.Create = function () {
-                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
-                $scope.promotion.__RequestVerificationToken = Token;
-                dataRequest = $scope.promotion;
-                console.log(dataRequest);
-                $http({
-                    method: "POST",
-                    url: '/Admin/Promotions/Create',
-                    data: $httpParamSerializerJQLike(dataRequest),
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
 
-                }).then(function (res) {
-                    if (res.ms == false) {
-                        alert("Lỗi thêm bản ghi")
+    <script src="/Assets/Admin/js/FileSave.js"></script>
+    <script src="/Assets/Admin/js/dirPagination.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="/Assets/Client/js/jquery-ui.js"></script>
+    <script>
+        function ChangeTime() {
+            let date1 = new Date(document.getElementById("StartDate").value);
+            let date2 = new Date()
+            if (date1.getTime() < date2.getTime()) {
+                $("#error").click(function () {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Thời gian bắt dầu phải lớn hơn thời hiện tại',
+                        icon: 'error',
+                        loader: true,
+                        loaderBg: '#fff',
+                        showHideTransition: 'plain',
+                        hideAfter: 5000,
+                        position: {
+                            right: 5,
+                            top: 30
+                        }
+                    })
+                })
+                $("#error").click();
+                return false
+            }
+            else
+                return true;
+
+        }
+    </script>
+    <script>
+
+        var myapp = angular.module("PromotionApp", ['angularUtils.directives.dirPagination']);
+        myapp.filter('checkForm', function () {
+            return function (input) {
+                if (input == 'Giảm giá số tiền') { return 'đ'; }
+                else {
+                    return '%';
+                }
+            }
+        });
+
+        myapp.controller("PromController", function ($scope, $http, $httpParamSerializerJQLike) {
+
+            $scope.ListPromotion = [];
+            $scope.ListProName = [];
+            $scope.StartDate;
+            $http.get("/Admin/Promotions/getAllPromotion").then(function (res) {
+                $scope.ListPromotion = res.data;
+            });
+
+            $scope.exportExcel = function () {
+                var blob = new Blob([document.getElementById('export').innerHTML], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                });
+                saveAs(blob, "Promotion.xls");
+            };
+            $scope.exportPdf = function () {
+                html2canvas(document.getElementById('export'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("promotion.pdf");
+                    }
+                });
+            }
+            $scope.print = function () {
+                let printContents, popupWin;
+                printContents = document.getElementById('export').innerHTML;
+                popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                popupWin.document.open();
+                popupWin.document.write(`
+                                                          <html>
+                                                            <head>
+                                                              <title>Print tab</title>
+                                                            <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                                                             <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+                                                              <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet" />
+                                                        <style>
+                                                                  body{
+                                                background-color: white;}
+                                                table th{
+                                                color:black;
+                                                font-weight:bold
+                                                }
+                                                        </style>
+                                                        </head>
+                                                    <body onload="window.print();window.close()">
+                                                    <h3 style=" color:black;" align = "center">Thống Kê Chương Trình Khuyến Mại</h3><br>
+
+
+                                                    ${printContents}</body>
+                                                  </html>`
+                );
+                popupWin.document.close();
+            }
+            $scope.itemsPerPage = 10;
+            $scope.promotion = {}
+            $scope.Create = function () {
+                $scope.promotion.ProMID = "";
+                $scope.promotion.Form = "Giảm giá số tiền";
+                $scope.promotion.ProMName = "";
+                $scope.promotion.SoGiam = "";
+                $scope.promotion.Type = "Chương trình khuyến mại"
+                $scope.promotion.Status = true;
+                $scope.promotion.ShowMenu = false;
+
+                $scope._function = "Thêm mới";
+                $scope.buttext = "Thêm mới";
+            };
+            $scope.Edit = function (idm) {
+                console.log(idm)
+                $scope.promotion.ProMID = idm.ProMID;
+                $scope.promotion.ProMName = idm.ProMName;
+                $scope.promotion.Form = idm.Form;
+                $scope.promotion.SoGiam = idm.SoGiam;
+                $scope.promotion.Status = idm.Status;
+                $scope.promotion.ShowMenu = idm.ShowMenu;
+                $scope.promotion.Type = idm.Type;
+                $scope._function = "Lưu chỉnh sửa";
+                $scope.buttext = "Lưu chỉnh sửa";
+
+            }
+            $scope.Save = function () {
+                //Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                //$scope.promotion.__RequestVerificationToken = Token;
+                //dataRequest = $scope.promotion;
+                //console.log(dataRequest);
+                if ($scope.buttext != "Thêm mới") {
+                    $http({
+                        method: "POST",
+                        data: $httpParamSerializerJQLike($scope.promotion),
+                        url: '/Admin/Promotions/Edit',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+                    }).then(function (res) {
+                        if (res.mse == false) {
+                            alert("Lỗi sửa bản ghi")
+                        }
+                        else {
+                            alert("Sửa bản ghi thành công");
+                            $scope.ListPromotion = res.data.data
+                        }
+                    })
+                }
+                else {
+                    $http({
+                        method: "POST",
+                        url: '/Admin/Promotions/Create',
+                        data: $httpParamSerializerJQLike($scope.promotion),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+                    }).then(function (res) {
+                        if (res.ms = true) {
+                            alert("Thêm bản ghi thành công");
+                            console.log(res.data.data)
+                            $scope.ListPromotion = res.data.data;
+                        }
+                        else {
+                            alert("Lỗi thêm bản ghi")
+                        }
+                    })
+                }
+            }
+
+            $scope.Delete = function (idd) {
+                if (confirm('Bạn có chắc chắm muốn xóa?')) {
+                    $http({
+                        method: "GET",
+                        url: '/Admin/Promotions/Delete/' + idd
+                    }).then(function (res) {
+                        if (res.msd = true) {
+                            alert("Xóa bản ghi thành công");
+                            $scope.ListPromotion = res.data.data
+                        }
+                    })
+                }
+
+            }
+            $scope.Apdung = function (s) {
+                $scope.Id = s
+                $http.get("/Admin/Promotions/getProName/" + s).then(function (res) {
+                    $("#StartDate").val(getDatetinmelocal(res.data.data.StartDate))
+                    $("#StopDate").val(getDatetinmelocal(res.data.data.StopDate))
+                    $scope.StartDate = getDatetinmelocal(res.data.data.StartDate)
+                    if (res.data.msa != false) {
+                        $scope.ListProName = (res.data.data.Apply).split(',')
                     }
                     else {
-                        alert("Thêm bản ghi thành công");
-                        window.location.href = "/Admin/Promotions/Index"
+                        $scope.ListProName = []
+                    }
+                });
+
+            }
+            $scope.sortKey = 'ProMID';
+            $scope.sortReverse = false;
+            $scope.sort = function (key) {
+                $scope.sortReverse = ($scope.sortKey == key) ? !$scope.sortReverse : $scope.sortReverse;
+                $scope.sortKey = key;
+            }
+            function getDatetinmelocal(data) {
+                if (data == null) {
+                    return data
+                }
+                else {
+                    let da = new Date(parseInt(/\/Date\((\d+).*/.exec(data)[1]))
+                    var month = parseInt(da.getMonth()) + 1
+                    var date = da.getDate();
+                    var hours = da.getHours();
+                    if (month < 10) {
+                        month = '0' + month;
+                    }
+                    if (parseInt(date) < 10) {
+                        date = '0' + da.getDate();
+                    }
+                    if (da.getHours() < 10) {
+                        hours = '0' + da.getHours()
+                    }
+                    var d = da.getFullYear() + '-' + month + '-' + date + 'T' + hours + ':' + da.getMinutes()
+                    return d;
+                }
+
+            }
+            function AutoProName() {
+                $("#txtKeyP").autocomplete({
+                    minLength: 0,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: "/Admin/Products/ListName",
+                            dataType: "json",
+                            data: {
+                                q: request.term
+                            },
+                            success: function (res) {
+                                response(res.data);
+                            },
+                        })
+                    },
+                    select: function (event, ui) {
+                        $("#txtKeyP").val("");
+                        if ($scope.ListProName == []) {
+                            $scope.ListProName = new Array();
+                            $scope.ListProName[0] = ui.item.ProName
+                            $http.get("/Admin/Promotions/AddApply/?id=" + $scope.Id + "&&pro=" + $scope.ListProName).then(function (res) {
+                            })
+                        }
+                        else if (!$scope.ListProName.includes(ui.item.ProName)) {
+                            $scope.ListProName.push(ui.item.ProName)
+                            console.log($scope.ListProName)
+                            $http.get("/Admin/Promotions/AddApply/?id=" + $scope.Id + "&&pro=" + $scope.ListProName).then(function (res) {
+                            })
+                        }
 
                     }
                 })
+                    .autocomplete("instance")._renderItem = function (ul, item) {
+                        return $("<li class='mt-2 mb-2'>")
+                            .append(item.ProName)
+                            .appendTo(ul);
+                    };
             }
-            $scope.edit2 = function (id2) {
-                alert(id2)
-                $scope.promotion.ProMID2 = id2;
-            }
-            //$scope.Edit = function () {
-            //    Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
-            //    $scope.promotion.__RequestVerificationToken = Token;
-            //    dataRequest = $scope.promotion;
-            //    console.log(dataRequest);
-            //    $http({
-            //        method: "POST",
-            //        url: '/Admin/Promotions/Edit',
-            //        data: $httpParamSerializerJQLike(dataRequest),
-            //        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
-            //    }).then(function (res) {
-            //        if (res.mse == false) {
-            //            alert("Lỗi sửa bản ghi")
-            //        }
-            //        else {
-            //            alert("Sửa bản ghi thành công");
-            //            window.location.href = "/Admin/Promotions/Index"
+            AutoProName();
+            function ApplyA(started, stopted) {
+                
+                if (started != "" && stopted != "") {
+                    if (stopted < started) {
+                        $("#error").click(function () {
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Thời gian kết thúc phải lớn hơn thời gian bắt đầu',
+                                icon: 'error',
+                                loader: true,
+                                loaderBg: '#fff',
+                                showHideTransition: 'plain',
+                                hideAfter: 5000,
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $("#error").click();
 
-            //        }
-            //    })
-            //}
-        }
+                    }
+                    else {
+                        if (new Date(stopted) < new Date()) {
+                            $("#error").click(function () {
+                                $.toast({
+                                    heading: 'Error',
+                                    text: 'Thời gian kết thúc phải lớn hoặc bằng ngày hiện tại',
+                                    icon: 'error',
+                                    loader: true,
+                                    loaderBg: '#fff',
+                                    showHideTransition: 'plain',
+                                    hideAfter: 5000,
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#error").click();
+                        }
+                        else {
+                            $http.get("/Admin/Promotions/AddApplyDT/?id=" + $scope.Id + "&&pro=" + $scope.ListProName + "&&stared=" + started + "&&stoped=" + stopted).then(function (res) {
+                                $("#success").click(function () {
+                                    $.toast({
+                                        heading: 'Success',
+                                        text: 'cập nhập thành công',
+                                        icon: 'success',
+                                        loader: true,
+                                        loaderBg: '#fff',
+                                        showHideTransition: 'fade',
+                                        hideAfter: 5000,
+                                        allowToastClose: false,
+                                        position: {
+                                            right: 5,
+                                            top: 30
+                                        }
+                                    })
+                                })
+                                $("#success").click()
+                            })
+                        }
+
+                    }
+                }
+
+                else if (started == "" && stopted != "") {
+                    $("#error").click(function () {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Vui lòng nhập đầy đủ thời gian bắt đầu',
+                            icon: 'error',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'plain',
+                            hideAfter: 5000,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    $("#error").click();
+                }
+                else if (started != "" && stopted == "") {
+                    $("#error").click(function () {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Vui lòng nhập đủ thời gian kết thúc',
+                            icon: 'error',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'plain',
+                            hideAfter: 5000,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    $("#error").click();
+                }
+                else {
+                    $http.get("/Admin/Promotions/AddApply/?id=" + $scope.Id + "&&pro=" + $scope.ListProName).then(function (res) {
+                        $("#success").click(function () {
+                            $.toast({
+                                heading: 'Success',
+                                text: 'cập nhập thành công',
+                                icon: 'success',
+                                loader: true,
+                                loaderBg: '#fff',
+                                showHideTransition: 'fade',
+                                hideAfter: 5000,
+                                allowToastClose: false,
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $("#success").click()
+                    })
+                }
+            }
+            $scope.AddApply = function () {
+                let started = document.getElementById("StartDate").value;
+                let stopted = document.getElementById("StopDate").value;
+                if (document.getElementById("checkapply").checked == true) {
+                    $scope.ListProName = new Array();
+                    $scope.ListProName[0] = "Áp dụng tất cả sản phẩm";
+                }
+                console.log(document.getElementById("StartDate").value)
+                console.log($scope.StartDate)
+                if (document.getElementById("StartDate").value != $scope.StartDate) {
+                    if (ChangeTime() == true) {
+                        ApplyA(started, stopted)
+                    }
+                    else {
+                        document.getElementById("StartDate").value = $scope.StartDate
+                        $("#error").click(function () {
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Thời gian bắt đầu phải lớn hơn thời gian hiện tại',
+                                icon: 'error',
+                                loader: true,
+                                loaderBg: '#fff',
+                                showHideTransition: 'plain',
+                                hideAfter: 5000,
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $("#error").click();
+                    }
+                }
+                else {
+                    if (started != "" && stopted != "") {
+                        if (new Date(stopted) < new Date()) {
+                            $("#error").click(function () {
+                                $.toast({
+                                    heading: 'Error',
+                                    text: 'Thời gian kết thúc phải lớn hoặc bằng ngày hiện tại',
+                                    icon: 'error',
+                                    loader: true,
+                                    loaderBg: '#fff',
+                                    showHideTransition: 'plain',
+                                    hideAfter: 5000,
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#error").click();
+                        }
+                        else {
+                            $http.get("/Admin/Promotions/AddApplyDTD/?id=" + $scope.Id + "&&pro=" + $scope.ListProName + "&&stoped=" + stopted).then(function (res) {
+                                $("#success").click(function () {
+                                    $.toast({
+                                        heading: 'Success',
+                                        text: 'cập nhập thành công',
+                                        icon: 'success',
+                                        loader: true,
+                                        loaderBg: '#fff',
+                                        showHideTransition: 'fade',
+                                        hideAfter: 5000,
+                                        allowToastClose: false,
+                                        position: {
+                                            right: 5,
+                                            top: 30
+                                        }
+                                    })
+                                })
+                                $("#success").click()
+                            })
+                        }
+
+                    }
+                    else {
+                        $http.get("/Admin/Promotions/AddApply/?id=" + $scope.Id + "&&pro=" + $scope.ListProName).then(function (res) {
+                            $("#success").click(function () {
+                                $.toast({
+                                    heading: 'Success',
+                                    text: 'cập nhập thành công',
+                                    icon: 'success',
+                                    loader: true,
+                                    loaderBg: '#fff',
+                                    showHideTransition: 'fade',
+                                    hideAfter: 5000,
+                                    allowToastClose: false,
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#success").click()
+                        })
+                    }
+
+                }
+            }
+            $scope.removeapply = function (s) {
+                $scope.ListProName = $scope.ListProName.filter(item => item !== s)
+            }
+
+        });
     </script>
+
 }
 

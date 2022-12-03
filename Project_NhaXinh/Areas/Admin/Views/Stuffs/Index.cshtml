@@ -62,16 +62,10 @@
                                                 <th><input type="checkbox" id="check-all" class="flat"></th>
                                                 <th>STT</th>
                                                 <th class="column-title">
-                                                    @Html.DisplayNameFor(model => model.Category.CatName)
-                                                </th>
-                                                <th class="column-title">
                                                     @Html.DisplayNameFor(model => model.StuID)
                                                 </th>
                                                 <th class="column-title">
                                                     @Html.DisplayNameFor(model => model.StuName)
-                                                </th>
-                                                <th class="column-title">
-                                                    @Html.DisplayNameFor(model => model.StuDescription)
                                                 </th>
                                                 <th class="column-title no-link last">Tác vụ</th>
                                                 <th class="bulk-actions" colspan="7">
@@ -88,17 +82,12 @@
                                                     </td>
                                                     <td>@(i++)</td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Category.CatName)
-                                                    </td>
-                                                    <td>
                                                         @Html.DisplayFor(modelItem => item.StuID)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.StuName)
                                                     </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.StuDescription)
-                                                    </td>
+                                                   
                                                     <td class="text-center text-danger" style="font-size: 18px">
                                                         @Html.ActionLink(" ", "Edit", new { id = item.StuID }, new { @class = "text-danger glyphicon glyphicon-edit" }) |
                                                         @Ajax.ActionLink(" ", "Delete", new { @id = item.StuID }, new AjaxOptions

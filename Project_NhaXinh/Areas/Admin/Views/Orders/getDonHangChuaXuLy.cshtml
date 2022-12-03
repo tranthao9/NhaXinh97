@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Order>
+@{
+    ViewBag.Title = "getDonHangChuaXacThuc";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+    int i = 1;
+
+}
+@{
+    // define format VND
+    var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Quản lý đơn hàng chờ xử lý <small></small></h3>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Quản lý đơn hàng chờ xử lý</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive ">
+
+                                    <table id="datatable-buttons" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th><input type="checkbox" id="check-all" class="flat"></th>
+                                                <th>STT</th>
+
+                                                <th class="column-title">
+                                                   Khách hàng
+                                                </th>
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.OrderDate)
+                                                </th>
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.Payment)
+
+                                                <th class="column-title">
+                                                    @Html.DisplayNameFor(model => model.MoneyTotal)
+                                                </th>
+                                                <th align="center" class="column-title no-link last">Tác vụ</th>
+                                                <th class="bulk-actions" colspan="7">
+                                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr id="row_@item.OrdID">
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="table_records">
+                                                    </td>
+                                                    <td>@(i++)</td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ReceivingName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.OrderDate)
+                                                    </td>
+                                                    <td>
+                                                        @if (item.Payment == "Chuyển khoản")
+                                                        {
+                                                            <div class="btn btn-success w-75 " style="font-size:12px">
+                                                                @Html.DisplayFor(modelItem => item.Payment)
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="btn btn-danger w-75 " style="font-size:12px">
+                                                                @Html.DisplayFor(modelItem => item.Payment)
+                                                            </div>
+                                                        }
+
+                                                    </td>
+                                                    <td>
+                                                        @String.Format(format, "{0:c0}", item.MoneyTotal)
+                                                    </td>
+                                                    <td class="text-center text-danger" style="font-size: 16px">
+                                                        <a href="Next/@item.OrdID" data-toggle="tooltip" data-placement="bottom" class="text-danger glyphicon glyphicon-check " title="Hoàn thành"> </a> |
+                                                        <a href="Details/@item.OrdID" data-toggle="tooltip" data-placement="bottom" class="text-danger glyphicon glyphicon-info-sign " title="Chi tiết"> </a> |
+                                                        <a href="Delete/@item.OrdID" data-toggle="tooltip" data-placement="bottom" class="text-danger glyphicon glyphicon-remove " title="Hủy"> </a>
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

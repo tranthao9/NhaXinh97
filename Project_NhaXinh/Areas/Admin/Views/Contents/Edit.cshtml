@@ -1,0 +1,95 @@
+﻿@model ModelNhaXinh.EF.Content
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div>
+    <div class="right_col" role="main">
+        @using (Html.BeginForm("Edit", "Contents", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal ">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="" style="margin-left:10px">
+                        <h4 class="text-dark font-weight-bold">Thêm mới bài viết</h4>
+
+                        <div class=" " style="width:75% ;margin: auto;background-color:white;padding:25px;padding-right:30px ">
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark " for="">Tiêu đề (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <input type="text" id="Name" value="@Model.Name" name="Name" class="col-9 pl-1 pt-1">
+                                <input type="text" id="ContentID" value="@Model.ContentID" name="ContentID" class="d-none">
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Meta Title </label>
+                                <input type="text" id="MetaTitle" value="@Model.MetaTitle" name="MetaTitle" class="col-9 pl-1 pt-1">
+                            </div>
+                            <div class="row mt-3">
+
+                                <label class="col-3 text-dark" for=""> </label>
+                                <img class="col-3 pl-1 pt-1" width="100%" src="@Model.Image" id="Image" /><br />
+                                <a id="btnSelectImage" class="col-4 text-dark mt-4" href="#">Chọn ảnh</a>
+                                <input type="text" id="SrcImgContent" value="@Model.Image" class="d-none" name="Image" />
+
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Loại bài viết </label>
+                                @Html.DropDownList("CatID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "CatID" })
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Tags (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <input type="text" id="Tags" value="@Model.Tags" name="Tags" class="col-9 pl-1 pt-1">
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Mô tả (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <textarea id="Description" name="Description" class="col-9 pl-1 pt-1 ">@Model.Description</textarea>
+
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Chi tiết (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <textarea id="Details" name="Details" class="col-9 pl-1 pt-1 ">@Html.Raw(Model.Details)</textarea>
+
+                            </div>
+
+                            <div class="row mt-4">
+                                <label class="col-4 text-dark" for="">Trạng thái </label>
+                                @Html.CheckBoxFor(model => model.Status, new { @class = " " })
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="">
+                    <div class="col-md-offset-2 mt-3">
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $("#btnSelectImage").on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                document.getElementById("Image").src = url;
+                $("#SrcImgContent").val(url);
+            };
+            finder.popup();
+        })
+    </script>
+    <script>
+        var editor = CKEDITOR.replace('Details', {
+            customConfig: '/Assets/Admin/Plugin/ckeditor/config.js'
+        })
+    </script>
+}
+
+

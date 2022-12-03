@@ -23,7 +23,7 @@ namespace NhaXinhBUS.BUS
 			List<Product> list = new List<Product>();
 			foreach (var a in getAllProduct())
 			{
-				Price x = getAllPrice().Find(s => s.ProID == a.ProID);
+				Price x = getAllPrice().Find(s => s.Product.ProName == a.ProName);
 				if (x == null)
 				{
 					list.Add(a);

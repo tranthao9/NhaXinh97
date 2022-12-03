@@ -1,0 +1,203 @@
+﻿@model Project_NhaXinh.Areas.Admin.Data.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Login </title>
+    <link rel="icon" href="~/Assets/images/Logo.ico" />
+
+    <!-- Bootstrap -->
+    <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/Assets/Admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/Assets/Admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/Assets/Admin/vendors/animate.css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet">
+
+    <link href="/Assets/Notification.css" rel="stylesheet" />
+    <style>
+        #recaptcha-container{
+            margin-bottom:10px;
+            margin-top:10px
+        }
+    </style>
+</head>
+
+<body class="login ">
+    <div class=" bg-blue-sky text-dark">
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <input id="error" class="d-none" type="button" value="Error!" />
+        <div class="login_wrapper ">
+            <div class="animate form login_form ">
+                <section class="login_content">
+                    <form onsubmit="LoginP()">
+                        <h1>Login</h1>
+                        <div>
+                            <input type="text" id="us" class="form-control" placeholder="Username" required />
+                        </div>
+                        <div style="position:relative">
+                            <input type="text" id="pas" class="form-control" placeholder="Password" required />
+                            <span style="position: absolute;right:15px;top:10px;" onclick="hideshow2()">
+                                <i id="slash2" class="fa fa-eye-slash"></i>
+                                <i id="eye2" class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <input id="remember" class="mt-3" type="checkbox" /> Remember Me
+                            <a class="reset_pass" href="#">Lost your password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-info submit mt-2 "> Login </button>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                New to site?
+                                <a href="#signup" class="to_register"> Create Account </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><img width="10%" src="/Assets/Admin/images/Logo.ico" /> Nhà Xinh</h1>
+                                <p>©2016 Công ty và trách nhiệm hữu hạn Nhà Xinh</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <div id="register" class="animate form registration_form" style="width:500px !important;">
+
+                <input id="success" class="d-none" type="button" value="Success!" />
+                <section class="login_content" style="left:-25%">
+                    <form onsubmit="login.ExamEmail()" class="">
+                        <h1 class="ml-2">Create Account</h1>
+                        <div class="field item form-group">
+                            <label class="col-form-label  col-sm-3  label-align">Tên Đăng Nhập<span class="required">*</span></label>
+                            <div class=" col-sm-9">
+                                <input class="form-control" id="name" placeholder="Trần Thị Thảo" required />
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label  col-sm-3  label-align">Địa chỉ<span class="required">*</span></label>
+                            <div class=" col-sm-9">
+                                <input class="form-control optional" id="occupation" placeholder="Đức Hợp - Kim Động - Hưng Yên" type="text" required />
+                            </div>
+                        </div>
+                        <div class="field item  form-group">
+                            <label class="col-form-label col-sm-3  label-align">Email<span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <input class="form-control email" id="email" placeholder="tt088038@gmail.com" required type="email" />
+                                <p id="vaemail" class="text-danger d-none" style="margin-left:-270px">Email đã tồn tại</p>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label  col-sm-3  label-align">UserName<span class="required">*</span></label>
+                            <div class=" col-sm-9">
+                                <input class="form-control" data-validate-words="2" id="username" placeholder="Thao123@abc" required />
+
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label  col-sm-3  label-align">Date<span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <input class="form-control date" type="date" id="date" required='required'>
+                            </div>
+                        </div>
+                        <div class="field item form-group">
+                            <label class="col-form-label col-sm-3  label-align">Password<span class="required">*</span></label>
+                            <div class=" col-sm-9">
+                                <input class="form-control" type="text" id="password1" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@Html.Raw('@')#$%^&*]).{8,}" title="Tối thiểu 8 ký tự bao gồm chữ cái hoa, thường, số và ký tự đặc biệt" required />
+                                <span style="position: absolute;right:15px;top:7px;" onclick="hideshow()">
+                                    <i id="slash" class="fa fa-eye-slash"></i>
+                                    <i id="eye" class="fa fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="field item form-group">
+                            <label class="col-form-label col-sm-3  label-align">Số điện thoại<span class="required">*</span></label>
+                            <div class=" col-sm-9">
+                                <input class="form-control tel" type="text" id="phone" placeholder="0832297222" required />
+                                <div id="recaptcha-container"></div>
+                                @*<button type="submit" class="btn btn-success" onclick="phoneAuth()">Send OTP</button>*@
+
+                            </div>
+                        </div>
+                        <div id="verify" class="field item form-group" style="display:none">
+                            <label class="col-form-label col-sm-3  label-align"></label>
+                            <div class=" col-sm-6 d-flex">
+                                <input class="mr-4 h-75 " type="text" id="verificationcode" />
+                                <button type="submit" class="btn btn-warning" id="verrify" onclick="codeverity()">Verify</button>
+
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="form-group">
+                                <div class="col-sm-9 offset-md-3">
+                                    <button type="submit"  class="btn btn-primary">Submit</button>
+                                    <button id="reset" type='reset' class="btn btn-success">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                Already a member ?
+                                <a href="#signin" class="to_register"> Log in </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><img width="10%" src="/Assets/Admin/images/Logo.ico" /> Nhà Xinh</h1>
+                                <p>©2016 Công ty và trách nhiệm hưu hạn Nhà Xinh </p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="/Assets/Admin/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/Assets/Admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="/Assets/Admin/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/Assets/Admin/vendors/nprogress/nprogress.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="/Assets/Admin/build/js/custom.min.js"></script>
+
+    <script src="/Assets/Notification.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+    <script src="/Assets/Client/js/Login.js"></script>
+</body>
+</html>
+

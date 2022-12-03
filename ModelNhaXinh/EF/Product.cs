@@ -17,38 +17,40 @@ namespace ModelNhaXinh.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.ImportBills = new HashSet<ImportBill>();
+            this.ImportBillDetails = new HashSet<ImportBillDetail>();
+            this.OrderDetails = new HashSet<OrderDetail>();
             this.Prices = new HashSet<Price>();
+            this.CartDetails = new HashSet<CartDetail>();
         }
     
         public string ProID { get; set; }
-        public string StuID { get; set; }
         public string CatID { get; set; }
-        public string RooID { get; set; }
+        public string Metatitle { get; set; }
         public string ProName { get; set; }
         public string ProDescription { get; set; }
         public string ProColor { get; set; }
         public string Materials { get; set; }
         public string Size { get; set; }
         public string ProImage { get; set; }
+        public string Tags { get; set; }
         public string MoreImage { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string CreateBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
         public string MetaDescriptions { get; set; }
         public string Displayhome { get; set; }
         public bool Status { get; set; }
+        public Nullable<int> inventory { get; set; }
+        public Nullable<int> sold { get; set; }
     
-        public virtual CartDetail CartDetail { get; set; }
         public virtual Category Category { get; set; }
+        public virtual Category Category1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ImportBill> ImportBills { get; set; }
+        public virtual ICollection<ImportBillDetail> ImportBillDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Price> Prices { get; set; }
-        public virtual ImportBillDetail ImportBillDetail { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
-        public virtual Room Room { get; set; }
-        public virtual Stuff Stuff { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }

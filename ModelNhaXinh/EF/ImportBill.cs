@@ -14,13 +14,24 @@ namespace ModelNhaXinh.EF
     
     public partial class ImportBill
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ImportBill()
+        {
+            this.ImportBillDetails = new HashSet<ImportBillDetail>();
+        }
+    
         public string ImpID { get; set; }
         public string ProID { get; set; }
-        public string StaffID { get; set; }
+        public int UserID { get; set; }
         public string ImpDate { get; set; }
         public Nullable<int> MoneyTotal { get; set; }
+        public Nullable<int> Discount { get; set; }
+        public Nullable<int> Pay { get; set; }
+        public string PayID { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Provider Provider { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImportBillDetail> ImportBillDetails { get; set; }
+        public virtual User_ User_ { get; set; }
     }
 }

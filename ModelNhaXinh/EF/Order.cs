@@ -14,15 +14,26 @@ namespace ModelNhaXinh.EF
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public string OrdID { get; set; }
         public string CusID { get; set; }
+        public string ReceivingName { get; set; }
         public string OrderDate { get; set; }
         public string Status { get; set; }
         public string ReceivingAddress { get; set; }
         public string ReceivingPhone { get; set; }
         public Nullable<int> MoneyTotal { get; set; }
         public string Note { get; set; }
+        public string ReceivingEmail { get; set; }
+        public string Payment { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

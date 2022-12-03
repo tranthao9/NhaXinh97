@@ -26,27 +26,35 @@ namespace ModelNhaXinh.EF
         }
     
         public virtual DbSet<About> Abouts { get; set; }
-        public virtual DbSet<CartDetail> CartDetails { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CategoryNew> CategoryNews { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<Content> Contents { get; set; }
+        public virtual DbSet<ContentTag> ContentTags { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Feeback> Feebacks { get; set; }
         public virtual DbSet<Footer> Footers { get; set; }
         public virtual DbSet<ImportBill> ImportBills { get; set; }
+        public virtual DbSet<ImportBillDetail> ImportBillDetails { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<MenuType> MenuTypes { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductTag> ProductTags { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Provider> Providers { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomDetail> RoomDetails { get; set; }
         public virtual DbSet<Silde> Sildes { get; set; }
         public virtual DbSet<Stuff> Stuffs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User_> User_ { get; set; }
-        public virtual DbSet<ImportBillDetail> ImportBillDetails { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<CartDetail> CartDetails { get; set; }
     }
 }

@@ -285,7 +285,7 @@
                 $scope.datas = res.data;
             });
             $scope.price = {};
-            $scope.price.StartedDate = time;
+            $scope.price.StartedDate = Date.parse(time);
             $scope.themgia = function (id) {
                 $scope.price.ProID = id;
             }

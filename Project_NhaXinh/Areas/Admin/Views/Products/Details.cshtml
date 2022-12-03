@@ -42,11 +42,11 @@
                                 </tr>
                                 <tr>
                                     <td class="text-dark font-weight-bold">Loại Phòng</td>
-                                    <td>@Model.Room.RooName</td>
+                                    <td>@Model.Category.Room.RooName</td>
                                 </tr>
                                 <tr>
                                     <td class="text-dark font-weight-bold">Loại Chất Liệu</td>
-                                    <td>@Model.Stuff.StuName</td>
+                                    <td>@Model.Tags</td>
                                 </tr>
                                 <tr>
                                     <td class="text-dark font-weight-bold">Loại hiển thị</td>
@@ -64,6 +64,10 @@
                                         <td>Ngưng hoạt động</td>
                                     }
 
+                                </tr>
+                                <tr>
+                                    <td class="text-dark font-weight-bold">Meta description</td>
+                                    <td>@Model.MetaDescriptions</td>
                                 </tr>
                                 <tr>
                                     <td class="text-dark font-weight-bold">Mô tả</td>

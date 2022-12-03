@@ -18,6 +18,22 @@ namespace ModelNhaXinh.Dao
 			return list;
 		}
 
+		public Provider getProvider(string id)
+		{
+			return db.Providers.Find(id);
+		}
+
+		public List<Provider> NccID()
+		{
+			List<Provider> list = db.Database.SqlQuery<Provider>("Select ProName, ProPhone , ProID , ProEmail, ProAddress, Status , debt from Provider").ToList();
+			return list;
+		}
+
+		public List<Provider> ListName(string keyW)
+		{
+			return db.Providers.Where(s => s.ProName.ToLower().Contains(keyW)).ToList();
+		}
+
 		public void addProvider(Provider item)
 		{
 			db.Providers.Add(item);
@@ -33,6 +49,8 @@ namespace ModelNhaXinh.Dao
 				newsp.ProAddress = item.ProAddress;
 				newsp.ProEmail = item.ProEmail;
 				newsp.ProPhone = item.ProPhone;
+				newsp.debt = item.debt;
+				newsp.Status = item.Status;
 				db.SaveChanges();
 			}
 		}
@@ -40,6 +58,7 @@ namespace ModelNhaXinh.Dao
 		public void removeProvider(string item)
 		{
 			db.Providers.Remove(db.Providers.Find(item));
+			db.SaveChanges();
 		}
 	}
 }

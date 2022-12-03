@@ -19,13 +19,27 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 		ProductBUS proBUS = new ProductBUS();
 		List<Product> proList;
 		Product product1 = new Product();
-		
 
 		// GET: Admin/Products
 		public ActionResult Index()
 		{
 			proList = proBUS.getAllProduct();
 			return View(proList);
+		}
+
+		public JsonResult getallProduct()
+		{
+			proList = proBUS.getAllProduct();
+			return Json(proList.Select(s => new {s.ProName,s.ProImage}), JsonRequestBehavior.AllowGet);
+		}
+		public JsonResult ListName(string q)
+		{
+			var data = proBUS.ListName(q);
+			return Json(new
+			{
+				data = data.Select(s => new {s.ProID,s.ProName,s.ProImage}),
+				status = true
+			},JsonRequestBehavior.AllowGet);
 		}
 
 		// GET: Admin/Products/Details/5
@@ -42,15 +56,11 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 				product1.Status = true;
 				product1.Displayhome = "--Chọn loại hiển thị--";
 				product1.MoreImage = "";
-				ViewBag.StuID = new SelectList(proBUS.GetStuffs(), "StuID", "StuName");
-				ViewBag.RooID = new SelectList(proBUS.getRooms(), "RooID", "RooName");
 				ViewBag.CatID = new SelectList(proBUS.GetCategories(), "CatID", "CatName");
 				return View(product1);
 			}
 			else
 			{
-				ViewBag.StuID = new SelectList(proBUS.GetStuffs(), "StuID", "StuName",product1.StuID);
-				ViewBag.RooID = new SelectList(proBUS.getRooms(), "RooID", "RooName",product1.RooID);
 				ViewBag.CatID = new SelectList(proBUS.GetCategories(), "CatID", "CatName",product1.CatID);
 				return View(product1);
 			}
@@ -62,21 +72,38 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[ValidateInput(false)]
-		public ActionResult Create([Bind(Include = "ProID,CatID,StuID,RooID,Materials,Size,Displayhome,ProName,ProDescription,ProColor,ProImage,MoreImage,Quantity,CreateDate,CreateBy,ModifiedDate,ModifiedBy,MetaDescriptions,Status")] Product product )
+		public ActionResult Create([Bind(Include = "Tags,ProID,CatID,Materials,Size,Displayhome,ProName,ProDescription,ProColor,ProImage,MoreImage,Quantity,CreateDate,CreateBy,MetaDescriptions,Status")] Product product )
 		{
+			int a1 = proBUS.getAllProduct().Count();
+			proList = proBUS.getAllProduct();
+			if (a1 == 0)
+			{
+				product.ProID = "SP01";
+			}
+			else if (a1 < 9)
+			{
+				a1 = int.Parse(proList[a1 - 1].ProID.Substring(2)) + 1;
+				product.ProID = "SP0" + a1;
+			}
+			else
+			{
+				a1 = int.Parse(proList[a1 - 1].ProID.Substring(2)) + 1;
+				product.ProID = "SP" + a1;
+			}
 			product1 = product;
-			ViewBag.StuID = new SelectList(proBUS.GetStuffs(), "StuID", "StuName");
-			ViewBag.RooID = new SelectList(proBUS.getRooms(), "RooID", "RooName");
 			ViewBag.CatID = new SelectList(proBUS.GetCategories(), "CatID", "CatName");
 			if (ModelState.IsValid)
 			{
 				string[] arrListStr = (product.MoreImage).Split(',');
 				string z = "";
+				product.ProImage = arrListStr[0].Substring(23);
 				foreach (var a in arrListStr)
 				{
 					z += a.Substring(23) + ",";
 				}
 				product.MoreImage = z.TrimEnd(',');
+				var session = (UserLogin)Session[Common.CommonConstants.User_Session];
+				product.CreateBy = session.UserName;
 				if (arrListStr.Count() < 11 )
 				{
 					
@@ -86,7 +113,7 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 					}
 					else
 					{
-						ViewBag.error = "Mã sản phẩm đã tồn tại";
+						ViewBag.error = "Tên sản phẩm đã tồn tại";
 						return View(product);
 					}
 				}	
@@ -104,8 +131,6 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 		public ActionResult Edit(string id)
 		{
 			Product product = proBUS.GetProduct(id);
-			ViewBag.StuID = new SelectList(proBUS.GetStuffs(), "StuID", "StuName",product.StuID);
-			ViewBag.RooID = new SelectList(proBUS.getRooms(), "RooID", "RooName",product.RooID);
 			ViewBag.CatID = new SelectList(proBUS.GetCategories(), "CatID", "CatName",product.CatID);
 			return View(product);
 		}
@@ -116,10 +141,8 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[ValidateInput(false)]
-		public ActionResult Edit([Bind(Include = "ProID,CatID,RooID,StuID,ProName,ProDescription,ProColor,ProImage,MoreImage,Detail,Quantity,Materials,Size,Displayhome,Status")] Product product)
+		public ActionResult Edit([Bind(Include = "Tags,ProID,CatID,ProName,ProDescription,ProImage,MoreImage,Detail,Quantity,Materials,Size,Displayhome,Status,MetaDescriptions")] Product product)
 		{
-			ViewBag.StuID = new SelectList(proBUS.GetStuffs(), "StuID", "StuName");
-			ViewBag.RooID = new SelectList(proBUS.getRooms(), "RooID", "RooName");
 			ViewBag.CatID = new SelectList(proBUS.GetCategories(), "CatID", "CatName");
 			if(ModelState.IsValid)
 			{
@@ -132,6 +155,7 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
 						z += a.Substring(23) + ",";
 					}
 					product.MoreImage = z.TrimEnd(',');
+					product.ProImage = arrListStr[0].Substring(23);
 					proBUS.editPro(product);
 					return RedirectToAction("Index");
 				}

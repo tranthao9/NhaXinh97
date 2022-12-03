@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ModelNhaXinh.Dao.IDAO;
 using ModelNhaXinh.EF;
 using System.Data;
+using System.Data.Entity;
 
 namespace ModelNhaXinh.Dao
 {
@@ -25,6 +26,8 @@ namespace ModelNhaXinh.Dao
 			db.SaveChanges();
 		}
 
+		
+
 		public Category findCat(string id)
 		{
 			return db.Categories.Find(id);
@@ -36,11 +39,10 @@ namespace ModelNhaXinh.Dao
 			if(category != null)
 			{
 				category.CatName = Cat.CatName;
-				category.CatDescription = Cat.CatDescription;
 				category.Status = Cat.Status;
 				category.DisplayOrder = Cat.DisplayOrder;
 				category.MetaTitle = Cat.MetaTitle;
-				category.ParentID = Cat.ParentID;
+				category.RooID = Cat.RooID;
 				category.ShowMenu = Cat.ShowMenu;
 				db.SaveChanges();
 			}	

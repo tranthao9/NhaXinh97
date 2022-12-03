@@ -11,14 +11,26 @@
             <li>
                 <a><i class="fa fa-table"></i> Quản lý danh mục <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li> @Html.ActionLink("Category", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Stuff", "Index", "Stuffs")</li>
-                    <li>@Html.ActionLink("Product", "Index", "Products")</li>
-                    <li><a href="price.html">Product</a></li>
-                    <li><a href="promotion.html">Product</a></li>
-                    <li><a href="provider.html">Product</a></li>
-                    <li><a href="importBill.html">Product</a></li>
-                    <li><a href="order.html">Product</a></li>
+                    <li> @Html.ActionLink("Quản lý loại nội thất", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Quản lý chất liệu", "Index", "Stuffs")</li>
+                    <li>@Html.ActionLink("Quản lý nội thất", "Index", "Products")</li>
+                    <li> @Html.ActionLink("Quản lý loại phòng", "Index", "Room")</li>
+                    <li> @Html.ActionLink("Quản lý phòng", "Index", "RoomDetails")</li>
+                    <li>@Html.ActionLink("Quản lý CTKM", "Index", "Promotions")</li>
+                    <li>@Html.ActionLink("Quản lý nhà cung cấp", "Index", "Providers")</li>
+                    <li> @Html.ActionLink("Quản hóa đơn nhập", "Index", "ImportBill")</li>
+                    <li> @Html.ActionLink("Quản lý bài viết", "Index", "Contents")</li>
+                </ul>
+            </li>
+            <li>
+                <a> <i class="fa fa-file-text-o"></i> Quản lý đơn hàng <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li> @Html.ActionLink("Đơn hàng chưa xác thực", "getChuaXacThuc", "Orders")</li>
+                    <li> @Html.ActionLink("Đơn hàng đã xác thực", "getDaXacThuc", "Orders")</li>
+                    <li> @Html.ActionLink("Đơn hàng chờ xử lý", "getDonHangChuaXuLy", "Orders")</li>
+                    <li> @Html.ActionLink("Đơn hàng đang vận chuyển", "getDangVanChuyen", "Orders")</li>
+                    <li> @Html.ActionLink("Đơn hàng đã thanh toán", "getDaThanhToan", "Orders")</li>
+                    <li> @Html.ActionLink("Đơn hàng đã hủy", "getDaHuy", "Orders")</li>
                 </ul>
             </li>
             <li>

@@ -12,7 +12,7 @@ namespace NhaXinhBUS.BUS
 	public partial class StuffBUS
 	{
 		ICategoryDAO catDAO = new CategoryDAO();
-		IStuffDAO stuDAO = new StuffDAO();
+		StuffDAO stuDAO = new StuffDAO();
 		List<Category> catList;
 		List<Stuff> stuList;
 		
@@ -30,7 +30,7 @@ namespace NhaXinhBUS.BUS
 
 		public bool addStuff(Stuff stu)
 		{
-			Stuff item = stuList.Find(s => s.StuID == stu.StuID);
+			Stuff item = getAllStuff().Find(s => s.StuID == stu.StuID);
 			if (item == null)
 			{
 				stuList.Add(stu);
@@ -45,10 +45,6 @@ namespace NhaXinhBUS.BUS
 			return stuDAO.findStuf(id);
 		}
 
-		public void editSufff(Stuff stu)
-		{
-			stuDAO.editStuff(stu);
-		}
 
 		public void removeStuff(string id)
 		{

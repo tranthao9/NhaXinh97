@@ -19,5 +19,10 @@ namespace ModelNhaXinh.EF
         public string Form { get; set; }
         public Nullable<int> SoGiam { get; set; }
         public bool Status { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
+        public Nullable<System.DateTime> StopDate { get; set; }
+        public string Apply { get; set; }
+        public bool ShowMenu { get; set; }
+        public string Type { get; set; }
     }
 }

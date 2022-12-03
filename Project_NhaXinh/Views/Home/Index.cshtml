@@ -87,8 +87,8 @@
         <div class="col-sm-9">
             <p>Catalogue Nhà Xinh 2022 nay đã ra mắt với những không gian và ý tưởng mới. Tìm cảm hứng cho bạn ngay nhé.</p>
         </div>
-        <div class="col-sm-3 " data-aos="fade-left" data-aos-duration="2000">
-            <button class="btn btn-outline-light hover_button " data-aos="fade-left" data-aos-duration="2000">XEM CATALOGUE NGAY</button>
+        <div class="col-sm-3 " data-aos="fade-right" data-aos-duration="2000">
+            <button class="btn btn-outline-light hover_button " data-aos="fade-right" data-aos-duration="2000">XEM CATALOGUE NGAY</button>
         </div>
     </div>
 </div>
@@ -124,204 +124,8 @@
 </div>
 <!-- sản phẩm -->
 <div class="container-fluid">
-    <div class="row">
-        @foreach (var pro in Model)
-        {
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total ">
-                    <div class="hidden position-relative">
-                        <img id="img_active2" class=" fakeimg img_hover" src="@pro.ProImage" alt="">
-                        <div class="position-absolute discount">15%</div>
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">@pro.ProName</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">38,165,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">44,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <a href="/Home/AddCart/@pro.ProID"><button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button></a>
-                        
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-        }
-        @*<div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden position-relative">
-                        <img id="img_active1" class=" fakeimg img_hover " src="/Assets/Client/image/sofa-combo-goc-boc-vai-xanh-dep-hien-dai-4.jpg" alt="">
-                        <div class="position-absolute discount">15%</div>
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa Combo góc trái vải 20412 9</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">32,215,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">37,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark " id="add_cart">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total ">
-                    <div class="hidden position-relative">
-                        <img id="img_active2" class=" fakeimg img_hover" src="/Assets/Client/image/ban-an-peak-van-may-hien-dai-ceramic-2-600x400.jpg" alt="">
-                        <div class="position-absolute discount">15%</div>
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Bàn ăn Peak hiện đại mặt Ceramic vân mây</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">38,165,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">44,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden position-relative">
-                        <img id="img_active3" class="fakeimg img_hover" src="/Assets/Client/image/armchair-osaka-hien-dai-sang-trong-2-600x400.jpg" alt="">
-                        <div class="position-absolute discount">15%</div>
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Arm chair Osaka bọc vải SO65</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">12,665,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">14,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden position-relative">
-                        <img id="img_active4" class=" fakeimg img_hover" src="/Assets/Client/image/CONSOLE-TABLE-GLORIA-GOLD-82379K-2-600x400.jpg" alt="">
-                        <div class="position-absolute discount">15%</div>
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Console Table Gloria Gold 82379K</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">30,090,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">35,400,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class="btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden ">
-                        <img id="img_active5" class=" fakeimg img_hover" src="/Assets/Client/image/Sofa-Combo-3-cho-da-Bali-520-1-600x400.jpg" alt="">
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Sofa Combo 3 chỗ da Bali 520</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">50,915,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">59,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden ">
-                        <img id="img_active6" class=" fakeimg img_hover" src="/Assets/Client/image/ghe-an-peak-mau-xanh-1-600x400.jpg" alt="">
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Ghế ăn Peak vải xanh</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">4,165,000<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">4,900,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden ">
-                        <img id="img_active7" class="fakeimg img_hover" src="/Assets/Client/image/TU-LY-BARBIER-WALNUT-410043Z-1-600x400.jpg" alt="">
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">tủ ly Barbie Walnut 410043Z</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">42,236,500<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">49,690,000<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class=" btn btn-outline-dark">THÊM VÀO GIỎ</button>
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 col-6">
-                <div class=" hover_total">
-                    <div class="hidden ">
-                        <img id="img_active4" class=" fakeimg img_hover" src="/Assets/Client/image/giuong-dubai-go-vai-4-600x400.jpg" alt="">
-                    </div>
-                    <div class="d-flex ">
-                        <div class="me-auto">
-                            <div class="nav-link text-muted cursor" aria-current="page" href="#">Giường ngủ Dubai 1m6 bọc vải màu kem AA34/150</div>
-                        </div>
-                        <div class="ms-auto ">
-                            <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
-                            <bdi class="text-danger ">12,665,001<span class="woocommerce-Price-currencySymbol">₫</span></bdi>
-                            <small class="text-decoration-line-through mt-3 text-muted ">14,900,001<small class="woocommerce-Price-currencySymbol">₫</small></small>
-                        </div>
-                    </div>
-                    <div class="d-flex design_top hidden_img">
-                        <button class="float-right btn btn-dark">XEM THÊM</button>
-                    </div>
-                </div>
-            </div>*@
+    <div class="row" id="newproduct">
+
     </div>
 </div>
 
@@ -682,6 +486,45 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+       
+        const currencyFractionDigits = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0
+        }).resolvedOptions().maximumFractionDigits;
+       
+    </script>
+    <script id="addItem" type="x-tmpl-mustache">
+        <div class="col-sm-3 col-6">
+            <div class=" hover_total ">
+                <div class="hidden position-relative">
+                    <img id="img_active2" class=" fakeimg img_hover" src="{{ProImage}}" alt="">
+                    <div class="position-absolute discount">15%</div>
+                </div>
+                <div class="d-flex ">
+                    <div class="me-auto">
+                        <div class="nav-link text-muted cursor" aria-current="page" href="#">{{ProName}}</div>
+                    </div>
+                    <div class="ms-auto ">
+                        <div class="nav-link text-muted hover_heart " aria-current="page" href="#"><i class="fa-regular fa-heart"></i></div>
+                        <bdi class="text-danger ">{{Cost}}</bdi>
+                        <small class="text-decoration-line-through mt-3 text-muted ">{{PreCost}}</small>
+                    </div>
+                </div>
+                <div class="d-flex design_top hidden_img">
+                    <a  onclick="common.AddCart('{{Id}}','{{ProName}}','{{ProImage}}','{{Cost2}}')" id="add_cart" class=" btn btn-outline-dark">THÊM VÀO GIỎ</a>
+                     <a href="/Home/Detail/{{Id}}"> <button class="float-right btn btn-dark">XEM THÊM</button></a>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+
+  
+}
 
 
 

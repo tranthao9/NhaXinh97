@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ModelNhaXinh.EF.OrderDetail>
+﻿
 
 @{
     ViewBag.Title = "viewCart";
@@ -13,44 +13,22 @@
     <div class="row">
         <div class="col-sm-7">
 
-            @foreach (var cart in Model)
-            {
-                <div class="row  border-bottom mt-3 pb-3">
+            <div id="CreateCart">
 
-                    <div class="col-4">
-                        <img class="fakeimg" src="@cart.Product.ProImage" alt="">
-                    </div>
-                    <div class="col-6 mt-2">
-                        <a class="text-decoration-none text-dark h6 " href=""><p>@cart.Product.ProName</p></a>
-                        <small>pa_vat-lieu: 583</small><br>
-                        <small>pa_kich-thuoc: 584</small>
-                        <div class="d-flex"><span class="mt-2 mb-2 text-danger">27,540,000<span class="woocommerce-Price-currencySymbol">₫</span></span></div>
-                        <a href="#" class="text-decoration-none text-dark mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="add to wishlist">
-                            <i class="fa-solid fa-heart"></i>
-                            Thêm vào Wishlist
-                        </a>
-                    </div>
-                    <div class="col-2">
-                        <a class="text-dark text-decoration-none " href=""><h6 class="ms-3">x</h6></a><br>
-                        <input class="text-muted form-control mt-5" style="width:55px !important; padding: 0 5px 0 15px!important; line-height:  none !important;" type="number" name="" id="" min="1" value="@cart.Quantity">
-                    </div>
-                </div>
-            }
-
-            <div class="mt-3">
-                <button class=" btn btn-dark  d-block h3 ">CẬP NHẬP GIỎ HÀNG</button>
             </div>
+            
         </div>
         <div class="col-sm-5">
             <div class="border ps-3 pe-3 pt-3 pb-3">
                 <h4>Tóm tắt đơn hàng</h4>
                 <div class="mt-3">
                     <span>Tạm tính</span>
-                    <span class="fw-bold float-right">50,758,000<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                    <span class="fw-bold float-right" id="tamtinh"></span>
+                    <input id="Cost" type="number" class="d-none" />
                 </div>
                 <div class="mt-3">
                     <span>Giảm giá</span>
-                    <span class="fw-bold float-right">0<span class="woocommerce-Price-currencySymbol">%</span></span>
+                    <span class="fw-bold float-right"><span id="Sogiam">0%</span></span>
                 </div>
                 <div class="mt-3">
                     <span>Vận chuyển</span>
@@ -60,15 +38,15 @@
                     </small>
                 </div>
                 <div class="mt-5">
-                    <span>Mã giảm giá/Quà tặng</span>
+                    <span>Mã giảm giá/Quà tặng <small>(Chỉ được áp dụng được một mã)</small></span>
                 </div>
                 <div class="input-group mt-2 ms-3 btn-outline-light">
-                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
-                    <button class="input-group-text  btn-dark btn-outline-light me-3">ÁP DỤNG</button>
+                    <input type="text" class="form-control" id="promotionCode" placeholder="Nhập mã giảm giá">
+                    <button onclick="ApplyPromotion()" class="input-group-text  btn-dark btn-outline-light me-3">ÁP DỤNG</button>
                 </div>
                 <div class="mt-3">
                     <span>Thành tiền (Đã bao gồm VAT 10%)</span>
-                    <span class="fw-bold float-right">50,758,000<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                    <span class="fw-bold float-right" id="thanhtien"></span>
                 </div>
                 <div class="mt-3">
                     <h6>Thông tin giao hàng</h6>
@@ -78,10 +56,279 @@
                     <a href="" class="text-decoration-none text-warning">Cửa hàng gần bạn</a>
                 </div>
                 <div class="d-flex mt-4">
-                    <button class=" btn btn-outline-dark w-50 ms-3 fw-bold"><i class="fa-solid fa-left-long me-2"></i>TIẾP TỤC MUA HÀNG</button>
-                    <button class="float-right btn btn-dark ms-3 w-50 fw-bold">ĐẶT HÀNG</button>
+                    <a href="/Home/Index" class=" btn btn-outline-dark w-50 ms-3 fw-bold"><i class="fa-solid fa-left-long me-2"></i>TIẾP TỤC MUA HÀNG</a>
+                    <a href="/Payment/Payment" class="float-right btn btn-dark ms-3 w-50 fw-bold cursor">ĐẶT HÀNG</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="/Assets/Client/js/Cart.js"></script>
+    <script id="addItem" type="x-tmpl-mustache">
+        <div class="row  border-bottom mt-3 pb-3">
+        <div class='col-4' >
+            <img class="fakeimg" src='{{ProImage}}'>
+        </div>
+        <div class="col-6 mt-2">
+            <a class="text-decoration-none text-dark h6 " href=""><p>{{ProName}}</p></a>
+            <small>pa_vat-lieu: {{material}}</small><br>
+            <small>pa_kich-thuoc: {{size}}</small>
+            <div class="d-flex"><span class="mt-2 mb-2 text-danger">{{Cost}}</div>
+            <a href="#" class="text-decoration-none text-dark mt-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title="add to wishlist">
+                <i class="fa-solid fa-heart"></i>
+                Thêm vào Wishlist
+            </a>
+        </div>
+        <div class="col-2">
+            <a class="text-dark text-decoration-none cursor" onclick="viewcart.removeCart('{{Id}}')"><h6 class="ms-3">x</h6></a><br>
+            <input onchange="viewcart.updateCart('{{Id}}','{{Id}}a')" class="text-muted form-control mt-5 " style="width:55px !important; padding: 0 5px 0 15px!important; line-height:  none !important;" type="number"  id="{{Id}}a" min="1" value="{{Quantity}}">
+        </div>
+         </div>
+    </script>
+    <script>
+
+        const currencyFractionDigits = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0
+        }).resolvedOptions().maximumFractionDigits;
+        var viewcart = {
+            init: function () {
+                viewcart.loadData();
+            },
+            loadData: function () {
+                if (sessionStorage.getItem("User") != null) {
+                    if (sessionStorage.getItem("User") != "") {
+                        LoadCartSQL(sessionStorage.getItem("User"))
+                    }
+                    else {
+                        if (getCookie("User") != "") {
+                            LoadCartSQL(getCookie("User"))
+                        }
+                    }
+                }
+                else {
+                    if (getCookie("User") != "") {
+                        LoadCartSQL(getCookie("User"))
+                    }
+                }
+            },
+            updateCart: function (idd, id2) {
+                var data = {
+                    ProID: idd,
+                    Quantity: document.getElementById(id2).value
+                };
+                if (sessionStorage.getItem("User") != null) {
+                    if (sessionStorage.getItem("User") != "") {
+                        UpdateCartSql(data, sessionStorage.getItem("User"))
+                    }
+                    else {
+                        if (getCookie("User") != "") {
+                            UpdateCartSql(data, getCookie("User"))
+                        }
+                        else {
+                            UpdateCartLocal(data.ProID, data.Quantity)
+                        }
+                    }
+                }
+                else {
+                    if (getCookie("User") != "") {
+                        UpdateCartSql(data, getCookie("User"))
+                    }
+                    else {
+                        UpdateCartLocal(data.ProID, data.Quantity)
+                    }
+                }
+            },
+            removeCart: function (s) {
+                swal({
+                    title: "Are you sure?",
+                    text: "Bạn có chắc chắn muốn xóa",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            var ob = s;
+                            if (sessionStorage.getItem("User") != null) {
+                                if (sessionStorage.getItem("User") != "") {
+                                    RemoveCartSQL(ob, sessionStorage.getItem("User"))
+                                }
+                                else {
+                                    if (getCookie("User") != "") {
+                                        RemoveCartSQL(ob, getCookie("User"))
+                                    }
+                                }
+                            }
+                            else {
+                                if (getCookie("User") != "") {
+                                    RemoveCartSQL(ob, getCookie("User"))
+                                }
+                            }
+
+                        } else {
+                            swal("Sản phẩm của bạn vẫn còn");
+                        }
+                    });
+
+            }
+        }
+        viewcart.init();
+        function LoadCartSQL(use) {
+            $.ajax({
+                url: "/Home/Cart",
+                dataType: "json",
+                data: { Username: use },
+                success: function (res) {
+                    if (res.status) {
+                        var details = res.Data;
+                        var html = '';
+                        var datatable = $('#addItem').html();
+                        var x = 0;
+                        var s = 0;
+                        var t = 0;
+                        $.each(details, function (i, item) {
+                            t = t + item.Quantity * item.Cost;
+                            console.log(promotion)
+                            promotion.forEach(function (s) {
+                                var arary = s.Apply.split(',')
+                                if (arary.includes(item.ProName)) {
+                                    item.Cost = item.Cost * (100 - s.SoGiam) / 100
+                                    
+                                }
+                            })
+                            s = s + item.Quantity
+                            x = x + item.Quantity * item.Cost;
+                            html += Mustache.render(datatable, {
+                                Id: item.ProID,
+                                ProImage: item.ProImage,
+                                ProName: item.ProName,
+                                Cost: (item.Cost).toLocaleString('de-DE', {
+                                    maximumFractionDigits: currencyFractionDigits
+                                }) + 'đ ',
+                                Quantity: item.Quantity
+                            });
+                        });
+                        $("#Soluong").html(s);
+                        $('#Tongtien').html(x.toLocaleString('de-DE', {
+                            maximumFractionDigits: currencyFractionDigits
+                        }) + 'đ ')
+                        var s = x * 1.1;
+                        $('#CreateCart').html(html);
+                        $('#tamtinh').html(x.toLocaleString('de-DE', {
+                            maximumFractionDigits: currencyFractionDigits
+                        }) + 'đ ');
+                        $("#Cost").val(t)
+                        $('#thanhtien').html(s.toLocaleString('de-DE', {
+                            maximumFractionDigits: currencyFractionDigits
+                        }) + 'đ ');
+                        
+                    }
+                },
+            })
+        }
+        function UpdateCartSql(data, user) {
+            $.ajax({
+                url: "/Home/UpdateSLC",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    model: JSON.stringify(data), Username: user
+                }, success: function () {
+                    LoadCartSQL(user)
+                }
+            })
+        }
+        function RemoveCartSQL(ob, user) {
+            $.ajax({
+                url: "/Home/RemoveCart",
+                type: 'Post',
+                dataType: "json",
+                data: { id: ob, Username: user },
+                success: function (res) {
+                    $("#success").click(function () {
+                        $.toast({
+                            heading: 'Success',
+                            text: 'Bạn đã xóa khỏi giỏ hàng',
+                            icon: 'success',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'fade',
+                            hideAfter: 5000,
+                            allowToastClose: false,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    common.loadData();
+                    $("#success").click()
+                }
+            });
+        }
+        function ApplyPromotion() {
+            var code = $("#promotionCode").val()
+            $.ajax({
+                url: '/Home/getVoucher',
+                dataType: 'json',
+                data: { Id: code },
+                success: function (res) {
+                    if (res.msv == true) {
+                        sessionStorage.setItem('Form', res.data.Form);
+                        sessionStorage.setItem('SoGiam', res.data.SoGiam);
+                        if (res.data.Form == "Giảm giá phần trăm") {
+                            $("#Sogiam").html(res.data.SoGiam + '%')
+                            var cost = $("#Cost").val();
+                            $('#tamtinh').html(cost.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                            var thanhtien = (cost * (100-res.data.SoGiam) / 100) * 1.1;
+                            $('#thanhtien').html(thanhtien.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                        }
+                        else {
+                            $('#Sogiam').html((res.data.SoGiam).toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                            $('#tamtinh').html(cost.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                            var cost = $("#Cost").val();
+                            var thanhtien = (cost - res.data.SoGiam) * 1.1;
+                            $('#thanhtien').html(thanhtien.toLocaleString('de-DE', {
+                                maximumFractionDigits: currencyFractionDigits
+                            }) + 'đ ');
+                        }
+                    }
+                    else {
+                        $("#error").click(function () {
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Mã không tồn tại',
+                                icon: 'error',
+                                loader: true,
+                                loaderBg: '#fff',
+                                showHideTransition: 'plain',
+                                hideAfter: 5000,
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $("#error").click();
+                        
+                    }
+                   
+                }
+            })
+           
+          
+        }
+    </script>
+}

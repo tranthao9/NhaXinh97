@@ -9,4 +9,13 @@ D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.CoreCompileI
 D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.CopyComplete
 D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.dll
 D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.pdb
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Newtonsoft.Json.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Newtonsoft.Json.xml
 D:\DoAn3\Project_NhaXinh\ModelNhaXinh\obj\Debug\ModelNhaXinh.csproj.AssemblyReference.cache
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Microsoft.IdentityModel.Logging.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Twilio.dll
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+D:\DoAn3\Project_NhaXinh\ModelNhaXinh\bin\Debug\Twilio.xml

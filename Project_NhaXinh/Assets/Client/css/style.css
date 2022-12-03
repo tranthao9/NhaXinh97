@@ -82,7 +82,7 @@ button:focus {outline:0 !important;
     overflow: hidden;
   }
   .fakeimg {
-    width: 100%;
+    width: 90%;
     border: 1px solid white;
     overflow: hidden;
   }
@@ -473,17 +473,16 @@ button:focus {outline:0 !important;
 .slick-current{
   opacity: 1 !important;
 }
-.slider-nav .slick-current{
-  border:  1px solid rgb(150, 148, 148);
-}
+
 .discount{
   top: 5%;
   right: 5%;
-  background-image: url(../image/bg_bage.png);
+  background-color:red;
+  border-radius:50%;
   padding: 5px;
   font-size: 15px;
   color: #FFF;
-  background-size: 40px 32px;
+  background-size: 35px 35px;
   background-repeat: no-repeat;
 }
 .materials

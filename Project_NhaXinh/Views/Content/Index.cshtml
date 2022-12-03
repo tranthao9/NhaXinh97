@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Content>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var content in Model)
+        {
+            <div class="col-6 mt-5 mb-5">
+                <div class="row" style="max-width:800px;margin:auto">
+                    <div class="col-4">
+                        <img width="100%" src="@content.Image"/>
+                    </div>
+                    <div class="col-8">
+                        <a class="text-decoration-none text-dark h5"  href="/tin-tuc/@content.MetaTitle-@content.ContentID">@content.Name</a>
+                        <p>@content.Description</p>
+                        <h6>@content.CreateDate by <a>@content.CreateBy</a></h6>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+

@@ -14,10 +14,13 @@ namespace ModelNhaXinh.EF
     
     public partial class OrderDetail
     {
+        public string OrdtID { get; set; }
+        public string OrdID { get; set; }
         public string ProID { get; set; }
         public Nullable<int> Quantity { get; set; }
         public Nullable<int> Price { get; set; }
     
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
 }

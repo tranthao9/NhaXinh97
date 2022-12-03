@@ -1,0 +1,306 @@
+﻿
+@{
+    ViewBag.Title = "HeThong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- slide -->
+<div class="container-fluid">
+    <div id="myCarousel" class="carousel" data-ride="carousel">
+        <div class="carousel-inner  position-relative" style="height:450px;">
+            <img class="fakeimg" src="/Assets/Client/image/nha-xinh-phong-khach-hien-dai-poppy-311021.jpg" alt="">
+            <div class="position-absolute d-flex fw-bold text-bottom design_color_slide ps-2 pe-2 w-100">
+                <div class="w-75 mt-5"><h2 class="text-white text-start" style="margin-top: 45%">Hệ thống cửa hàng Nhà Xinh tại TP. Hồ Chí Minh, Hà Nội và Bình Dương</h2> </div>
+                <h5 class="text-end text-white" style="margin-top: 30%">
+                    <a class="text-white text-decoration-none  " href="#">Trang chủ</a> /
+                    <a class="text-white text-decoration-none " href="">Hệ thống cửa hàng Nhà Xinh tại TP. Hồ Chí Minh, Hà Nội và Bình Dương</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Choosing address -->
+<div class="container-fluid bg-light  pt-5 pb-5 pb-5">
+    <div class="h2 text-center text-dark mt-5">Lựa chọn thành phố và khu vực gần bạn</div>
+    <div class="row" style="max-width: 1000px; margin:auto">
+        <div class="col-sm-5">
+            <label class="form-label text-dark">Tỉnh / Thành phố</label>
+            <select class="form-select">
+                <option value="">Select province/city</option>
+                <option value="HOCHIMINH">Tp. Hồ Chí Minh</option>
+                <option value="BINHDUONG">Bình Dương</option>
+                <option value="HANOI">Hà Nội</option>
+                <option value="ANGIANG">An Giang</option>
+                <option value="BACGIANG">Bắc Giang</option>
+                <option value="BACKAN">Bắc Kạn</option>
+                <option value="BACLIEU">Bạc Liêu</option>
+                <option value="BACNINH">Bắc Ninh</option>
+                <option value="BARIAVUNGTAU">Bà Rịa - Vũng Tàu</option>
+                <option value="BENTRE">Bến Tre</option>
+                <option value="BINHDINH">Bình Định</option>
+                <option value="BINHPHUOC">Bình Phước</option>
+                <option value="BINHTHUAN">Bình Thuận</option>
+                <option value="CAMAU">Cà Mau</option>
+                <option value="CANTHO">Cần Thơ</option>
+                <option value="CAOBANG">Cao Bằng</option>
+                <option value="DAKLAK">Đắk Lắk</option>
+                <option value="DAKNONG">Đắk Nông</option>
+                <option value="DANANG">Đà Nẵng</option>
+                <option value="DIENBIEN">Điện Biên</option>
+                <option value="DONGNAI">Đồng Nai</option>
+                <option value="DONGTHAP">Đồng Tháp</option>
+                <option value="GIALAI">Gia Lai</option>
+                <option value="HAGIANG">Hà Giang</option>
+                <option value="HAIDUONG">Hải Dương</option>
+                <option value="HAIPHONG">Hải Phòng</option>
+                <option value="HANAM">Hà Nam</option>
+                <option value="HATINH">Hà Tĩnh</option>
+                <option value="HAUGIANG">Hậu Giang</option>
+                <option value="HOABINH">Hòa Bình</option>
+                <option value="HUNGYEN">Hưng Yên</option>
+                <option value="KHANHHOA">Khánh Hòa</option>
+                <option value="KIENGIANG">Kiên Giang</option>
+                <option value="KONTUM">Kon Tum</option>
+                <option value="LAICHAU">Lai Châu</option>
+                <option value="LAMDONG">Lâm Đồng</option>
+                <option value="LANGSON">Lạng Sơn</option>
+                <option value="LAOCAI">Lào Cai</option>
+                <option value="LONGAN">Long An</option>
+                <option value="NAMDINH">Nam Định</option>
+                <option value="NGHEAN">Nghệ An</option>
+                <option value="NINHBINH">Ninh Bình</option>
+                <option value="NINHTHUAN">Ninh Thuận</option>
+                <option value="PHUTHO">Phú Thọ</option>
+                <option value="PHUYEN">Phú Yên</option>
+                <option value="QUANGBINH">Quảng Bình</option>
+                <option value="QUANGNAM">Quảng Nam</option>
+                <option value="QUANGNGAI">Quảng Ngãi</option>
+                <option value="QUANGNINH">Quảng Ninh</option>
+                <option value="QUANGTRI">Quảng Trị</option>
+                <option value="SOCTRANG">Sóc Trăng</option>
+                <option value="SONLA">Sơn La</option>
+                <option value="TAYNINH">Tây Ninh</option>
+                <option value="THAIBINH">Thái Bình</option>
+                <option value="THAINGUYEN">Thái Nguyên</option>
+                <option value="THANHHOA">Thanh Hóa</option>
+                <option value="THUATHIENHUE">Thừa Thiên Huế</option>
+                <option value="TIENGIANG">Tiền Giang</option>
+                <option value="TRAVINH">Trà Vinh</option>
+                <option value="TUYENQUANG">Tuyên Quang</option>
+                <option value="VINHLONG">Vĩnh Long</option>
+                <option value="VINHPHUC">Vĩnh Phúc</option>
+                <option value="YENBAI">Yên Bái</option>
+            </select>
+        </div>
+        <div class="col-sm-5">
+            <label class="form-label text-dark">Tỉnh / Thành phố</label>
+            <select class="form-select">
+                <option value="">Chọn quận / huyện</option>
+                <option value="001">Quận Ba Đình</option>,
+                <option value="002">Quận Hoàn Kiếm</option>,
+                <option value="003">Quận Tây Hồ</option>,
+                <option value="004">Quận Long Biên</option>,
+                <option value="005">Quận Cầu Giấy</option>,
+                <option value="006">Quận Đống Đa</option>,
+                <option value="007">Quận Hai Bà Trưng</option>,
+                <option value="008">Quận Hoàng Mai</option>,
+                <option value="009">Quận Thanh Xuân</option>,
+                <option value="016">Huyện Sóc Sơn</option>,
+                <option value="017">Huyện Đông Anh</option>,
+                <option value="018">Huyện Gia Lâm</option>,
+                <option value="019">Quận Nam Từ Liêm</option>,
+                <option value="020">Huyện Thanh Trì</option>,
+                <option value="021">Quận Bắc Từ Liêm</option>,
+                <option value="250">Huyện Mê Linh</option>,
+                <option value="268">Quận Hà Đông</option>,
+                <option value="269">Thị xã Sơn Tây</option>,
+                <option value="271">Huyện Ba Vì</option>,
+                <option value="272">Huyện Phúc Thọ</option>,
+                <option value="273">Huyện Đan Phượng</option>,
+                <option value="274">Huyện Hoài Đức</option>,
+                <option value="275">Huyện Quốc Oai</option>,
+                <option value="276">Huyện Thạch Thất</option>,
+                <option value="277">Huyện Chương Mỹ</option>,
+                <option value="278">Huyện Thanh Oai</option>,
+                <option value="279">Huyện Thường Tín</option>,
+                <option value="280">Huyện Phú Xuyên</option>,
+                <option value="281">Huyện Ứng Hòa</option>,
+                <option value="282">Huyện Mỹ Đức</option>
+            </select>
+        </div>
+        <div class="col-sm-2 mt-3">
+            <button class="btn btn-dark mt-3">
+                Tìm kiếm
+            </button>
+        </div>
+    </div>
+</div>
+<!-- details address -->
+<div class="container-fluid mt-5">
+    <div class="d-flex">
+        <div class="h3 me-5 " style="margin-left: 25px;">TP. HỒ CHÍ MINH</div>
+        <div class="line w-75 mt-3"></div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (THẢO ĐIỀN)</h5>
+            <p>8h30 – 21h (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 900 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (028) 35351505 | (028) 35351506</p>
+            <p>Email: nhaxinhthaodien@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>107 - 109 Xa Lộ Hà Nội, Phường Thảo Điền, Quận 2, Tp. HCM</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (PHÚ MỸ HƯNG)</h5>
+            <p>8h30 - 20h30 (Từ thứ 2 đến thứ 6) & 8h30 - 21h00 (Thứ 7 & CN)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 3000m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.28) 5413 6657</p>
+            <p>Fax: (84.28) 5413 6659</p>
+            <p>Email: nhaxinh_pmh@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>CR3 – Khu thương mại Hồ Bán Nguyệt, 111 Tôn Dật Tiên, P.Tân Phú, Q.7, TP.HCM</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (HAI BÀ TRƯNG)</h5>
+            <p>8h30 - 21h00 (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 1.000 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (028) 62520022 – (028) 62512200</p>
+            <p>Email: nhaxinh_hbt@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>187A Hai Bà Trưng, Phường 6, Quận 3, TP.HCM</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (DIAMOND)</h5>
+            <p>9h30h00 - 18h (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Điện thoại: (84.28)2200 1079</p>
+            <p>Email: nhaxinhdiamond@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>34 Lê Duẩn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="h3 me-5 " style="margin-left: 40px;">BÌNH DƯƠNG</div>
+        <div class="line w-75 mt-3"></div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (BÌNH DƯƠNG)</h5>
+            <p>8H30-19H (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 500 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: 02742222019</p>
+            <p>Email: nhaxinhbd@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>442A Đại Lộ Bình Dương, TP. Thuận An</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="d-flex">
+        <div class="h3 me-5 " style="margin-left: 120px;">HÀ NỘI</div>
+        <div class="line w-75 mt-3"></div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (SMART CITY)</h5>
+            <p>10h - 21h30 (Từ thứ 2 đến thứ 6) & 10h - 22h (Thứ 7 & CN)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 800 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.24) 3202 8027 / 3202 0306</p>
+            <p>Email: nhaxinhsmartcity@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Tầng 2, Vincom Mega Mall, KĐT Vinhomes Smart City, P. Đại Mỗ, Q. Nam Từ Liêm</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (YÊN HÒA)</h5>
+            <p>8h30 - 21h00 (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 1.000 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.24) 3782 1761 / 3782 1762</p>
+            <p>Email: nhaxinhyenhoa@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Lầu 1 - Tòa nhà F4, 112 Trung Kính, Q. Cầu Giấy, HN</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (THỤY KHUÊ)</h5>
+            <p>9h00 - 20h00 (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 3000 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.24) 3201 2118</p>
+            <p>Email: nhaxinhthuykhue@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Tầng 3, TTTM Sun Plaza - 69 Thuỵ Khuê, Tây Hồ, Hà Nội (12 Hoàng Hoa Thám)</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (ĐỐNG ĐA)</h5>
+            <p>10h - 21h30 (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Diện tích: 700 m2 (Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.24) 3761 7666</p>
+            <p>Email: nhaxinhdongda@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>L4-04, Tầng 4, TTTM Vincom Center, 54 Nguyễn Chí Thanh, Q. Đống Đa, HN</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+    <div class="d-flex ">
+        <div class="h3 me-5 " style="margin-left: 50px;">HƯNG YÊN</div>
+        <div class="line w-75 mt-3"></div>
+    </div>
+    <div class="row mt-5 pe-5 ps-5">
+        <div class="col-sm-4">
+            <h5>CỬA HÀNG NHÀ XINH (ECOPARK)</h5>
+            <p>8h30 - 17h30 (Cả tuần)</p>
+        </div>
+        <div class="col-sm-4">
+            <p>(Có chỗ đậu xe ô tô)</p>
+            <p>Điện thoại: (84.24) 6262 0739</p>
+            <p>Email: nhaxinhecopark@akacompany.com.vn</p>
+        </div>
+        <div class="col-sm-4">
+            <p>Tòa nhà E1, Chung cư Rừng Cọ, KĐT Ecopark, Hưng Yên</p>
+            <button class="btn btn-outline-dark ">Xem hướng  <i class="fa-solid fa-chevron-right text-muted"></i></button>
+        </div>
+    </div>
+</div>

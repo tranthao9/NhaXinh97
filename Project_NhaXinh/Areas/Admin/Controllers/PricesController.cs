@@ -11,7 +11,7 @@ using NhaXinhBUS.BUS;
 
 namespace Project_NhaXinh.Areas.Admin.Controllers
 {
-    public class PricesController : Controller
+    public class PricesController : BaseController
     {
         PriceBUS priceBUS = new PriceBUS();
         List<Price> priceList;
@@ -35,7 +35,7 @@ namespace Project_NhaXinh.Areas.Admin.Controllers
             foreach (var a in priceBUS.getProPriceno())
 			{
                 ProNo x = new ProNo();
-                x.id = a.ProID;
+                x.id = a.ProName;
                 list_No.Add(x);
 			}                
             return Json(priceBUS.getProPriceno().Select(s=> new { s.ProID , s.ProName }), JsonRequestBehavior.AllowGet);

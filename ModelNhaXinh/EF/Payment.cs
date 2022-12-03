@@ -14,6 +14,7 @@ namespace ModelNhaXinh.EF
     
     public partial class Payment
     {
+        public string PayID { get; set; }
         public string PayName { get; set; }
         public string Bank { get; set; }
     }

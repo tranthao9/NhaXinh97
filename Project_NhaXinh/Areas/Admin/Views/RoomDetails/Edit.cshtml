@@ -1,0 +1,98 @@
+﻿
+@model ModelNhaXinh.EF.RoomDetail
+@{
+    ViewBag.Title = Model.RoDName;
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<div>
+    <div class="right_col" role="main">
+        @using (Html.BeginForm("Edit", "RoomDetails", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal ">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="" style="margin-left:10px">
+                        <h4 class="text-dark font-weight-bold">Chỉnh sửa thông tin phòng</h4>
+
+                        <div class=" " style="width:75% ;margin:auto;background-color:white;padding:25px;padding-right:30px ">
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark " for="">Tên phòng (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <input type="text" id="RoDName" value="@Model.RoDName" name="RoDName" class="col-9 pl-1 pt-1">
+                                <input type="text" id="RoDID" value="@Model.RoDID" name="RoDID" class="d-none">
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="d-flex">
+                                    <label class="col-3 text-dark" for=""></label>
+                                    <img class="col-2 pl-1 pt-1" width="100px" src="@Model.Silde" id="Silde" /><br />
+                                    <a id="btnSelectImage" class="col-3 text-dark mt-4" href="#">Chọn ảnh</a>
+                                    <input type="text" id="SrcImgRoom" value="@Model.Silde" class="d-none" name="Silde" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Loại phòng </label>
+                                @Html.DropDownList("RooID", null, htmlAttributes: new { @class = "w-50 pl-1 pt-1", name = "RooID" })
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Mô tả (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <textarea type="text" id="RoDDescription" name="RoDDescription" class="col-9 pl-1 pt-1">@Model.RoDDescription</textarea>
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Meta Description (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <textarea id="MetaDescription" name="MetaDescription" class="col-9 pl-1 pt-1 ">@Model.MetaDescription</textarea>
+
+                            </div>
+                            <div class="row mt-3">
+                                <label class="col-3 text-dark" for="">Chi tiết (<span class="text-danger font-weight-bold">*</span>)</label>
+                                <textarea id="Details" name="Details" class="col-9 pl-1 pt-1 ">@Html.Raw(Model.Details)</textarea>
+
+                            </div>
+
+                            <div class="row mt-3">
+                                <label class="col-4 text-dark" for="">Trạng thái </label>
+                                @Html.CheckBoxFor(model => model.Status, new { @class = "ml-2 ", @checked = "checked" })
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="">
+                    <div class="col-md-offset-2 mt-3">
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $("#btnSelectImage").on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                document.getElementById("Silde").src = url;
+                $("#SrcImgRoom").val(url);
+            };
+            finder.popup();
+        })
+    </script>
+    <script>
+        var editor = CKEDITOR.replace('Details', {
+            customConfig: '/Assets/Admin/Plugin/ckeditor/config.js'
+        })
+    </script>
+}
+
+
+
+
+
+

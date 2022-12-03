@@ -1,0 +1,24 @@
+﻿@model  IEnumerable<ModelNhaXinh.EF.Menu>
+
+
+@foreach (var item in Model)
+{
+    var stylei = "";
+    if(item.Text.Contains(" Đặc Biệt"))
+    {
+        stylei = "color: #fe0808!important";
+
+    }
+    else if(item.Text.Contains("00"))
+    {
+        stylei = "color: black!important";
+    }
+    else
+    {
+        stylei = "color: rgba(102,102,102,.85)!important";
+    }
+    <li>
+        <a class="nav-link cursor" style="@stylei" href="/@item.Link">@item.Text</a>
+    </li>
+}
+

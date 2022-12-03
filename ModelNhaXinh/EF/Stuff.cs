@@ -14,20 +14,7 @@ namespace ModelNhaXinh.EF
     
     public partial class Stuff
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stuff()
-        {
-            this.Products = new HashSet<Product>();
-        }
-    
         public string StuID { get; set; }
         public string StuName { get; set; }
-        public string StuDescription { get; set; }
-        public string CatID { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Category Category1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

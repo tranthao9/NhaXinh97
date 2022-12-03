@@ -1,0 +1,431 @@
+﻿
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <style>
+        .nav-tabs a.active {
+            color: brown !important;
+        }
+    </style>
+}
+<div class="container-fluid mt-5 mb-5 ml-2">
+
+    <div class="row">
+        <div class="col-sm-3 bg-light">
+            <h5 class="mt-2 pt-3 ps-4 boder_left_color"><a class="text-dark text-decoration-none ">Tài khoản cá nhân</a></h5>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="flex-direction: column">
+                <a class="ml-3 mt-3 mb-3 text-decoration-none text-dark active font-weight-bold" data-bs-toggle="tab" href="#thongtin">Thông tin của tôi</a>
+                <a class="ml-3 mt-3 mb-3 text-decoration-none text-dark  font-weight-bold" data-bs-toggle="tab" href="#donhang">Đơn hàng</a>
+                <a class="ml-3 mt-3 mb-3 text-decoration-none text-dark  font-weight-bold" data-bs-toggle="tab" href="#wishlist">Wishlist</a>
+                <a class="ml-3 mt-3 mb-3 text-decoration-none text-dark  font-weight-bold" data-bs-toggle="tab" onclick="logout()" href="#thongtin">Đăng xuất</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="tab-content" id="nav-tabContent">
+                <div id="thongtin" class="container tab-pane active">
+                    <h1>Thông tin của tôi</h1>
+                    <form action="">
+                        <div class="mt-3 ">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Họ và tên <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control" placeholder="Nhập họ và tên" required id="namett">
+                                </div>
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Ngày sinh <span class="text-danger"> *</span></label>
+                                    <input type="date" class="form-control" id="datett" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 ">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Số điện thoại <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control" disabled placeholder="Nhập số điện thoại" id="sdt">
+                                </div>
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Địa chỉ email <span class="text-danger"> *</span></label>
+                                    <input type="email" class="form-control" name="" placeholder="Nhập email" id="email" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mt-4 ">
+                            <div class="row">
+                                <select class="form-select mb-3 col mr-2" id="city" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn tỉnh thành</option>
+                                </select>
+
+                                <select class="form-select  mb-3 col mr-2 ml-2" id="district" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn quận huyện</option>
+                                </select>
+
+                                <select class="form-select col ml-2" id="ward" aria-label=".form-select-sm">
+                                    <option value="" selected>Chọn phường xã</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="mt-3 ">
+                            <label for="" class="form-lable mb-1">Địa chỉ <span class="text-danger"> *</span></label>
+                            <input type="text" class="form-control" name="" placeholder="Nhập địa chỉ" id="address">
+                        </div>
+                        <div class="mt-3 ">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Username <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control" placeholder="Username" required id="usernamett">
+                                </div>
+                                <div class="col">
+                                    <label for="" class="form-lable mb-1">Password <span class="text-danger"> *</span></label>
+                                    <input type="password" class="form-control" disabled placeholder="Nhập password" id="password" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <input type="reset" id="resettt" class="d-none"/>
+                        <input class="btn btn-warning mt-3" type="button" onclick="Update()" value="Cập nhập" />
+                        <input class="btn btn-danger mt-3" type="button" value="Đổi mật khẩu" data-bs-toggle="modal" data-bs-target="#doimatkhau" />
+                    </form>
+                </div>
+                <div id="donhang" class="container tab-pane fade">
+                    <h3>Đơn hàng của tôi</h3>
+                    <div class="container mt-5">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs row" role="tablist">
+                            <li class="nav-item col-3">
+                                <a class="text-decoration-none text-warning font-weight-bold active" data-bs-toggle="tab" href="#tatca">Tất cả đơn hàng</a>
+                            </li>
+                            <li class="nav-item col-2">
+                                <a class="text-decoration-none text-warning font-weight-bold" data-bs-toggle="tab" href="#xuly">Đang xử lý</a>
+                            </li>
+                            <li class="nav-item col-2">
+                                <a class="text-decoration-none text-warning font-weight-bold" data-bs-toggle="tab" href="#danggiao">Đang giao</a>
+                            </li>
+                            <li class="nav-item col-3">
+                                <a class="text-decoration-none text-warning font-weight-bold" data-bs-toggle="tab" href="#hoanthanh">Đã hoàn thành</a>
+                            </li>
+                            <li class="nav-item col-2">
+                                <a class="text-decoration-none text-warning font-weight-bold" data-bs-toggle="tab" href="#return">Trả lại</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="tatca" class="container tab-pane active">
+                                
+                            </div>
+                            <div id="xuly" class="container tab-pane fade">
+                                <br>
+                                <h3>Menu 1</h3>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                            <div id="danggiao" class="container tab-pane fade">
+                                <br>
+                                <h3>Menu 2</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </div>
+                            <div id="hoanthanh" class="container tab-pane fade">
+                                <br>
+                                <h3>Menu 1</h3>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                            <div id="return" class="container tab-pane fade">
+                                <br>
+                                <h3>Menu 2</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="wishlist" class="container tab-pane fade">
+                    <br>
+                    <h3>Menu 2</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="doimatkhau">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Đổi mật khẩu</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form onsubmit="UpdatePas()">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <p class="row">
+                            <label class="col-4">Mật Khẩu cũ</label>
+                            <input class="col-7" type="password" id="passold" required>
+
+                        </p>
+                        <p class="row">
+                            <label class="col-4">Mật khẩu mới</label>
+                            <input class="col-7" type="password" id="newpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@Html.Raw('@')#$%^&*]).{8,}" title="Tối thiểu 8 ký tự bao gồm chữ cái hoa, thường, số và ký tự đặc biệt" required>
+                            <a href="#0" class="hide-password col-1"><i class="fa fa-eye"></i></a>
+                        </p>
+                        <p class="row">
+                            <label class="col">Xác thực </label>
+                            <input class="col-7" type="password" id="confimpas" name="password"  required>
+                            <a href="#0" class="hide-password col-1"><i class="fa fa-eye"></i></a>
+                        </p>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit"  class="btn btn-warning">Cập nhập</button>
+                        <button type="button" id="closepa" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts{
+
+    <script>
+        
+        function Thongtin() {
+            var username;
+            if (sessionStorage.getItem("User") != null) {
+                if (sessionStorage.getItem("User") != "") {
+                    username = sessionStorage.getItem("User")
+                }
+                else {
+                    username = getCookie("User");
+                }
+            }
+            else {
+                username = getCookie("User");
+            }
+            $.ajax({
+                url: "/Customer/ExamUserName",
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    username: username
+                }, success: function (res) {
+                    if (res.msn == false) {
+                        let da = new Date(parseInt(/\/Date\((\d+).*/.exec(res.data.Brithday)[1]))
+                        var month = parseInt(da.getMonth()) + 1
+                        var date = da.getDate();
+                        if (month < 10) {
+                            month = '0' + month;
+                        }
+                        if (parseInt(date) < 10) {
+                            date = '0' + da.getDate();
+                        }
+                        var d = da.getFullYear() + '-' + month + '-' + date
+                        document.getElementById('datett').value = d;
+                        $("#namett").val(res.data.CusName);
+                        $("#sdt").val(res.data.CusPhone);
+                        $("#email").val(res.data.CusEmail);
+                        $("#address").val(res.data.CusAddress);
+                        $("#usernamett").val(res.data.UserName);
+                        $("#password").val(res.data.Password);
+                        $("#city").val(res.data.City).change();
+                        $("#district").val(res.data.district).change();
+                        $("#ward").val(res.data.ward);
+                    }
+
+                }
+            })
+        }
+        Thongtin()
+
+        function Update() {
+            var data = {
+                CusName: $("#namett").val(),
+                CusAddress: $("#address").val(),
+                Brithday: $("#datett").val(),
+                CusPhone: $("#sdt").val(),
+                CusEmail: $("#email").val(),
+                UserName: $("#usernamett").val(),
+                Password: $("#password").val(),
+                City: $("#city").val(),
+                district: $("#district").val(),
+                ward: $("#ward").val()
+            };
+            $.ajax({
+                url: "/Customer/ExamEmailTT",
+                type: 'POST',
+                dataType: "json",
+                data: data
+                , success: function (res) {
+                    if (res.mset == true) {
+                        $.ajax({
+                            url: "/Customer/ExamUserNameTT",
+                            type: 'POST',
+                            dataType: "json",
+                            data: data
+                            , success: function (res) {
+                                if (res.msen == true) {
+                                    $.ajax({
+                                        url: "/Customer/Edit",
+                                        type: 'post',
+                                        dataType: 'json',
+                                        data: data,
+                                        success: function (res) {
+                                            $("#success").click(function () {
+                                                $.toast({
+                                                    heading: 'Success',
+                                                    text: 'Cập nhập thành công',
+                                                    icon: 'success',
+                                                    loader: true,
+                                                    loaderBg: '#fff',
+                                                    showHideTransition: 'fade',
+                                                    hideAfter: 5000,
+                                                    allowToastClose: false,
+                                                    position: {
+                                                        right: 5,
+                                                        top: 30
+                                                    }
+                                                })
+                                            })
+                                            $("#success").click()
+                                            document.cookie = "User=" + data.UserName + "; path=/";
+                                            Thongtin()
+                                        }
+
+                                    })
+                                }
+                                else {
+                                    $("#error").click(function () {
+                                        $.toast({
+                                            heading: 'Error',
+                                            text: 'UserName đã tồn tại',
+                                            icon: 'error',
+                                            loader: true,
+                                            loaderBg: '#fff',
+                                            showHideTransition: 'plain',
+                                            hideAfter: 5000,
+                                            position: {
+                                                right: 5,
+                                                top: 30
+                                            }
+                                        })
+                                    })
+                                    $("#error").click();
+
+                                }
+                            }
+                        })
+                    }
+                    else {
+                        $("#error").click(function () {
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Email đã tồn tại',
+                                icon: 'error',
+                                loaderBg: '#fff',
+                                hideAfter: 5000,
+                                showHideTransition: 'plain',
+                                position: {
+                                    right: 5,
+                                    top: 30
+                                }
+                            })
+                        })
+                        $("#error").click();
+
+                    }
+                }
+            })
+        }
+        function UpdatePas() {
+            event.preventDefault();
+            var thongtin = {
+                CusName: $("#namett").val(),
+                CusAddress: $("#address").val(),
+                Brithday: $("#datett").val(),
+                CusPhone: $("#sdt").val(),
+                CusEmail: $("#email").val(),
+                UserName: $("#usernamett").val(),
+                Password: $("#password").val(),
+                City: $("#city").val(),
+                district: $("#district").val(),
+                ward: $("#ward").val()
+            };
+            var oldpas = $("#passold").val();
+            var newpas = $("#newpass").val();
+            var confirm = $("#confimpas").val();
+            if (oldpas == thongtin.Password) {
+                if (newpas == confirm) {
+                    thongtin.Password = newpas
+                    $.ajax({
+                        url: "/Customer/Edit",
+                        type: 'post',
+                        dataType: 'json',
+                        data: thongtin
+                        , success: function (res) {
+                            $("#success").click(function () {
+                                $.toast({
+                                    heading: 'Success',
+                                    text: 'Cập nhập thành công',
+                                    icon: 'success',
+                                    loader: true,
+                                    loaderBg: '#fff',
+                                    showHideTransition: 'fade',
+                                    hideAfter: 5000,
+                                    allowToastClose: false,
+                                    position: {
+                                        right: 5,
+                                        top: 30
+                                    }
+                                })
+                            })
+                            $("#success").click()
+                            $("#closepa").click()
+                        }
+                    })
+                }
+                else {
+                    $("#error").click(function () {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Mật khẩu mới phải trùng nhau',
+                            icon: 'error',
+                            loader: true,
+                            loaderBg: '#fff',
+                            showHideTransition: 'plain',
+                            hideAfter: 5000,
+                            position: {
+                                right: 5,
+                                top: 30
+                            }
+                        })
+                    })
+                    $("#error").click();
+                }
+            }
+            else {
+                $("#error").click(function () {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Mật khẩu sai',
+                        icon: 'error',
+                        loader: true,
+                        loaderBg: '#fff',
+                        showHideTransition: 'plain',
+                        hideAfter: 5000,
+                        position: {
+                            right: 5,
+                            top: 30
+                        }
+                    })
+                })
+                $("#error").click();
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="/Assets/City.js"></script>
+
+}
+

@@ -12,7 +12,7 @@ using NhaXinhBUS.BUS;
 
 namespace Project_NhaXinh.Areas.Admin.Controllers
 {
-	public class User_Controller : Controller
+	public class User_Controller : BaseController
 	{
 		UserBUS userBUS = new UserBUS();
 		List<User_> userList;	NhaXinhEntities db = new NhaXinhEntities();

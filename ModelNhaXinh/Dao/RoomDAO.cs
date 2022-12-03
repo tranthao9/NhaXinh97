@@ -17,6 +17,16 @@ namespace ModelNhaXinh.Dao
 			return db.Rooms.ToList();
 		}
 
+		public Room getRoom(string id)
+		{
+			return db.Rooms.Find(id);
+		}
+
+		public List<Category> GetCategories(string id)
+		{
+			return db.Categories.Where(s => s.RooID == id).ToList();
+		}
+
 		public void addRoom(Room item)
 		{
 			db.Rooms.Add(item);
@@ -30,6 +40,7 @@ namespace ModelNhaXinh.Dao
 			{
 				news.RooName = item.RooName;
 				news.Status = item.Status;
+				news.Metatitle = item.Metatitle;
 				db.SaveChanges();
 			}
 		}

@@ -19,13 +19,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CartDetails">
-      <EntityTypeMapping TypeName="NhaXinhModel.CartDetail">
-        <MappingFragment StoreEntitySet="CartDetail">
-          <ScalarProperty Name="ProID" ColumnName="ProID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="MoneyTotal" ColumnName="MoneyTotal" />
+    <EntitySetMapping Name="Carts">
+      <EntityTypeMapping TypeName="NhaXinhModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+          <ScalarProperty Name="CusID" ColumnName="CusID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -34,17 +33,24 @@
         <MappingFragment StoreEntitySet="Category">
           <ScalarProperty Name="CatID" ColumnName="CatID" />
           <ScalarProperty Name="CatName" ColumnName="CatName" />
-          <ScalarProperty Name="CatDescription" ColumnName="CatDescription" />
           <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
-          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="Stuffs" ColumnName="Stuffs" />
+          <ScalarProperty Name="RooID" ColumnName="RooID" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="MetaDescriptions" ColumnName="MetaDescriptions" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ShowMenu" ColumnName="ShowMenu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryNews">
+      <EntityTypeMapping TypeName="NhaXinhModel.CategoryNew">
+        <MappingFragment StoreEntitySet="CategoryNew">
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,14 +63,48 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Contents">
+      <EntityTypeMapping TypeName="NhaXinhModel.Content">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="MetaDescriptions" ColumnName="MetaDescriptions" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContentTags">
+      <EntityTypeMapping TypeName="NhaXinhModel.ContentTag">
+        <MappingFragment StoreEntitySet="ContentTag">
+          <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="NhaXinhModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
           <ScalarProperty Name="CusID" ColumnName="CusID" />
           <ScalarProperty Name="CusName" ColumnName="CusName" />
           <ScalarProperty Name="CusAddress" ColumnName="CusAddress" />
+          <ScalarProperty Name="Brithday" ColumnName="Brithday" />
           <ScalarProperty Name="CusPhone" ColumnName="CusPhone" />
           <ScalarProperty Name="CusEmail" ColumnName="CusEmail" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="district" ColumnName="district" />
+          <ScalarProperty Name="ward" ColumnName="ward" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -96,9 +136,25 @@
         <MappingFragment StoreEntitySet="ImportBill">
           <ScalarProperty Name="ImpID" ColumnName="ImpID" />
           <ScalarProperty Name="ProID" ColumnName="ProID" />
-          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ImpDate" ColumnName="ImpDate" />
           <ScalarProperty Name="MoneyTotal" ColumnName="MoneyTotal" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Pay" ColumnName="Pay" />
+          <ScalarProperty Name="PayID" ColumnName="PayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImportBillDetails">
+      <EntityTypeMapping TypeName="NhaXinhModel.ImportBillDetail">
+        <MappingFragment StoreEntitySet="ImportBillDetail">
+          <ScalarProperty Name="ImpDID" ColumnName="ImpDID" />
+          <ScalarProperty Name="ImpID" ColumnName="ImpID" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ImportPrice" ColumnName="ImportPrice" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="ToTalMoney" ColumnName="ToTalMoney" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -107,11 +163,21 @@
         <MappingFragment StoreEntitySet="Menu">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
           <ScalarProperty Name="Target" ColumnName="Target" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuTypes">
+      <EntityTypeMapping TypeName="NhaXinhModel.MenuType">
+        <MappingFragment StoreEntitySet="MenuType">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -131,18 +197,33 @@
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="OrdID" ColumnName="OrdID" />
           <ScalarProperty Name="CusID" ColumnName="CusID" />
+          <ScalarProperty Name="ReceivingName" ColumnName="ReceivingName" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ReceivingAddress" ColumnName="ReceivingAddress" />
           <ScalarProperty Name="ReceivingPhone" ColumnName="ReceivingPhone" />
           <ScalarProperty Name="MoneyTotal" ColumnName="MoneyTotal" />
           <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="ReceivingEmail" ColumnName="ReceivingEmail" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="NhaXinhModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="OrdtID" ColumnName="OrdtID" />
+          <ScalarProperty Name="OrdID" ColumnName="OrdID" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Payments">
       <EntityTypeMapping TypeName="NhaXinhModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="PayID" ColumnName="PayID" />
           <ScalarProperty Name="PayName" ColumnName="PayName" />
           <ScalarProperty Name="Bank" ColumnName="Bank" />
         </MappingFragment>
@@ -165,29 +246,42 @@
       <EntityTypeMapping TypeName="NhaXinhModel.Product">
         <MappingFragment StoreEntitySet="Product">
           <ScalarProperty Name="ProID" ColumnName="ProID" />
-          <ScalarProperty Name="StuID" ColumnName="StuID" />
           <ScalarProperty Name="CatID" ColumnName="CatID" />
-          <ScalarProperty Name="RooID" ColumnName="RooID" />
+          <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
           <ScalarProperty Name="ProName" ColumnName="ProName" />
           <ScalarProperty Name="ProDescription" ColumnName="ProDescription" />
           <ScalarProperty Name="ProColor" ColumnName="ProColor" />
           <ScalarProperty Name="Materials" ColumnName="Materials" />
           <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="ProImage" ColumnName="ProImage" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
           <ScalarProperty Name="MoreImage" ColumnName="MoreImage" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="MetaDescriptions" ColumnName="MetaDescriptions" />
           <ScalarProperty Name="Displayhome" ColumnName="Displayhome" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="inventory" ColumnName="inventory" />
+          <ScalarProperty Name="sold" ColumnName="sold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTags">
+      <EntityTypeMapping TypeName="NhaXinhModel.ProductTag">
+        <MappingFragment StoreEntitySet="ProductTag">
+          <ScalarProperty Name="StuID" ColumnName="StuID" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Promotions">
       <EntityTypeMapping TypeName="NhaXinhModel.Promotion">
         <MappingFragment StoreEntitySet="Promotion">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ShowMenu" ColumnName="ShowMenu" />
+          <ScalarProperty Name="Apply" ColumnName="Apply" />
+          <ScalarProperty Name="StopDate" ColumnName="StopDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="ProMID" ColumnName="ProMID" />
           <ScalarProperty Name="ProMName" ColumnName="ProMName" />
           <ScalarProperty Name="Form" ColumnName="Form" />
@@ -204,6 +298,8 @@
           <ScalarProperty Name="ProAddress" ColumnName="ProAddress" />
           <ScalarProperty Name="ProEmail" ColumnName="ProEmail" />
           <ScalarProperty Name="ProPhone" ColumnName="ProPhone" />
+          <ScalarProperty Name="debt" ColumnName="debt" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -212,7 +308,23 @@
         <MappingFragment StoreEntitySet="Room">
           <ScalarProperty Name="RooID" ColumnName="RooID" />
           <ScalarProperty Name="RooName" ColumnName="RooName" />
+          <ScalarProperty Name="Metatitle" ColumnName="Metatitle" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoomDetails">
+      <EntityTypeMapping TypeName="NhaXinhModel.RoomDetail">
+        <MappingFragment StoreEntitySet="RoomDetail">
+          <ScalarProperty Name="RoDID" ColumnName="RoDID" />
+          <ScalarProperty Name="RooID" ColumnName="RooID" />
+          <ScalarProperty Name="RoDName" ColumnName="RoDName" />
+          <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
+          <ScalarProperty Name="MetaDescription" ColumnName="MetaDescription" />
+          <ScalarProperty Name="RoDDescription" ColumnName="RoDDescription" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Silde" ColumnName="Silde" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -236,8 +348,6 @@
         <MappingFragment StoreEntitySet="Stuff">
           <ScalarProperty Name="StuID" ColumnName="StuID" />
           <ScalarProperty Name="StuName" ColumnName="StuName" />
-          <ScalarProperty Name="StuDescription" ColumnName="StuDescription" />
-          <ScalarProperty Name="CatID" ColumnName="CatID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -249,6 +359,14 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="NhaXinhModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="TagID" ColumnName="TagID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -275,21 +393,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ImportBillDetails">
-      <EntityTypeMapping TypeName="NhaXinhModel.ImportBillDetail">
-        <MappingFragment StoreEntitySet="ImportBillDetail">
+    <EntitySetMapping Name="CartDetails">
+      <EntityTypeMapping TypeName="NhaXinhModel.CartDetail">
+        <MappingFragment StoreEntitySet="CartDetail">
+          <ScalarProperty Name="CartDetailID" ColumnName="CartDetailID" />
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
           <ScalarProperty Name="ProID" ColumnName="ProID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="ImportPrice" ColumnName="ImportPrice" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OrderDetails">
-      <EntityTypeMapping TypeName="NhaXinhModel.OrderDetail">
-        <MappingFragment StoreEntitySet="OrderDetail">
-          <ScalarProperty Name="ProID" ColumnName="ProID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

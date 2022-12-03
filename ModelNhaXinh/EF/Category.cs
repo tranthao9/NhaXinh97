@@ -17,30 +17,27 @@ namespace ModelNhaXinh.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Stuffs = new HashSet<Stuff>();
             this.Products = new HashSet<Product>();
-            this.Stuffs1 = new HashSet<Stuff>();
+            this.Products1 = new HashSet<Product>();
         }
     
         public string CatID { get; set; }
         public string CatName { get; set; }
-        public string CatDescription { get; set; }
         public string MetaTitle { get; set; }
-        public string ParentID { get; set; }
+        public string Stuffs { get; set; }
+        public string RooID { get; set; }
         public Nullable<int> DisplayOrder { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string CreateBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
         public string MetaDescriptions { get; set; }
         public bool Status { get; set; }
         public bool ShowMenu { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stuff> Stuffs { get; set; }
+        public virtual Room Room { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stuff> Stuffs1 { get; set; }
+        public virtual ICollection<Product> Products1 { get; set; }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.RoomDetail>
+@{
+    var room = (ModelNhaXinh.EF.Room)ViewBag.category;
+    ViewBag.Title = room.Metatitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid mt-3 ">
+    <div class="row">
+        <div class="col-sm-3 ps-5">
+            <div class="bg-light mb-5">
+                <h5 class="mt-2 pt-3 ps-4 boder_left_color"><a class="text-dark text-decoration-none " href="">Nội thất @room.RooName</a></h5>
+                <h6 class="mt-5 mb-4 ps-4"><a class="text-dark text-decoration-none " >Mẫu @room.RooName</a></h6>
+                @{
+                    var tags = (List<ModelNhaXinh.EF.Category>)ViewBag.Categorydt;
+                    foreach (var tag in tags)
+                    {
+                        <small><a class="text-dark text-decoration-none  ps-4 mt-4" href="/danh-muc/@tag.MetaTitle-@tag.CatID">@tag.CatName</a></small><br>
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-sm-9 mt-2 ">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6">
+                        <div class="swiper-slide d-block">
+                            <a class="text-decoration-none" href="#">
+                                <img class="height_img" src="@item.Silde">
+                                <div class="mt-3 nav-link hover_text cursor" style="margin-left:-15px;">
+                                    <h5 class=" d-flex justify-content-left">@item.RoDName</h5>
+                                    <div class="line"></div>
+                                    <p class="design_text">@item.RoDDescription 						</p>
+                                    <button class="btn-outline-dark"><small> Xem chi tiết</small></button>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -14,11 +14,12 @@ namespace ModelNhaXinh.EF
     
     public partial class CartDetail
     {
+        public int CartDetailID { get; set; }
+        public int CartID { get; set; }
         public string ProID { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<int> Price { get; set; }
-        public Nullable<int> MoneyTotal { get; set; }
     
+        public virtual Cart Cart { get; set; }
         public virtual Product Product { get; set; }
     }
 }

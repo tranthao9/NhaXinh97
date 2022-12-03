@@ -1,0 +1,37 @@
+﻿@model ModelNhaXinh.EF.Content
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+<div>
+    <div class="right_col" role="main">
+        
+        <div class="form-horizontal ">
+            
+            <div class="row">
+                <div class="" style="margin-left:10px">
+                    <div class=" " style="width:75% ;margin: auto;background-color:white;padding:25px;padding-right:30px ">
+                        <div class="row mt-3">
+                            @Html.Raw(Model.Details)
+                        </div>
+                        <div class="row mt-4">
+                            <label class="col-2 text-dark" for="">Trạng thái </label>
+                            @Html.CheckBoxFor(model => model.Status, new { @class = " " })
+                        </div>
+                    </div>
+                        
+                </div>
+
+            </div>
+            <div class="">
+                <div class="col-md-offset-2 mt-3">
+                    @Html.ActionLink("Edit", "Edit")
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

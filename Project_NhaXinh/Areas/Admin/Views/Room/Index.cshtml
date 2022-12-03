@@ -1,0 +1,320 @@
+﻿@model IEnumerable<ModelNhaXinh.EF.Room>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+<!-- page content -->
+<div ng-app="Room" ng-controller="RoomController">
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Quản lý phòng <small></small></h3>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="d-flex">
+                                        <div class="dropdown ml-3">
+                                            <a class=" btn btn-info dropdown-toggle  text-white" data-toggle="dropdown"><i class="glyphicon glyphicon-export text-white"></i></a>
+                                            <div class="dropdown-menu" style="width:30px" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item font-weight-bolder " ng-click="exportExcel()">
+                                                    <img width="25px" src="/Assets/Admin/images/modern-flat-design-logo-xls-file-icon-document-type-208206583.jpg" />
+                                                    Exel
+                                                </a>
+                                                <a class="dropdown-item font-weight-bolder" ng-click="exportPdf()" href="#">
+                                                    <img width="25px" src="/Assets/Admin/images/27_Pdf_File_Type_Adobe_logo_logos-512.jpg" />  Pdf
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <a class="glyphicon glyphicon-print btn btn-info text-white" ng-click="print()"></a>
+                                    </div>
+                                    <div class="float-right d-inline-block">
+
+                                        <button ng-click="Create()" style="margin-left:200px" class=" btn btn-warning mt-3  text-white" data-toggle="modal" data-target="#ModelRoom">
+                                            <i class="glyphicon glyphicon-plus "></i>
+                                            Thêm mới
+                                        </button>
+                                        <div class=" mt-3 mb-3 ml-5 d-flex">
+                                            <label class="h6 mt-1 mr-2">Tìm kiếm : </label>
+                                            <input style=" border: 1px solid #b1b0b0; height: 30px; border-radius: 3px; width: 200px" type="text" ng-model="Search">
+                                        </div>
+                                    </div>
+                                    <div class="card-box table-responsive " id="export">
+
+                                        <table id="" class="table bulk_action jambo_table table-striped table-bordered table-hover" style="width:100%">
+                                            <thead>
+                                                <tr class="headings">
+
+                                                    <th>STT</th>
+                                                    <th class="column-title">
+                                                        Mã phòng
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Tên phòng
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Trạng thái
+                                                    </th>
+                                                    <th class="column-title no-link last">Tác vụ</th>
+                                                    <th class="bulk-actions" colspan="7">
+                                                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr dir-paginate="s in ListRoom | filter:Search | orderBy:sortKey:sortReverse | itemsPerPage: itemsPerPage" pagination-id="ListRoom">
+
+                                                    <td align="center">
+                                                        {{$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.RooID}}
+                                                    </td>
+                                                    <td>
+                                                        {{s.RooName}}
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" ng-checked="{{s.Status}}" disabled>
+
+                                                    </td>
+                                                    <td class="text-center text-danger" style="font-size: 16px">
+                                                        <a data-toggle="modal" ng-click="Edit(s)" data-target="#ModelRoom" class="text-danger glyphicon glyphicon-edit"></a>  |
+                                                        <a ng-click="Delete(s.RooID)" class="text-danger glyphicon glyphicon-remove"></a>
+
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dataTables_paginate ">
+                                        <dir-pagination-controls pagination-id="ListRoom" direction-links="true" max-size="5"
+                                                                 boundary-links="true" class="pull-right "></dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="ModelRoom" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-dark"> Thêm mới loại phòng </h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <form ng-submit="Save()">
+                        @Html.AntiForgeryToken()
+                        <div class="modal-body">
+                            <div class="form-horizontal ">
+                                <div class="row">
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Mã phòng:  </label>
+                                        <input id="RooID" value="@Html.ViewBag.id" class="d-none" />
+                                        <input class="h-50" type="text" ng-model="room.RooID" disabled />
+                                    </div>
+                                    <div class="col-sm-5 ml-4 form-group">
+                                        <label>Tên phòng </label>
+                                        <input class="h-50" type="text" ng-model="room.RooName" />
+                                    </div>
+
+                                    <div class="col-sm-5 ml-4 mt-3 form-group">
+                                        <label>Trạng thái hoạt động : </label>
+                                        <input type="checkbox" ng-model="room.Status" ng-checked="room.Status" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" ng-click="Save()" class="btn btn-warning ">{{buttext}}</button>
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+@section Scripts
+ {
+
+    <script src="/Assets/Admin/js/FileSave.js"></script>
+    <script src="/Assets/Admin/js/dirPagination.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script>
+        var myapp = angular.module("Room", ['angularUtils.directives.dirPagination']);
+        var id = $("#RooID").val();
+        myapp.controller("RoomController", function ($scope, $http, $httpParamSerializerJQLike) {
+
+            $scope.ListRoom = [];
+            $http.get("/Admin/Room/getAllRooms").then(function (res) {
+                $scope.ListRoom = res.data;
+            });
+            $scope.exportExcel = function () {
+                var blob = new Blob([document.getElementById('export').innerHTML], {
+                    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+                });
+                saveAs(blob, "Room.xls");
+            };
+            $scope.exportPdf = function () {
+                html2canvas(document.getElementById('export'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("room.pdf");
+                    }
+                });
+            }
+            $scope.print = function () {
+                let printContents, popupWin;
+                printContents = document.getElementById('export').innerHTML;
+                popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                popupWin.document.open();
+                popupWin.document.write(`
+                          <html>
+                            <head>
+                              <title>Print tab</title>
+                            <link href="/Assets/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+                             <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+                              <link href="/Assets/Admin/build/css/custom.css" rel="stylesheet" />
+                        <style>
+                                  body{
+                background-color: white;}
+                table th{
+                color:black;
+                font-weight:bold
+                }
+                        </style>
+                        </head>
+                    <body onload="window.print();window.close()">
+                    <h3 style=" color:black;" align = "center">Thống Kê Loại Phòng</h3><br>
+
+
+                    ${printContents}</body>
+                  </html>`
+                );
+                popupWin.document.close();
+            }
+            $scope.itemsPerPage = 10;
+            $scope.room = {}
+            $scope.Create = function () {
+                $scope.room.RooID = id;
+                $scope.room.RooName = "";
+                $scope.room.Status = true;
+                $scope._function = "Thêm mới";
+                $scope.buttext = "Thêm mới";
+            };
+            $scope.Edit = function (idm) {
+                $scope.room.RooID = idm.RooID;
+                $scope.room.RooName = idm.RooName;
+                $scope.room.Status = idm.Status;
+                $scope._function = "Lưu chỉnh sửa";
+                $scope.buttext = "Lưu chỉnh sửa";
+
+            }
+            $scope.Save = function () {
+                Token = angular.element('input[name="__RequestVerificationToken"]').attr('value');
+                $scope.room.__RequestVerificationToken = Token;
+                dataRequest = $scope.room;
+                console.log(dataRequest);
+                if ($scope.buttext != "Thêm mới") {
+                    $http({
+                        method: "POST",
+                        data: $httpParamSerializerJQLike(dataRequest),
+                        url: '/Admin/Room/Edit',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+                    }).then(function (res) {
+                        if (res.mse = false) {
+                            alert("Lỗi sửa bản ghi")
+                        }
+                        else {
+                            alert("Sửa bản ghi thành công");
+                            window.location.href = "/Admin/Room/Index";
+                        }
+                    })
+                }
+                else {
+                    $http({
+                        method: "POST",
+                        url: '/Admin/Room/Create',
+                        data: $httpParamSerializerJQLike(dataRequest),
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8' }
+                    }).then(function (res) {
+                        if (res.ms = true) {
+                            alert("Thêm bản ghi thành công");
+                            window.location.href = "/Admin/Room/Index"
+                        }
+                        else {
+
+                            alert("Lỗi thêm bản ghi")
+                        }
+                    })
+                }
+            }
+
+            $scope.Delete = function (idd) {
+                if (confirm('Bạn có chắc chắm muốn xóa?')) {
+                    $http({
+                        method: "GET",
+                        url: '/Admin/Room/Delete/' + idd
+                    }).then(function (res) {
+                        if (res.msd = true) {
+                            alert("Xóa bản ghi thành công");
+                            window.location.href = "/Admin/Room/Index";
+                        }
+                    })
+                }
+
+            }
+            $scope.sortKey = 'RooID';
+            $scope.sortReverse = false;
+            $scope.sort = function (key) {
+                $scope.sortReverse = ($scope.sortKey == key) ? !$scope.sortReverse : $scope.sortReverse;
+                $scope.sortKey = key;
+            }
+
+        });
+    </script>
+}
+
+
+
